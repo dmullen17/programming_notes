@@ -1,21 +1,110 @@
 # Introduction {#intro}
+These are my notes from my time spent becoming a self-taught software developer.  My apologies 
+if some sections are difficult to read - they're mainly for my own reference and 
+to track my progress.  
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+# Command Line
+These are my notes from the excellent tutorial: <a href='https://www.learnenough.com/command-line-tutorial#fig-tech_support_cheat_sheet'>Learn Enough Command Line to Be Dangerous</a>!
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+## Shortcuts 
+ShortCuts | Definitions
+------------ | ----------------------------------------
+new tab | cmd+t
+close tab | cmd+w
+^A | go the beginning of the command 
+^E | go to the end of the line 
+^U | clear line 
+hold ⌥ + click | move to specified spot in line 
+^L | clear previous text
+^R | search interactively and edit previous commands
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
+## Commands 
+Command | Definition
+------- | ----------------------------------------------------------------------
+echo | print strings to screen
+mkdir | create directory 
+cd | change directory 
+pwd | print working directory 
+crtl+c | best for “getting out of trouble” (cancel as a mnemonic) 
+q | quits out of text editor windows / man windows 
+clear| removes all previous text 
+sleep x | puts the terminal to sleep for “x” seconds, processes commands typed during sleep mode afterwards
+`>` (redirect operator) | use cat + fileName to write contents of a file to a new file | writes output to a file
+`>>` (append operator) | writes output to the end of a file 
+curl| download a file from a URL `curl -OL cdn.learnenough.com/sonnets.txt`
+!! (bang)| re-run previous command 
+!curl | (re-run previous curl command)
+history | show previous command history 
+<br>
+<br>
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+File related Command | Definition
+------- | ----------------------------------------------------------------------
+open | opens the argument using the default application 
+cat | dumps contents onto the screen, can accept multiple args
+diff | shows differences between two files 
+ls | list all files and directories (supports some regex expressions)
+ls -l | lists files in long format with date modified and size 
+ls -rtl | lists files in reverse order of modification 
+ls -a | show hidden files 
+ls -h | adds human readable byte count
+mv (move)| rename a file or directory 
+cp | copy a file
+rm | remove a file 
+head/tail| show first/last 10 lines of a file
+wc | shows lines, words, and bytes in a file
+rm -rf | delete a directory and all contents recursively 
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
+## Piping
+Piping exists in command line!   
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
++ `head sonnets.txt | wc` - get head of sonnets.txt then pipe result to wc
++ `history | less` - pipe history to less for interactive searching 
+    + example: `open -a '/Applications/Microsoft Excel.app' 'Downloads/Utqiagvik_daily_species_counts.csv'`
+
+## Less 
+Lets you interactly navigate a file or output.   
+Command	| Description	
+------- | -----------
+up & down arrow keys |	Move up or down one line	
+spacebar |	Move forward one page	
+⌃F |	Move forward one page	
+⌃B |	Move back one page	
+G	| Move to end of file	
+1G |	Move to beginning of file	
+/<string> |	Search file for string	/rose
+n	| Move to next search result
+N	| Move to previous search result
+q	| Quit less
+
+
+## Grep (globally search a regular expression and print)
+grep is used for simple patterns and basic regular expressions (BREs); egrep can
+handle extended regular expressions (EREs).  See re_format(7) for more informa-
+tion on regular expressions.  fgrep is quicker than both grep and egrep, but can
+only handle fixed patterns (i.e. it does not interpret regular expressions).
+Patterns may consist of one or more lines, allowing any of the pattern lines to
+match a portion of the input.
+
+zgrep, zegrep, and zfgrep act like grep, egrep, and fgrep, respectively, but
+accept input files compressed with the compress(1) or gzip(1) compression utili-
+ties.
+
+*Note:* It doesn't work that well (for instance I tried using anchors `^` and `$` with no success).  Better to use a text editor or another language.
+
+
+## Miscellaneous 
+  
++ Unix refers to a family of operating systems that includes Linux, Android, iOS (iPhone/iPad), and macOS
+    + the main exception to the unix family is windows
++ touch foo is commonly used to create an empty file 
++ Use `tail -f foo` to view a file that's actively changing 
+    + Ex. `ping learneough.com > learneough.log` in one tab and `tail -f learneough.log` in another tab 
++ `/` is the root directory 
++ `cd` by itself defaults to the home directory 
++ `cd ..` goes up one directory 
++ `open .` opens the current directory in default viewer (finder)
++ `cd -` goes to the previous directory, whatever it was
++ you can separate commands in one line using `;`
++ you can chain commands using `&&` that run only if the previous call was successful
++ `grep -ri folder_name` search recursivley through folder 
