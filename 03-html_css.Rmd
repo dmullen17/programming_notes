@@ -1,0 +1,103 @@
+# Responsive Web Design FCC
+These are my notes from the Responsive Web Design certification from the<a href="https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5"> FreeCodeCamp lessons</a>
+
+## HTML and HTML5 
+Basic structure for each page: 
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- metadata elements -->
+  </head>
+  <body>
+    <!-- page contents -->
+  </body>
+</html>
+```
+
++ It's best practice to include an alt tag w/ an image: `<img src='' alt='alt text>`
++ Anchor element links to other pages `<a href="https://freecodecamp.org">this links to freecodecamp.org</a>`
+    + To create an internal link, you assign a link's href attribute to a hash symbol # plus the value of the id attribute for the element that you want to internally link to
+    + `href="#"` to make a placeholder link
+    + You can nest an image in an anchor tag to make it a link
++ `<input type='text' placeholder='dummy text'>` creates a box for user input text 
+
+Example of a user submission form: 
+```
+  <form action="/submit-cat-photo">
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+```
+<br>
+
+Example of a radio button list: 
+The `for` attribute allows us to link between the parent input elements 
+```
+  <label for='indoor'>
+    <input id='indoor' type='radio' name='indoor-outdoor'> Indoor
+  </label>
+  <label for='outdoor'>
+    <input id='outdoor' type='radio' name='indoor-outdoor'> Outdoor
+  </label>
+```
+<br>
+
+
+## CSS
+The idea behind CSS is that you can use a selector to target an HTML element in the DOM (Document Object Model) and then apply a variety of attributes to that element to change the way it is displayed on the page. You can apply CSS inline but it's better to use an external stylesheet.  You can also create a `<style>` block on the .html file but it's not good practice.  
+
+**Element Ids:**
+Add an id (`id='meal-class-1`) to an element to style it with that id's CSS rules. An id is not reusable and should only be applied to one element. An id also has a higher specificity (importance) than a class so if both are applied to the same element and have conflicting styles, the styles of the id will be applied.
+
+**Inheritance:**  
+Child elements inherit properties from their parent elements.  Giving an element a class will override any conflicting rules that it inherits from its parent. If an element has multiple classes the last one in the CSS will take precedence.  Giving an element a unique Id attribute (ex. `#orange-text {color: orange;}`) will take precedence over classes / parents.  Giving an element inline CSS style (ex. `<h1 style='color: white'>Title</h1>`) will take precedence over parent, classes and Ids.  The last way that overrides everything is to add `!important` to a css rule (ex. `.pink-text {color: pink !important}`).   
+
+**Hexadecimal colors:**  
+In CSS, we can use 6 hexadecimal digits to represent colors, two each for the red (R), green (G), and blue (B) components. For example, #000000 is black and is also the lowest possible value.  You can shorten this to one digit for each color, for example red = #F00. Instead of using six hexadecimal digits like you do with hex code, with RGB you specify the brightness of each color with a number between 0 and 255: orange - `background-color: rgb(255, 165, 0);`
+  
+**CSS Variables:**  
+CSS Variables are a powerful way to change many CSS style properties at once by changing only one value. To create a CSS Variable, you just need to give it a name with two dashes in front of it and assign it a value like this: `--background-variable: orange`.  After you create your variable, you can assign its value to other CSS properties by referencing the name you gave it: `background-color: var(--background-variable)`.  When using your variable as a CSS property value, you can attach a fallback value that your browser will revert to if the given variable is invalid: `--background-color: var(--background-variable, black)`. 
+  When you create a variable, it becomes available for you to use inside the element in which you create it. It also becomes available within any elements nested within it. This effect is known as cascading. CSS variables are often created in the `:root` element so they're available everywhere throughout the page: `:root {--variable: pink}`.  You can then re-define a variable within a class to overwrite the `:root` rule.  
+
+**Browser Fallbacks**:  
+When your browser parses the CSS of a webpage, it ignores any properties that it doesn't recognize or support. For example, if you use a CSS variable to assign a background color on a site, Internet Explorer will ignore the background color because it does not support CSS variables. In that case, the browser will use whatever value it has for that property. If it can't find any other value set for that property, it will revert to the default value, which is typically not ideal. This means that if you do want to provide a browser fallback, it's as easy as providing another more widely supported value immediately before your declaration. That way an older browser will have something to fall back on, while a newer browser will just interpret whatever declaration comes later in the cascade.
+**Example:**
+```
+  .red-box {
+    background: red; /*For older browswers*/
+    background: var(--red-color);
+    height: 200px;
+    width:200px;
+  }
+```
+
+
++ `.class` . is the class selector
++ `#` . is the id selector
++ `[attr=value]` is the attribute selector.  Example:
+```
+[type='radio'] {
+  margin: 20px 0px 20px 0px;
+}
+```
+
++ include google fonts: `<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">`
++ we can have the browser choose from a list of fonts depending on which are available: 
+```
+p {
+  font-family: Helvetica, sans-serif;
+}
+```
++ You can apply multiple classes to one element!!!!
++ `width:15px;` doesn't have a space between 15 and px - I think i've seen it differently elsewhere?
++ `border-radius: 15px;` rounds the corners 
+    + `border-radius 50%` makes it circular 
+    
+Element | Description 
+------- | ----------------------------------------------------------------------
+padding | amount of space between the element's content and it's border. We can set this in one line (also margin). Ex. `padding: 40px 40px 20px 20px` (clockwise:top, right, bottom, left) 
+margin | controls the amount of space between an element's border and surrounding elements.  If you set a margin to a negative value it will increase the size of the element. 
+
+
+## Applied Visual Design
