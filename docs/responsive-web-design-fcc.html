@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-02">
+<meta name="date" content="2018-12-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -85,7 +85,9 @@
 <li class="chapter" data-level="4" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html"><i class="fa fa-check"></i><b>4</b> Responsive Web Design FCC</a><ul>
 <li class="chapter" data-level="4.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#html-and-html5"><i class="fa fa-check"></i><b>4.1</b> HTML and HTML5</a></li>
 <li class="chapter" data-level="4.2" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#css"><i class="fa fa-check"></i><b>4.2</b> CSS</a></li>
-<li class="chapter" data-level="4.3" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#applied-visual-design"><i class="fa fa-check"></i><b>4.3</b> Applied Visual Design</a></li>
+<li class="chapter" data-level="4.3" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#applied-visual-design"><i class="fa fa-check"></i><b>4.3</b> Applied Visual Design</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#animation"><i class="fa fa-check"></i><b>4.3.1</b> Animation:</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -209,7 +211,192 @@ When your browser parses the CSS of a webpage, it ignores any properties that it
 </div>
 <div id="applied-visual-design" class="section level2">
 <h2><span class="header-section-number">4.3</span> Applied Visual Design</h2>
+<table style="width:100%;">
+<colgroup>
+<col width="13%" />
+<col width="86%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>text-align:</td>
+<td>align text - left (default), right, center and justify (causes all lines of text except the last line to meet the left and right edges of the line box)</td>
+</tr>
+<tr class="even">
+<td>width:</td>
+<td>relative length units (such as em), absolute length units (such as px), or as a percentage of its containing parent element</td>
+</tr>
+<tr class="odd">
+<td>font-weight</td>
+<td><code>font-weight: bold;</code> is the same as wrapping text in <code>&lt;strong&gt;&lt;/strong&gt;</code>. Sets how thick or think characters are (ranges in abs values from 100:800 or so, and percentages can be used)</td>
+</tr>
+<tr class="even">
+<td>text-decoration</td>
+<td><code>text-decoration: underline;</code> is the same as wrapping text in <code>&lt;u&gt;&lt;/u&gt;</code></td>
+</tr>
+<tr class="odd">
+<td>font-style</td>
+<td><code>font-style: italic;</code> is the same as wrapping text in <code>&lt;em&gt;&lt;/em&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;hr&gt;</code></td>
+<td>create a horizontal line (self-closing tag)</td>
+</tr>
+<tr class="odd">
+<td>rgba()</td>
+<td>add opacity argument. <code>background-color: rgba(45, 45, 45, 0.1)</code> produces a dark gray that is nearly transparent</td>
+</tr>
+<tr class="even">
+<td>font-size</td>
+<td>font-size</td>
+</tr>
+<tr class="odd">
+<td>opacity</td>
+<td>adjusts the transparency. 0 is see through, 1 is opaque.</td>
+</tr>
+<tr class="even">
+<td>text - transform</td>
+<td>lowercase, uppercase, capitalize (sentence-casing), initial, none, inherit (inherit parent props)</td>
+</tr>
+<tr class="odd">
+<td>line-height</td>
+<td>vertical amount of space between lines</td>
+</tr>
+<tr class="even">
+<td>float</td>
+<td>does not actually use position, but sets the float property of an element. Floating elements are removed from the normal flow of a document and pushed to either the left or right of their containing parent element.</td>
+</tr>
+<tr class="odd">
+<td>z-index</td>
+<td>stack floating elements on top of each other, higher values take precedence</td>
+</tr>
+<tr class="even">
+<td>margin</td>
+<td>move a block element horizontally (<code>margin: auto;</code> = center)</td>
+</tr>
+<tr class="odd">
+<td>display</td>
+<td>choose whether to display as block or inline</td>
+</tr>
+<tr class="even">
+<td>hsl()</td>
+<td>Hue (color 0 red, 360 blue), saturation (amount of grey) lightness (amount of white 0 to black 100)</td>
+</tr>
+<tr class="odd">
+<td>linear-gradient()</td>
+<td>create a color gradient, the first arg specifies which direction the gradient moves. <code>background: linear-gradient(0deg, #CCFFFF, #FFCCCC)</code></td>
+</tr>
+<tr class="even">
+<td>background</td>
+<td><code>background: url(https://i.imgur.com/MJAkxbh.png);</code> to add an image</td>
+</tr>
+<tr class="odd">
+<td>transform:</td>
+<td><code>transform: scale(2)</code> doubles the element size.</td>
+</tr>
+<tr class="even">
+<td>transform:</td>
+<td><code>transform: skewX(30deg);</code> skews along the X-axis (e.g. square to rhombus)</td>
+</tr>
+<tr class="odd">
+<td>transform:</td>
+<td><code>transform: rotate(-45deg);</code> rotates an element</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Box-shadow:</strong><br />
+Makes the <code>&lt;div&gt;</code> appear likes it’s floating on the page by adding shadow around it. The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order. The blur-radius and spread-radius values are optional.</p>
+<pre><code>/* Multiple shadows with some blur */
+box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);</code></pre>
+<p><strong>Psuedo-classes:</strong><br />
+A pseudo-class is a keyword that can be added to selectors, in order to select a specific state of the element.</p>
+<pre><code>/* When hovering over an anchor tag, change its color to red */
+a:hover {
+  color: red;
+}</code></pre>
+<p><strong>Positioning</strong><br />
+<br> <em>Relative:</em>CSS treats each HTML element as its own box, which is usually referred to as the CSS Box Model. Block-level items automatically start on a new line (think headings, paragraphs, and divs) while inline items sit within surrounding content (like images or spans). The default layout of elements in this way is called the normal flow of a document, but CSS offers the position property to override it. When the position of an element is set to relative, it allows you to specify how CSS should move it relative to its current position in the normal flow of the page. It pairs with the CSS offset properties of left or right, and top or bottom. These say how many pixels, percentages, or ems to move the item away from where it is normally positioned. The following example moves the paragraph 10 pixels away from the bottom:</p>
+<pre><code>p {
+  /* Relative positions move away from top, bottom, left and right */ 
+  position: relative;
+  bottom: 10px;
+}</code></pre>
+<p><em>Absolute:</em> The next option for the CSS position property is absolute, which locks the element in place relative to its parent container. Unlike the relative position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position. <em>Fixed:</em> locks an element relative to the browser window. Similar to absolute positioning, it’s used with the CSS offset properties and also removes the element from the normal flow of the document.</p>
+<p><strong>Colors:</strong><br />
+Red (R), green (G), and blue (B) are called primary colors. Mixing two primary colors creates the secondary colors cyan (G + B), magenta (R + B) and yellow (R + G). Tertiary colors are the result of combining a primary color with one of its secondary color neighbors. For example, red (primary) and yellow (secondary) make orange. HSL ()</p>
+<p><strong>Shapes:</strong><br />
+Use CSS Styline to create a crescent moon shape:</p>
+<pre><code>&lt;style&gt;
+.center
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  
+  background-color: transparent; /* Change this to see the initial shape */
+  border-radius: 50%;
+  box-shadow: 25px 10px 0px 0px blue; 
+}
+&lt;/style&gt;
+&lt;div class=&quot;center&quot;&gt;&lt;/div&gt;</code></pre>
+<p><strong>Pseudo-elements:</strong><br />
+::before and ::after pseudo-elements to function properly, they must have a defined content property. This property is usually used to add things like a photo or text to the selected element. When the ::before and ::after pseudo-elements are used to make shapes, the content property is still required, but it’s set to an empty string.</p>
+<div id="animation" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Animation:</h3>
+<p>The animation properties control how the animation should behave and the <code>@keyframes</code> rule controls what happens during that animation. animation-name sets the name of the animation, which is later used by <code>@keyframes</code> to tell CSS which rules go with which animations; it uses percentages similarly to frames. 0% is at the beginning and 100% is at the end.<br />
+Change the background color from blue to yellow in 3 seconds:</p>
+<pre><code>#anim {
+  animation-name: colorful;
+  animation-duration: 3s;
+}
+@keyframes colorful {
+  0% {
+    background-color: blue;
+  }
+  100% {
+    background-color: yellow;
+  }
+}</code></pre>
+<pre><code>&lt;style&gt;
+  button {
+    border-radius: 5px;
+    color: white;
+    background-color: #0F5897;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    animation-name: background-color;
+    animation-duration: 500ms;
+    /* add your code below this line */
+    animation-fill-mode: forwards;
+    /* add your code above this line */
+  }
+  @keyframes background-color {
+    100% {
+      background-color: #4791d0;
+    }
+  }
+&lt;/style&gt;
+&lt;button&gt;Register&lt;/button&gt;</code></pre>
+<p><strong>Animation Properties and Effects:</strong><br />
+Animation Property | Explanation ——————– | ————————————————- animation-name | name is referred to in <code>@keyframes</code> to link them animation-duration | <code>animation-duration: 1s;</code> animation-iteration-count | number of iterations (can be set to <code>infinite</code>) animation-timing-function | controls the speed at various point of the animation. linear is constant. <code>animation-timinig-function: ease-in;</code> is slow at the beginning and speeds up.</p>
+<p>Some animation effects: Animation Effect | Explanation ———- | ——————————————————————- opacity | make an element fade in and out</p>
+<p><strong>Cubic-bezier function:</strong> In CSS animations, Bezier curves are used with the cubic-bezier function. The shape of the curve represents how the animation plays out. The curve lives on a 1 by 1 coordinate system. The X-axis of this coordinate system is the duration of the animation (think of it as a time scale), and the Y-axis is the change in the animation.</p>
+<p>The cubic-bezier function consists of four main points that sit on this 1 by 1 grid: p0, p1, p2, and p3. p0 and p3 are set for you - they are the beginning and end points which are always located respectively at the origin (0, 0) and (1, 1). You set the x and y values for the other two points, and where you place them in the grid dictates the shape of the curve for the animation to follow. This is done in CSS by declaring the x and y values of the p1 and p2 “anchor” points in the form: (x1, y1, x2, y2). Pulling it all together, here’s an example of a Bezier curve in CSS code:</p>
+<pre><code>/* Equivalent to the &quot;linear&quot; keyword */
+animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);</code></pre>
 
+</div>
 </div>
 </div>
             </section>
