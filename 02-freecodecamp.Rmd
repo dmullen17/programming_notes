@@ -1,6 +1,14 @@
 # JavaScript Algorithms and Data Structures FCC 
 These are my notes from the JavaScript Algorithms and Data Structures certification from the<a href="https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/basic-javascript"> FreeCodeCamp lessons</a>
 
+## ES6 
+Arrow function defintion syntax: 
+```
+let printAandB = (a, b) => {
+  console.log(`${a} = a and ${b} = b`);
+}
+```
+
 ## Regex 
 Example using the .test() method - pretty weird syntax with the string as the input. 
 ```
@@ -156,3 +164,138 @@ function chunkArrayInGroups(arr, size) {
 return newArr;
 }
 ```
+
+## Object Oriented Programming
+The software development process first defines a problem, then presents a solution. Object oriented programming is one of several major approaches to the software development process. As its name implies, object oriented programming organizes code into object definitions. These are sometimes called classes, and they group together data with related behavior. The data is an object's attributes, and the behavior (or functions) are methods.
+
++ object declaration: ```let object = {property: "value"}`
++ access properties with the dot operator: `object.property`
++ add a method to an object 
+    +
+    ```
+let dog = {
+  name: "Spot",
+  numLegs: 4,
+  sayLegs: function() {return `This dog has ${this.numLegs} legs.`}
+};
+```
++ Create a class constructor: 
+    +
+```
+function Dog(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 4;
+}
+```
++ check that a variable is of a Class using `variable instanceOf class;`
++ own properties are defined directly on an object (not inherited)
+    + You can loop through an objects properties (AND prototype properties): `for (let property in object){}`
++ prototype is an object shared among all instance of a class 
+    + we can modify the prototype directly with: `Dog.prototype.numLegs = 4;`
++ we can check if the constructor is of a specific class: 
+    +
+```
+let joinDogFraternity = (candidate) => {
+  return candidate.constructor === Dog ? true : false;
+}
+```
++ Set methods in the prototype.  Also includes shorthand method definitions: 
+    + when manually setting the prototype of an object it deletes the constructor.  Remember to include the `constructor` property in the prototype.
+    +
+```
+function Dog(name) {
+  this.name = name; 
+}
+Dog.prototype = {
+  numLegs: 4,
+  eat() {
+    console.log('nom nom nom');
+  },
+  describe() {
+    console.log(`My name is ${this.name}`);
+  }
+};
+```
++ `isProtoTypeOf` method: 
+    +
+```
+function Dog(name) {
+  this.name = name;
+}
+let beagle = new Dog("Snoopy");
+Dog.prototype.isPrototypeOf(beagle);
+```
++ using inheritance means you won't repeat yourself (DRY)
++ `superType` = parent
++ this is the same as using the `new` operator: 
+    + `let animal = Object.create(Animal.prototype);`
+    + Object.create(obj) creates a new object, and sets obj as the new object's prototype
++ `subtype` = child 
+    + set the prototype of the subtype (or child)—in this case, Bird—to be an instance of Animal: 
+    + `Bird.prototype = Object.create(Animal.prototype);`
++ When an object inherits its prototype from another object, it also inherits the supertype's constructor property.  You need to reset the constructor property manually: `Bird.prototype.constructor = Bird;`
++ We can overwrite a prototype method by using the same name. 
++ `Mixin` a generic function we can use to give unrelated objects methods
+    +
+```
+let bird = {
+  name: "Donald",
+  numLegs: 2
+};
+let boat = {
+  name: "Warrior",
+  type: "race-boat"
+};
+// Create a Mixin function
+let glideMixin = function(obj) {
+    obj.glide = function() {
+        console.log('gliding!');
+    }
+};
+glideMixin(bird);
+glideMixin(boat);
+bird.glide();
+```
+
+**Use Closures to create private variables:**  
+We can make properties private by creating a variable within the constructor function. The scope of the variable is now in the constructor function -> so the variable can only be accessed or changed by methods within the constructor function.  
+```
+function Bird() {
+  let weight = 15;
+  this.getWeight = function() {//publicly available method
+    return weight;
+  }
+}
+```
+
+**Use an IIFE to create a module:**  
+Note that you have an immediately invoked function expression (IIFE) that returns an object motionModule. This returned object contains all of the mixin behaviors as properties of the object. The advantage of the module pattern is that all of the motion behaviors can be packaged into a single object that can then be used by other parts of your code. Here is an example using it:
+```
+let motionModule = (function () {
+  return {
+    glideMixin: function (obj) {
+      obj.glide = function() {
+        console.log("Gliding on the water");
+      };
+    },
+    flyMixin: function(obj) {
+      obj.fly = function() {
+        console.log("Flying, wooosh!");
+      };
+    }
+  }
+}) (); // The two parentheses cause the function to be immediately invoked
+motionModule.glideMixin(duck);
+duck.glide();
+```
+<hr>
+
+
+## Function Programming Challenges 
+Functional programming is an approach to software development based around the evaluation of functions. Like mathematics, functions in programming map input to output to produce a result. You can combine basic functions in many ways to build more and more complex programs. The functional programming software development approach breaks a program into small, testable parts. This section covers basic functional programming principles in JavaScript.
+
++ Functional programming follows a few core principles:
++ Functions are independent from the state of the program or global variables. They only depend on the arguments passed into them to make a calculation
++ Functions try to limit any changes to the state of the program and avoid changes to the global objects holding data
++ Functions have minimal side effects in the program  
