@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-03">
+<meta name="date" content="2018-12-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -88,6 +88,8 @@
 <li class="chapter" data-level="4.3" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#applied-visual-design"><i class="fa fa-check"></i><b>4.3</b> Applied Visual Design</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#animation"><i class="fa fa-check"></i><b>4.3.1</b> Animation:</a></li>
 </ul></li>
+<li class="chapter" data-level="4.4" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#applied-acessbility"><i class="fa fa-check"></i><b>4.4</b> Applied Acessbility</a></li>
+<li class="chapter" data-level="4.5" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#responsive-web-design"><i class="fa fa-check"></i><b>4.5</b> Responsive Web Design</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -111,7 +113,8 @@
             <section class="normal" id="section-">
 <div id="responsive-web-design-fcc" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Responsive Web Design FCC</h1>
-<p>These are my notes from the Responsive Web Design certification from the<a href="https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5"> FreeCodeCamp lessons</a></p>
+These are my notes from the Responsive Web Design certification from the<a href="https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5"> FreeCodeCamp lessons</a>
+<hr>
 <div id="html-and-html5" class="section level2">
 <h2><span class="header-section-number">4.1</span> HTML and HTML5</h2>
 <p>Basic structure for each page:</p>
@@ -147,7 +150,8 @@
   &lt;label for=&#39;outdoor&#39;&gt;
     &lt;input id=&#39;outdoor&#39; type=&#39;radio&#39; name=&#39;indoor-outdoor&#39;&gt; Outdoor
   &lt;/label&gt;</code></pre>
-<p><br></p>
+<br>
+<hr>
 </div>
 <div id="css" class="section level2">
 <h2><span class="header-section-number">4.2</span> CSS</h2>
@@ -208,6 +212,7 @@ When your browser parses the CSS of a webpage, it ignores any properties that it
 </tr>
 </tbody>
 </table>
+<hr>
 </div>
 <div id="applied-visual-design" class="section level2">
 <h2><span class="header-section-number">4.3</span> Applied Visual Design</h2>
@@ -395,8 +400,65 @@ Animation Property | Explanation ——————– | ———————�
 <p>The cubic-bezier function consists of four main points that sit on this 1 by 1 grid: p0, p1, p2, and p3. p0 and p3 are set for you - they are the beginning and end points which are always located respectively at the origin (0, 0) and (1, 1). You set the x and y values for the other two points, and where you place them in the grid dictates the shape of the curve for the animation to follow. This is done in CSS by declaring the x and y values of the p1 and p2 “anchor” points in the form: (x1, y1, x2, y2). Pulling it all together, here’s an example of a Bezier curve in CSS code:</p>
 <pre><code>/* Equivalent to the &quot;linear&quot; keyword */
 animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);</code></pre>
-
+<hr>
 </div>
+</div>
+<div id="applied-acessbility" class="section level2">
+<h2><span class="header-section-number">4.4</span> Applied Acessbility</h2>
+<p>“Accessibility” generally means having web content and a user interface that can be understood, navigated, and interacted with by a broad audience. This includes people with visual, auditory, mobility, or cognitive disabilities. Websites should be open and accessible to everyone, regardless of a user’s abilities or resources. Some users rely on assistive technology such as a screen reader or voice recognition software. Other users may be able to navigate through a site only using a keyboard. Keeping the needs of various users in mind when developing your project can go a long way towards creating an open web. Having accessible web content is an ongoing challenge. A great resource for your projects going forward is the W3 Consortium’s Web Content Accessibility Guidelines (WCAG). They set the international standard for accessibility and provide a number of criteria you can use to check your work.</p>
+<ul>
+<li>All images are required to include <code>alt</code> text with HTML5.</li>
+<li>headers should have semantic / hierarchical meaning.<br />
+</li>
+<li>main, header, footer, nav, article, and section can be used for increased readability from screen readers.</li>
+<li><code>&lt;article&gt;</code> is for stand-alone content, <code>&lt;section&gt;</code> is for thematically related content.</li>
+<li><code>&lt;header&gt;</code> wrap introductory information or navigation links for its parent tag</li>
+<li><code>&lt;nav&gt;</code> wrap around the main navigation links in your page</li>
+<li><code>&lt;audio controls&gt;</code> wrapping this around an audio element will create play buttons <code>&lt;audio controls&gt;&lt;source src='https://s3.amazonaws.com/freecodecamp/screen-reader.mp3' type='audio/mpeg'&gt;&lt;/audio&gt;</code></li>
+<li><p><code>&lt;figure&gt; and &lt;figcaption&gt;</code> Wrap a visual representation along with its caption:</p>
+<pre><code>&lt;figure&gt;
+  &lt;img src=&quot;roundhouseDestruction.jpeg&quot; alt=&quot;Photo of Camper Cat executing a roundhouse kick&quot;&gt;
+  &lt;br&gt;
+  &lt;figcaption&gt;
+Master Camper Cat demonstrates proper form of a roundhouse kick.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre></li>
+<li>Add a <code>label</code> on <code>inputs</code> where the for attribute matches the id attribute on input. This links them together.</li>
+<li><p>fieldset tag surrounds the entire grouping of radio buttons to achieve this. It often uses a legend tag to provide a description for the grouping, which is read by screen readers for each choice in the fieldset element.</p>
+<pre><code>&lt;form&gt;
+  &lt;fieldset&gt;
+&lt;legend&gt;Choose one of these three items:&lt;/legend&gt;
+&lt;input id=&quot;one&quot; type=&quot;radio&quot; name=&quot;items&quot; value=&quot;one&quot;&gt;
+&lt;label for=&quot;one&quot;&gt;Choice One&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;two&quot; type=&quot;radio&quot; name=&quot;items&quot; value=&quot;two&quot;&gt;
+&lt;label for=&quot;two&quot;&gt;Choice Two&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;three&quot; type=&quot;radio&quot; name=&quot;items&quot; value=&quot;three&quot;&gt;
+&lt;label for=&quot;three&quot;&gt;Choice Three&lt;/label&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre></li>
+<li>Date picker <code>&lt;label for=&quot;input1&quot;&gt;Enter a date:&lt;/label&gt;&lt;input type=&quot;date&quot; id=&quot;input1&quot; name=&quot;input1&quot;&gt;</code></li>
+<li>Add <code>datetime</code> attributes for unambiguous dates: <code>&lt;time datetime=&quot;2013-02-13&quot;&gt;last Wednesday&lt;/time&gt;</code></li>
+<li>text contrast ratio should be at least 4.5:1 (1:1 is the same color, 1:21 is white:black)</li>
+<li>Avoid putting anchor tags around phrases like “Click here”</li>
+<li>accessKey allows you to specify which keyboard button selects an element. <code>&lt;button accesskey=&quot;b&quot;&gt;Important Button&lt;/button&gt;</code></li>
+<li><p>give elements a tabindex attribute to allow users to tab through them. <code>&lt;div tabindex=0&gt;hi&lt;/div&gt;</code>. A tabindex=-1 indicates an element is focusable but not available at the keyboard (like a new link). This also enables the psuedoclass <code>:focus</code>. Using positive numbers overrides the default order and allows you to specify what order elements will be focused on.</p></li>
+</ul>
+<p><strong>Position Elements Off-screen:</strong><br />
+CSS’s magic can also improve accessibility on your page when you want to visually hide content meant only for screen readers. This happens when information is in a visual format (like a chart), but screen reader users need an alternative presentation (like a table) to access the data. CSS is used to position the screen reader-only elements off the visual area of the browser window.</p>
+<pre><code>.sr-only {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  top: auto;
+  overflow: hidden;
+}</code></pre>
+<hr>
+</div>
+<div id="responsive-web-design" class="section level2">
+<h2><span class="header-section-number">4.5</span> Responsive Web Design</h2>
+<p>The page structure and CSS rules should be flexible to accommodate these differences. In general, design the page’s CSS to your target audience. If you expect most of your traffic to be from mobile users, take a ‘mobile-first’ approach. Then add conditional rules for larger screen sizes.</p>
+
 </div>
 </div>
             </section>

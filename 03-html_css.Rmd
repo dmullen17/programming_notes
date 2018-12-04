@@ -1,5 +1,6 @@
 # Responsive Web Design FCC
 These are my notes from the Responsive Web Design certification from the<a href="https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5"> FreeCodeCamp lessons</a>
+<hr>
 
 ## HTML and HTML5 
 Basic structure for each page: 
@@ -42,6 +43,7 @@ The `for` attribute allows us to link between the parent input elements
   </label>
 ```
 <br>
+<hr>
 
 
 ## CSS
@@ -98,6 +100,7 @@ Element | Description
 ------- | ----------------------------------------------------------------------
 padding | amount of space between the element's content and it's border. We can set this in one line (also margin). Ex. `padding: 40px 40px 20px 20px` (clockwise:top, right, bottom, left) 
 margin | controls the amount of space between an element's border and surrounding elements.  If you set a margin to a negative value it will increase the size of the element. 
+<hr>
 
 
 ## Applied Visual Design
@@ -247,4 +250,65 @@ The cubic-bezier function consists of four main points that sit on this 1 by 1 g
 /* Equivalent to the "linear" keyword */
 animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
 ```
+<hr>
 
+
+## Applied Acessbility 
+
+"Accessibility" generally means having web content and a user interface that can be understood, navigated, and interacted with by a broad audience. This includes people with visual, auditory, mobility, or cognitive disabilities. Websites should be open and accessible to everyone, regardless of a user's abilities or resources. Some users rely on assistive technology such as a screen reader or voice recognition software. Other users may be able to navigate through a site only using a keyboard. Keeping the needs of various users in mind when developing your project can go a long way towards creating an open web.  Having accessible web content is an ongoing challenge. A great resource for your projects going forward is the W3 Consortium's Web Content Accessibility Guidelines (WCAG). They set the international standard for accessibility and provide a number of criteria you can use to check your work.  
+
++ All images are required to include `alt` text with HTML5.
++ headers should have semantic / hierarchical meaning.  
++ main, header, footer, nav, article, and section can be used for increased readability from screen readers. 
++ `<article>` is for stand-alone content, `<section>` is for thematically related content.
++ `<header>` wrap introductory information or navigation links for its parent tag
++ `<nav>` wrap around the main navigation links in your page
++ `<audio controls>` wrapping this around an audio element will create play buttons `<audio controls><source src='https://s3.amazonaws.com/freecodecamp/screen-reader.mp3' type='audio/mpeg'></audio>`
++ `<figure> and <figcaption>` Wrap a visual representation along with its caption:
+```
+<figure>
+  <img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
+  <br>
+  <figcaption>
+    Master Camper Cat demonstrates proper form of a roundhouse kick.
+  </figcaption>
+</figure>
+```
++ Add a `label` on `inputs` where the for attribute matches the id attribute on input.  This links them together. 
++ fieldset tag surrounds the entire grouping of radio buttons to achieve this. It often uses a legend tag to provide a description for the grouping, which is read by screen readers for each choice in the fieldset element.
+```
+<form>
+  <fieldset>
+    <legend>Choose one of these three items:</legend>
+    <input id="one" type="radio" name="items" value="one">
+    <label for="one">Choice One</label><br>
+    <input id="two" type="radio" name="items" value="two">
+    <label for="two">Choice Two</label><br>
+    <input id="three" type="radio" name="items" value="three">
+    <label for="three">Choice Three</label>
+  </fieldset>
+</form>
+```
++ Date picker `<label for="input1">Enter a date:</label><input type="date" id="input1" name="input1">`
++ Add `datetime` attributes for unambiguous dates: `<time datetime="2013-02-13">last Wednesday</time>`
++ text contrast ratio should be at least 4.5:1 (1:1 is the same color, 1:21 is white:black)
++ Avoid putting anchor tags around phrases like "Click here"
++ accessKey allows you to specify which keyboard button selects an element. `<button accesskey="b">Important Button</button>`
++ give elements a tabindex attribute to allow users to tab through them.  `<div tabindex=0>hi</div>`.  A tabindex=-1 indicates an element is focusable but not available at the keyboard (like a new link).  This also enables the psuedoclass `:focus`.  Using positive numbers overrides the default order and allows you to specify what order elements will be focused on.  
+
+**Position Elements Off-screen:**  
+CSS's magic can also improve accessibility on your page when you want to visually hide content meant only for screen readers. This happens when information is in a visual format (like a chart), but screen reader users need an alternative presentation (like a table) to access the data. CSS is used to position the screen reader-only elements off the visual area of the browser window.
+```
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  top: auto;
+  overflow: hidden;
+}
+```
+<hr> 
+
+## Responsive Web Design  
+The page structure and CSS rules should be flexible to accommodate these differences. In general, design the page's CSS to your target audience. If you expect most of your traffic to be from mobile users, take a 'mobile-first' approach. Then add conditional rules for larger screen sizes.
