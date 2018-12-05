@@ -21,9 +21,9 @@ let result = fccRegex.test(myString);
 + uses flags: i = case insensitive, g = more than the first match 
 + you can put whatever you want in a class: [aeiou] or [a-f], [a-z] etc. 
 + lazy matching - finds the smallest part of the string that matches the pattern
-+ [\w] matches alphanumerics, [\W] matches non alphanumerics 
-+ [\d] matches digits, [\D] is the inverse 
-+ [\s] matches all whitespace characters, [\S] is the inverse 
++ `[\w]` matches alphanumerics, `[\W]` matches non alphanumerics 
++ `[\d]` matches digits, `[\D]` is the inverse 
++ `[\s]` matches all whitespace characters, `[\S]` is the inverse 
 + `?` checks for all or none (think of it as optional)
 + .trim() and .replace() methods exist 
 
@@ -294,8 +294,168 @@ duck.glide();
 
 ## Function Programming Challenges 
 Functional programming is an approach to software development based around the evaluation of functions. Like mathematics, functions in programming map input to output to produce a result. You can combine basic functions in many ways to build more and more complex programs. The functional programming software development approach breaks a program into small, testable parts. This section covers basic functional programming principles in JavaScript.
+  **Callbacks** are the functions that are slipped or passed into another function to decide the invocation of that function. Functions that can be assigned to a variable, passed into another function, or returned from another function just like any other normal value, are called **first class** functions. In JavaScript, all functions are first class functions. The functions that take a function as an argument, or return a function as a return value are called **higher order** functions. When the functions are passed in to another function or returned from another function, then those functions which gets passed in or returned can be called a **lambda.** 
+Example of these principles: 
+```
+const prepareGreenTea = () => 'greenTea';
+const prepareBlackTea = () => 'blackTea';
+
+const getTea = (prepareTea, numOfCups) => {
+  const teaCups = [];
+  for(let cups = 1; cups <= numOfCups; cups += 1) {
+    const teaCup = prepareTea();
+    teaCups.push(teaCup);
+  }
+  return teaCups;
+};
+
+const tea4GreenTeamFCC = getTea(prepareGreenTea, 27); // 
+const tea4BlackTeamFCC = getTea(prepareBlackTea, 13); // 
+```
 
 + Functional programming follows a few core principles:
 + Functions are independent from the state of the program or global variables. They only depend on the arguments passed into them to make a calculation
 + Functions try to limit any changes to the state of the program and avoid changes to the global objects holding data
 + Functions have minimal side effects in the program  
+
+Super cool snippet of functional programming with one error: 
+```
+// tabs is an array of titles of each site open within the window
+var Window = function(tabs) {
+  this.tabs = tabs; // we keep a record of the array inside the object
+};
+
+// When you join two windows into one window
+Window.prototype.join = function (otherWindow) {
+  this.tabs = this.tabs.concat(otherWindow.tabs);
+  return this;
+};
+
+// When you open a new tab at the end
+Window.prototype.tabOpen = function (tab) {
+  this.tabs.push('new tab'); // let's open a new tab for now
+  return this;
+};
+
+// When you close a tab
+Window.prototype.tabClose = function (index) {
+  /* the splice call modifies the arry - wrong method to use here */
+  var tabsBeforeIndex = this.tabs.splice(0, index); // get the tabs before the tab
+  var tabsAfterIndex = this.tabs.splice(index); // get the tabs after the tab
+
+  this.tabs = tabsBeforeIndex.concat(tabsAfterIndex); // join them together 
+  return this;
+ };
+
+// Let's create three browser windows
+var workWindow = new Window(['GMail', 'Inbox', 'Work mail', 'Docs', 'freeCodeCamp']); // Your mailbox, drive, and other work sites
+var socialWindow = new Window(['FB', 'Gitter', 'Reddit', 'Twitter', 'Medium']); // Social sites
+var videoWindow = new Window(['Netflix', 'YouTube', 'Vimeo', 'Vine']); //  Entertainment sites
+
+// Now perform the tab opening, closing, and other operations
+var finalTabs = socialWindow
+                    .tabOpen() // Open a new tab for cat memes
+                    .join(videoWindow.tabClose(2)) // Close third tab in video window, and join
+                    .join(workWindow.tabClose(1).tabOpen());
+
+alert(finalTabs.tabs);
+```
+
+Add a user-defined map and filter prototypes methods to the global Array object: 
+```
+var s = [23, 65, 98, 5];
+
+Array.prototype.myMap = function(callback){
+  var newArray = [];
+  for(let i = 0; i < this.length; i++) {
+    newArray.push(callback(this[i]));
+  }
+  // the forEach method also works 
+  // this.forEach(a => newArray.push(callback(a)));
+  return newArray;
+};
+
+var new_s = s.myMap(function(item){
+  return item * 2;
+});
+
+Array.prototype.myFilter = function(callback){
+  var newArray = [];
+  // Add your code below this line
+  this.forEach(el => {if (callback(el)) {
+      newArray.push(el);
+    }
+  });
+  // Add your code above this line
+  return newArray;
+};
+```
+
+`.filter` method takes a callback function input and returns elements in a new array if it evaluates to true
+The following code chunk works, but it won't work if we wrap {} around the arrown function in .filter.  Why is that?
+```
+var filteredList = watchList.filter(el => parseInt(el.imdbRating) >= 8).map(el => {return {title: el.Title, rating: el.imdbRating}});
+```
+
++ `.concat` allows us to push items to the end of an array in a non mutating way. 
+
++ `.reduce` example: 
+```
+var nolan_movies = watchList.filter(el => el.Director === 'Christopher Nolan');
+var averageRating = nolan_movies.map(el => parseFloat(el.imdbRating)).reduce((a, b) => a + b)/(nolan_movies.length);
+```
+
++ Sorting examples. Sorting defaults to unicode which converts numbers to characters.  We need callback functions to sort numeric values correctly.  Sort also mutates the original array.  
+```
+function ascendingOrder(arr) {
+  return arr.sort(function(a, b) {
+    return a - b;
+  });
+}
+ascendingOrder([1, 5, 2, 3, 4]);
+// Returns [1, 2, 3, 4, 5]
+
+function reverseAlpha(arr) {
+  return arr.sort(function(a, b) {
+    return a < b;
+  });
+}
+reverseAlpha(['l', 'h', 'z', 'b', 's']);
+// Returns ['z', 's', 'l', 'h', 'b']
+```
++ `.join('delimiter')` joins elements of an array using a delimiter 
++ `.every` takes a callback function and checks if every value is true.  
+    +`.some` (any in R) method checks if any applications of the callback function are true
+    
+**Curry and Partial Application:**
++ `arity` is the number of arguments a function requires
++ `currying` a function means converting one function of N arity (arguments) into N functions of arity 1.  
++ partial application can be described as applying a few arguments to a function at a time and returning another function that is applied to more arguments
+    + this basically looks like big nested function calls (pretty weird)
+```
+function add(x) {
+  return function(y) {
+    return function(z) {
+      return x + y + z;
+    }
+  }
+}
+add(10)(20)(30);
+```
+<hr> 
+
+
+## Intermediate Algorithm Scripting 
+
+1. Create a `range` function for an unsorted 2-number array that sums all numbers (inclusive).
+```
+function sumAll(arr) {
+  var sortedArr = arr.sort((a,b) => a-b);
+  var firstNum = arr[0];
+  var lastNum = arr[1];
+  // Using Arithmetic Progression summing formula
+  var sum = (lastNum - firstNum + 1) * (firstNum + lastNum) / 2;
+  return sum;
+}
+```
+2. 

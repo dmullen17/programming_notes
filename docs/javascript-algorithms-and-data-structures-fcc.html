@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-04">
+<meta name="date" content="2018-12-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="command-line.html">
-<link rel="next" href="responsive-web-design-fcc.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -84,16 +84,7 @@
 <li class="chapter" data-level="3.5" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#basic-algorithm-scripting"><i class="fa fa-check"></i><b>3.5</b> Basic Algorithm Scripting</a></li>
 <li class="chapter" data-level="3.6" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#object-oriented-programming"><i class="fa fa-check"></i><b>3.6</b> Object Oriented Programming</a></li>
 <li class="chapter" data-level="3.7" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#function-programming-challenges"><i class="fa fa-check"></i><b>3.7</b> Function Programming Challenges</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html"><i class="fa fa-check"></i><b>4</b> Responsive Web Design FCC</a><ul>
-<li class="chapter" data-level="4.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#html-and-html5"><i class="fa fa-check"></i><b>4.1</b> HTML and HTML5</a></li>
-<li class="chapter" data-level="4.2" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#css"><i class="fa fa-check"></i><b>4.2</b> CSS</a></li>
-<li class="chapter" data-level="4.3" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#applied-visual-design"><i class="fa fa-check"></i><b>4.3</b> Applied Visual Design</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#animation"><i class="fa fa-check"></i><b>4.3.1</b> Animation:</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#applied-acessibility"><i class="fa fa-check"></i><b>4.4</b> Applied Acessibility</a></li>
-<li class="chapter" data-level="4.5" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#responsive-web-design"><i class="fa fa-check"></i><b>4.5</b> Responsive Web Design</a></li>
-<li class="chapter" data-level="4.6" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#css-flexbox"><i class="fa fa-check"></i><b>4.6</b> CSS Flexbox</a></li>
+<li class="chapter" data-level="3.8" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#css-flexbox"><i class="fa fa-check"></i><b>3.8</b> CSS Flexbox</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -136,9 +127,9 @@ let result = fccRegex.test(myString);</code></pre>
 <li>uses flags: i = case insensitive, g = more than the first match</li>
 <li>you can put whatever you want in a class: [aeiou] or [a-f], [a-z] etc.</li>
 <li>lazy matching - finds the smallest part of the string that matches the pattern</li>
-<li>[] matches alphanumerics, [] matches non alphanumerics</li>
-<li>[] matches digits, [] is the inverse</li>
-<li>[] matches all whitespace characters, [] is the inverse</li>
+<li><code>[\w]</code> matches alphanumerics, <code>[\W]</code> matches non alphanumerics</li>
+<li><code>[\d]</code> matches digits, <code>[\D]</code> is the inverse</li>
+<li><code>[\s]</code> matches all whitespace characters, <code>[\S]</code> is the inverse</li>
 <li><code>?</code> checks for all or none (think of it as optional)</li>
 <li>.trim() and .replace() methods exist</li>
 </ul>
@@ -380,13 +371,388 @@ duck.glide();</code></pre>
 </div>
 <div id="function-programming-challenges" class="section level2">
 <h2><span class="header-section-number">3.7</span> Function Programming Challenges</h2>
-<p>Functional programming is an approach to software development based around the evaluation of functions. Like mathematics, functions in programming map input to output to produce a result. You can combine basic functions in many ways to build more and more complex programs. The functional programming software development approach breaks a program into small, testable parts. This section covers basic functional programming principles in JavaScript.</p>
+<p>Functional programming is an approach to software development based around the evaluation of functions. Like mathematics, functions in programming map input to output to produce a result. You can combine basic functions in many ways to build more and more complex programs. The functional programming software development approach breaks a program into small, testable parts. This section covers basic functional programming principles in JavaScript. <strong>Callbacks</strong> are the functions that are slipped or passed into another function to decide the invocation of that function. Functions that can be assigned to a variable, passed into another function, or returned from another function just like any other normal value, are called <strong>first class</strong> functions. In JavaScript, all functions are first class functions. The functions that take a function as an argument, or return a function as a return value are called <strong>higher order</strong> functions. When the functions are passed in to another function or returned from another function, then those functions which gets passed in or returned can be called a <strong>lambda.</strong> Example of these principles:</p>
+<pre><code>const prepareGreenTea = () =&gt; &#39;greenTea&#39;;
+const prepareBlackTea = () =&gt; &#39;blackTea&#39;;
+
+const getTea = (prepareTea, numOfCups) =&gt; {
+  const teaCups = [];
+  for(let cups = 1; cups &lt;= numOfCups; cups += 1) {
+    const teaCup = prepareTea();
+    teaCups.push(teaCup);
+  }
+  return teaCups;
+};
+
+const tea4GreenTeamFCC = getTea(prepareGreenTea, 27); // 
+const tea4BlackTeamFCC = getTea(prepareBlackTea, 13); // </code></pre>
 <ul>
 <li>Functional programming follows a few core principles:</li>
 <li>Functions are independent from the state of the program or global variables. They only depend on the arguments passed into them to make a calculation</li>
 <li>Functions try to limit any changes to the state of the program and avoid changes to the global objects holding data</li>
 <li>Functions have minimal side effects in the program</li>
 </ul>
+<p>Super cool snippet of functional programming with one error:</p>
+<pre><code>// tabs is an array of titles of each site open within the window
+var Window = function(tabs) {
+  this.tabs = tabs; // we keep a record of the array inside the object
+};
+
+// When you join two windows into one window
+Window.prototype.join = function (otherWindow) {
+  this.tabs = this.tabs.concat(otherWindow.tabs);
+  return this;
+};
+
+// When you open a new tab at the end
+Window.prototype.tabOpen = function (tab) {
+  this.tabs.push(&#39;new tab&#39;); // let&#39;s open a new tab for now
+  return this;
+};
+
+// When you close a tab
+Window.prototype.tabClose = function (index) {
+  /* the splice call modifies the arry - wrong method to use here */
+  var tabsBeforeIndex = this.tabs.splice(0, index); // get the tabs before the tab
+  var tabsAfterIndex = this.tabs.splice(index); // get the tabs after the tab
+
+  this.tabs = tabsBeforeIndex.concat(tabsAfterIndex); // join them together 
+  return this;
+ };
+
+// Let&#39;s create three browser windows
+var workWindow = new Window([&#39;GMail&#39;, &#39;Inbox&#39;, &#39;Work mail&#39;, &#39;Docs&#39;, &#39;freeCodeCamp&#39;]); // Your mailbox, drive, and other work sites
+var socialWindow = new Window([&#39;FB&#39;, &#39;Gitter&#39;, &#39;Reddit&#39;, &#39;Twitter&#39;, &#39;Medium&#39;]); // Social sites
+var videoWindow = new Window([&#39;Netflix&#39;, &#39;YouTube&#39;, &#39;Vimeo&#39;, &#39;Vine&#39;]); //  Entertainment sites
+
+// Now perform the tab opening, closing, and other operations
+var finalTabs = socialWindow
+                    .tabOpen() // Open a new tab for cat memes
+                    .join(videoWindow.tabClose(2)) // Close third tab in video window, and join
+                    .join(workWindow.tabClose(1).tabOpen());
+
+alert(finalTabs.tabs);</code></pre>
+<p>Add a user-defined map and filter prototypes methods to the global Array object:</p>
+<pre><code>var s = [23, 65, 98, 5];
+
+Array.prototype.myMap = function(callback){
+  var newArray = [];
+  for(let i = 0; i &lt; this.length; i++) {
+    newArray.push(callback(this[i]));
+  }
+  // the forEach method also works 
+  // this.forEach(a =&gt; newArray.push(callback(a)));
+  return newArray;
+};
+
+var new_s = s.myMap(function(item){
+  return item * 2;
+});
+
+Array.prototype.myFilter = function(callback){
+  var newArray = [];
+  // Add your code below this line
+  this.forEach(el =&gt; {if (callback(el)) {
+      newArray.push(el);
+    }
+  });
+  // Add your code above this line
+  return newArray;
+};</code></pre>
+<p><code>.filter</code> method takes a callback function input and returns elements in a new array if it evaluates to true The following code chunk works, but it won’t work if we wrap {} around the arrown function in .filter. Why is that?</p>
+<pre><code>var filteredList = watchList.filter(el =&gt; parseInt(el.imdbRating) &gt;= 8).map(el =&gt; {return {title: el.Title, rating: el.imdbRating}});</code></pre>
+<ul>
+<li><p><code>.concat</code> allows us to push items to the end of an array in a non mutating way.</p></li>
+<li><p><code>.reduce</code> example:</p>
+<pre><code>var nolan_movies = watchList.filter(el =&gt; el.Director === &#39;Christopher Nolan&#39;);
+var averageRating = nolan_movies.map(el =&gt; parseFloat(el.imdbRating)).reduce((a, b) =&gt; a + b)/(nolan_movies.length);</code></pre></li>
+<li><p>Sorting examples. Sorting defaults to unicode which converts numbers to characters. We need callback functions to sort numeric values correctly. Sort also mutates the original array.<br />
+``` function ascendingOrder(arr) { return arr.sort(function(a, b) { return a - b; }); } ascendingOrder([1, 5, 2, 3, 4]); // Returns [1, 2, 3, 4, 5]</p></li>
+</ul>
+<p>function reverseAlpha(arr) { return arr.sort(function(a, b) { return a &lt; b; }); } reverseAlpha([‘l’, ‘h’, ‘z’, ‘b’, ‘s’]); // Returns [‘z’, ‘s’, ‘l’, ‘h’, ‘b’]</p>
+<pre><code>+ `.join(&#39;delimiter&#39;)` joins elements of an array using a delimiter 
++ `.every` takes a callback function and checks if every value is true.  
+    +`.some` (any in R) method checks if any applications of the callback function are true
+    
+**Curry and Partial Application:**
++ `arity` is the number of arguments a function requires
++ `currying` a function means converting one function of N arity (arguments) into N functions of arity 1.  
++ partial application can be described as applying a few arguments to a function at a time and returning another function that is applied to more arguments
+    + this basically looks like big nested function calls (pretty weird)</code></pre>
+<p>function add(x) { return function(y) { return function(z) { return x + y + z; } } } add(10)(20)(30);</p>
+<pre><code>&lt;hr&gt; 
+
+
+## Intermediate Algorithm Scripting 
+
+1. Create a `range` function for an unsorted 2-number array that sums all numbers (inclusive).</code></pre>
+<p>function sumAll(arr) { var sortedArr = arr.sort((a,b) =&gt; a-b); var firstNum = arr[0]; var lastNum = arr[1]; // Using Arithmetic Progression summing formula var sum = (lastNum - firstNum + 1) * (firstNum + lastNum) / 2; return sum; }</p>
+<pre><code>2. 
+
+&lt;!--chapter:end:02-javascript_algorithms_and_data_structures.Rmd--&gt;
+
+# Responsive Web Design FCC
+These are my notes from the Responsive Web Design certification from the&lt;a href=&quot;https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5&quot;&gt; FreeCodeCamp lessons&lt;/a&gt;
+&lt;hr&gt;
+
+## HTML and HTML5 
+Basic structure for each page: </code></pre>
+<!DOCTYPE html>
+<html>
+<head>
+<pre><code>&lt;!-- metadata elements --&gt;</code></pre>
+</head>
+<body>
+<pre><code>&lt;!-- page contents --&gt;</code></pre>
+</body>
+</html>
+<pre><code>
++ It&#39;s best practice to include an alt tag w/ an image: `&lt;img src=&#39;&#39; alt=&#39;alt text&gt;`
++ Anchor element links to other pages `&lt;a href=&quot;https://freecodecamp.org&quot;&gt;this links to freecodecamp.org&lt;/a&gt;`
+    + To create an internal link, you assign a link&#39;s href attribute to a hash symbol # plus the value of the id attribute for the element that you want to internally link to
+    + `href=&quot;#&quot;` to make a placeholder link
+    + You can nest an image in an anchor tag to make it a link
++ `&lt;input type=&#39;text&#39; placeholder=&#39;dummy text&#39;&gt;` creates a box for user input text 
+
+Example of a user submission form: </code></pre>
+<form action="/submit-cat-photo">
+<pre><code>&lt;input type=&quot;text&quot; placeholder=&quot;cat photo URL&quot; required&gt;
+&lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;</code></pre>
+</form>
+<pre><code>&lt;br&gt;
+
+Example of a radio button list: 
+The `for` attribute allows us to link between the parent input elements </code></pre>
+<p><label for='indoor'> <input id='indoor' type='radio' name='indoor-outdoor'> Indoor </label> <label for='outdoor'> <input id='outdoor' type='radio' name='indoor-outdoor'> Outdoor </label></p>
+<pre><code>&lt;br&gt;
+&lt;hr&gt;
+
+
+## CSS
+The idea behind CSS is that you can use a selector to target an HTML element in the DOM (Document Object Model) and then apply a variety of attributes to that element to change the way it is displayed on the page. You can apply CSS inline but it&#39;s better to use an external stylesheet.  You can also create a `&lt;style&gt;` block on the .html file but it&#39;s not good practice.  
+
+**Element Ids:**
+Add an id (`id=&#39;meal-class-1`) to an element to style it with that id&#39;s CSS rules. An id is not reusable and should only be applied to one element. An id also has a higher specificity (importance) than a class so if both are applied to the same element and have conflicting styles, the styles of the id will be applied.
+
+**Inheritance:**  
+Child elements inherit properties from their parent elements.  Giving an element a class will override any conflicting rules that it inherits from its parent. If an element has multiple classes the last one in the CSS will take precedence.  Giving an element a unique Id attribute (ex. `#orange-text {color: orange;}`) will take precedence over classes / parents.  Giving an element inline CSS style (ex. `&lt;h1 style=&#39;color: white&#39;&gt;Title&lt;/h1&gt;`) will take precedence over parent, classes and Ids.  The last way that overrides everything is to add `!important` to a css rule (ex. `.pink-text {color: pink !important}`).   
+
+**Hexadecimal colors:**  
+In CSS, we can use 6 hexadecimal digits to represent colors, two each for the red (R), green (G), and blue (B) components. For example, #000000 is black and is also the lowest possible value.  You can shorten this to one digit for each color, for example red = #F00. Instead of using six hexadecimal digits like you do with hex code, with RGB you specify the brightness of each color with a number between 0 and 255: orange - `background-color: rgb(255, 165, 0);`
+  
+**CSS Variables:**  
+CSS Variables are a powerful way to change many CSS style properties at once by changing only one value. To create a CSS Variable, you just need to give it a name with two dashes in front of it and assign it a value like this: `--background-variable: orange`.  After you create your variable, you can assign its value to other CSS properties by referencing the name you gave it: `background-color: var(--background-variable)`.  When using your variable as a CSS property value, you can attach a fallback value that your browser will revert to if the given variable is invalid: `--background-color: var(--background-variable, black)`. 
+  When you create a variable, it becomes available for you to use inside the element in which you create it. It also becomes available within any elements nested within it. This effect is known as cascading. CSS variables are often created in the `:root` element so they&#39;re available everywhere throughout the page: `:root {--variable: pink}`.  You can then re-define a variable within a class to overwrite the `:root` rule.  
+
+**Browser Fallbacks**:  
+When your browser parses the CSS of a webpage, it ignores any properties that it doesn&#39;t recognize or support. For example, if you use a CSS variable to assign a background color on a site, Internet Explorer will ignore the background color because it does not support CSS variables. In that case, the browser will use whatever value it has for that property. If it can&#39;t find any other value set for that property, it will revert to the default value, which is typically not ideal. This means that if you do want to provide a browser fallback, it&#39;s as easy as providing another more widely supported value immediately before your declaration. That way an older browser will have something to fall back on, while a newer browser will just interpret whatever declaration comes later in the cascade.
+**Example:**</code></pre>
+<p>.red-box { background: red; /<em>For older browswers</em>/ background: var(–red-color); height: 200px; width:200px; }</p>
+<pre><code>
+
++ `.class` . is the class selector
++ `#` . is the id selector
++ `[attr=value]` is the attribute selector.  Example:</code></pre>
+<p>[type=‘radio’] { margin: 20px 0px 20px 0px; }</p>
+<pre><code>
++ include google fonts: `&lt;link href=&quot;https://fonts.googleapis.com/css?family=Lobster&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;`
++ we can have the browser choose from a list of fonts depending on which are available: </code></pre>
+<p>p { font-family: Helvetica, sans-serif; }</p>
+<pre><code>+ You can apply multiple classes to one element!!!!
++ `width:15px;` doesn&#39;t have a space between 15 and px - I think i&#39;ve seen it differently elsewhere?
++ `border-radius: 15px;` rounds the corners 
+    + `border-radius 50%` makes it circular 
+    
+Element | Description 
+------- | ----------------------------------------------------------------------
+padding | amount of space between the element&#39;s content and it&#39;s border. We can set this in one line (also margin). Ex. `padding: 40px 40px 20px 20px` (clockwise:top, right, bottom, left) 
+margin | controls the amount of space between an element&#39;s border and surrounding elements.  If you set a margin to a negative value it will increase the size of the element. 
+&lt;hr&gt;
+
+
+## Applied Visual Design
+
+Element | Description 
+----------- | --------------------------------------------------------------------------
+text-align: | align text - left (default), right, center and justify (causes all lines of text except the last line to meet the left and right edges of the line box)
+width: | relative length units (such as em), absolute length units (such as px), or as a percentage of its containing parent element
+font-weight | `font-weight: bold;` is the same as wrapping text in `&lt;strong&gt;&lt;/strong&gt;`.  Sets how thick or think characters are (ranges in abs values from 100:800 or so, and percentages can be used)
+text-decoration | `text-decoration: underline;` is the same as wrapping text in `&lt;u&gt;&lt;/u&gt;`
+font-style | `font-style: italic;` is the same as wrapping text in `&lt;em&gt;&lt;/em&gt;`
+`&lt;hr&gt;` | create a horizontal line (self-closing tag)
+rgba() | add opacity argument. `background-color: rgba(45, 45, 45, 0.1)` produces a dark gray that is nearly transparent
+font-size | font-size
+opacity | adjusts the transparency. 0 is see through, 1 is opaque. 
+text - transform | lowercase, uppercase, capitalize (sentence-casing), initial, none, inherit (inherit parent props)
+line-height | vertical amount of space between lines 
+float | does not actually use position, but sets the float property of an element. Floating elements are removed from the normal flow of a document and pushed to either the left or right of their containing parent element.
+z-index | stack floating elements on top of each other, higher values take precedence
+margin | move a block element horizontally (`margin: auto;` = center)
+display | choose whether to display as block or inline
+hsl() | Hue (color 0 red, 360 blue), saturation (amount of grey) lightness (amount of white 0 to black 100)
+linear-gradient() | create a color gradient, the first arg specifies which direction the gradient moves.  `background: linear-gradient(0deg, #CCFFFF, #FFCCCC)`
+background | `background: url(https://i.imgur.com/MJAkxbh.png);` to add an image
+transform: | `transform: scale(2)` doubles the element size.  
+transform: | `transform: skewX(30deg);` skews along the X-axis (e.g. square to rhombus)
+transform: | `transform: rotate(-45deg);` rotates an element 
+
+**Box-shadow:**  
+Makes the `&lt;div&gt;` appear likes it&#39;s floating on the page by adding shadow around it.  The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order. The blur-radius and spread-radius values are optional.</code></pre>
+<p>/* Multiple shadows with some blur */ box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);</p>
+<pre><code>
+**Psuedo-classes:**  
+A pseudo-class is a keyword that can be added to selectors, in order to select a specific state of the element.  </code></pre>
+<p>/* When hovering over an anchor tag, change its color to red */ a:hover { color: red; }</p>
+<pre><code>
+**Positioning**  
+&lt;br&gt;
+*Relative:*CSS treats each HTML element as its own box, which is usually referred to as the CSS Box Model. Block-level items automatically start on a new line (think headings, paragraphs, and divs) while inline items sit within surrounding content (like images or spans). The default layout of elements in this way is called the normal flow of a document, but CSS offers the position property to override it.
+When the position of an element is set to relative, it allows you to specify how CSS should move it relative to its current position in the normal flow of the page. It pairs with the CSS offset properties of left or right, and top or bottom. These say how many pixels, percentages, or ems to move the item away from where it is normally positioned. The following example moves the paragraph 10 pixels away from the bottom:</code></pre>
+<p>p { /* Relative positions move away from top, bottom, left and right */ position: relative; bottom: 10px; }</p>
+<pre><code>*Absolute:* The next option for the CSS position property is absolute, which locks the element in place relative to its parent container. Unlike the relative position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position.
+*Fixed:* locks an element relative to the browser window. Similar to absolute positioning, it&#39;s used with the CSS offset properties and also removes the element from the normal flow of the document.
+
+**Colors:**  
+Red (R), green (G), and blue (B) are called primary colors. Mixing two primary colors creates the secondary colors cyan (G + B), magenta (R + B) and yellow (R + G). Tertiary colors are the result of combining a primary color with one of its secondary color neighbors. For example, red (primary) and yellow (secondary) make orange.  HSL ()
+
+**Shapes:**  
+Use CSS Styline to create a crescent moon shape:</code></pre>
+<style>
+.center
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  
+  background-color: transparent; /* Change this to see the initial shape */
+  border-radius: 50%;
+  box-shadow: 25px 10px 0px 0px blue; 
+}
+</style>
+<div class="center">
+
+</div>
+<pre><code>
+**Pseudo-elements:**    
+::before and ::after pseudo-elements to function properly, they must have a defined content property. This property is usually used to add things like a photo or text to the selected element. When the ::before and ::after pseudo-elements are used to make shapes, the content property is still required, but it&#39;s set to an empty string.  
+
+### Animation:  
+The animation properties control how the animation should behave and the `@keyframes` rule controls what happens during that animation. animation-name sets the name of the animation, which is later used by `@keyframes` to tell CSS which rules go with which animations; it uses percentages similarly to frames.  0% is at the beginning and 100% is at the end.  
+Change the background color from blue to yellow in 3 seconds: </code></pre>
+<p>/<em> #anim { animation-name: colorful; animation-duration: 3s; } <span class="citation">@keyframes</span> colorful { 0% { background-color: blue; } 100% { background-color: yellow; } } </em>/</p>
+<pre><code></code></pre>
+<style>
+  button {
+    border-radius: 5px;
+    color: white;
+    background-color: #0F5897;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    animation-name: background-color;
+    animation-duration: 500ms;
+    /* add your code below this line */
+    animation-fill-mode: forwards;
+    /* add your code above this line */
+  }
+  @keyframes background-color {
+    100% {
+      background-color: #4791d0;
+    }
+  }
+</style>
+<button>
+Register
+</button>
+<pre><code>
+**Animation Properties and Effects:**  
+Animation Property | Explanation 
+-------------------- | -------------------------------------------------
+animation-name | name is referred to in `@keyframes` to link them 
+animation-duration | `animation-duration: 1s;`
+animation-iteration-count | number of iterations (can be set to `infinite`)
+animation-timing-function | controls the speed at various point of the animation.  linear is constant.  `animation-timinig-function: ease-in;` is slow at the beginning and speeds up. 
+
+Some animation effects: 
+Animation Effect | Explanation 
+---------- | -------------------------------------------------------------------
+opacity | make an element fade in and out 
+
+**Cubic-bezier function:**
+In CSS animations, Bezier curves are used with the cubic-bezier function. The shape of the curve represents how the animation plays out. The curve lives on a 1 by 1 coordinate system. The X-axis of this coordinate system is the duration of the animation (think of it as a time scale), and the Y-axis is the change in the animation.
+
+The cubic-bezier function consists of four main points that sit on this 1 by 1 grid: p0, p1, p2, and p3. p0 and p3 are set for you - they are the beginning and end points which are always located respectively at the origin (0, 0) and (1, 1). You set the x and y values for the other two points, and where you place them in the grid dictates the shape of the curve for the animation to follow. This is done in CSS by declaring the x and y values of the p1 and p2 &quot;anchor&quot; points in the form: (x1, y1, x2, y2). Pulling it all together, here&#39;s an example of a Bezier curve in CSS code:</code></pre>
+<p>/* Equivalent to the “linear” keyword */ animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);</p>
+<pre><code>&lt;hr&gt;
+
+
+## Applied Acessibility 
+
+&quot;Accessibility&quot; generally means having web content and a user interface that can be understood, navigated, and interacted with by a broad audience. This includes people with visual, auditory, mobility, or cognitive disabilities. Websites should be open and accessible to everyone, regardless of a user&#39;s abilities or resources. Some users rely on assistive technology such as a screen reader or voice recognition software. Other users may be able to navigate through a site only using a keyboard. Keeping the needs of various users in mind when developing your project can go a long way towards creating an open web.  Having accessible web content is an ongoing challenge. A great resource for your projects going forward is the W3 Consortium&#39;s Web Content Accessibility Guidelines (WCAG). They set the international standard for accessibility and provide a number of criteria you can use to check your work.  
+
++ All images are required to include `alt` text with HTML5.
++ headers should have semantic / hierarchical meaning.  
++ main, header, footer, nav, article, and section can be used for increased readability from screen readers. 
++ `&lt;article&gt;` is for stand-alone content, `&lt;section&gt;` is for thematically related content.
++ `&lt;header&gt;` wrap introductory information or navigation links for its parent tag
++ `&lt;nav&gt;` wrap around the main navigation links in your page
++ `&lt;audio controls&gt;` wrapping this around an audio element will create play buttons `&lt;audio controls&gt;&lt;source src=&#39;https://s3.amazonaws.com/freecodecamp/screen-reader.mp3&#39; type=&#39;audio/mpeg&#39;&gt;&lt;/audio&gt;`
++ `&lt;figure&gt; and &lt;figcaption&gt;` Wrap a visual representation along with its caption:</code></pre>
+<figure>
+<img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick"> <br>
+<figcaption>
+<pre><code>Master Camper Cat demonstrates proper form of a roundhouse kick.</code></pre>
+</figcaption>
+</figure>
+<pre><code>+ Add a `label` on `inputs` where the for attribute matches the id attribute on input.  This links them together. 
++ fieldset tag surrounds the entire grouping of radio buttons to achieve this. It often uses a legend tag to provide a description for the grouping, which is read by screen readers for each choice in the fieldset element.</code></pre>
+<form>
+<fieldset>
+<pre><code>&lt;legend&gt;Choose one of these three items:&lt;/legend&gt;
+&lt;input id=&quot;one&quot; type=&quot;radio&quot; name=&quot;items&quot; value=&quot;one&quot;&gt;
+&lt;label for=&quot;one&quot;&gt;Choice One&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;two&quot; type=&quot;radio&quot; name=&quot;items&quot; value=&quot;two&quot;&gt;
+&lt;label for=&quot;two&quot;&gt;Choice Two&lt;/label&gt;&lt;br&gt;
+&lt;input id=&quot;three&quot; type=&quot;radio&quot; name=&quot;items&quot; value=&quot;three&quot;&gt;
+&lt;label for=&quot;three&quot;&gt;Choice Three&lt;/label&gt;</code></pre>
+</fieldset>
+</form>
+<pre><code>+ Date picker `&lt;label for=&quot;input1&quot;&gt;Enter a date:&lt;/label&gt;&lt;input type=&quot;date&quot; id=&quot;input1&quot; name=&quot;input1&quot;&gt;`
++ Add `datetime` attributes for unambiguous dates: `&lt;time datetime=&quot;2013-02-13&quot;&gt;last Wednesday&lt;/time&gt;`
++ text contrast ratio should be at least 4.5:1 (1:1 is the same color, 1:21 is white:black)
++ Avoid putting anchor tags around phrases like &quot;Click here&quot;
++ accessKey allows you to specify which keyboard button selects an element. `&lt;button accesskey=&quot;b&quot;&gt;Important Button&lt;/button&gt;`
++ give elements a tabindex attribute to allow users to tab through them.  `&lt;div tabindex=0&gt;hi&lt;/div&gt;`.  A tabindex=-1 indicates an element is focusable but not available at the keyboard (like a new link).  This also enables the psuedoclass `:focus`.  Using positive numbers overrides the default order and allows you to specify what order elements will be focused on.  
+
+**Position Elements Off-screen:**  
+CSS&#39;s magic can also improve accessibility on your page when you want to visually hide content meant only for screen readers. This happens when information is in a visual format (like a chart), but screen reader users need an alternative presentation (like a table) to access the data. CSS is used to position the screen reader-only elements off the visual area of the browser window.</code></pre>
+<p>.sr-only { position: absolute; left: -10000px; width: 1px; height: 1px; top: auto; overflow: hidden; }</p>
+<pre><code>&lt;hr&gt; 
+
+## Responsive Web Design  
+The page structure and CSS rules should be flexible to accommodate these differences. In general, design the page&#39;s CSS to your target audience. If you expect most of your traffic to be from mobile users, take a &#39;mobile-first&#39; approach. Then add conditional rules for larger screen sizes.
+
++ A media query applies CSS rules if the condition is true. This query applies CSS rules if the width is &lt; 100px
+    + `@media (max-width: 100px) { /* CSS Rules */ }`
++ &quot;retina&quot; - define your images as only half of their height/width in px
++ viewport units
+    + `vh: 3vh;` 3% of the viewport&#39;s height
+    + `vw: 10vh;` 10% of the viewport&#39;s width 
+    + `vmin: 70vmin` 70% of the viewport&#39;s smaller dimension 
+    + `vmax: 100vmax` 100% of the viewport&#39;s bigger dimension
+
+**Resonsive Images:**  
+The max-width property of 100% scales the image to fit the width of its container, but the image won&#39;t stretch wider than its original width. Setting the display property to block changes the image from an inline element (its default), to a block element on its own line. The height property of auto keeps the original aspect ratio of the image.</code></pre>
+img { max-width: 100%; display: block; height: auto; } ```
+<hr>
+</div>
+<div id="css-flexbox" class="section level2">
+<h2><span class="header-section-number">3.8</span> CSS Flexbox</h2>
 
 </div>
 </div>
@@ -395,8 +761,8 @@ duck.glide();</code></pre>
           </div>
         </div>
       </div>
-<a href="command-line.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="responsive-web-design-fcc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="command-line.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

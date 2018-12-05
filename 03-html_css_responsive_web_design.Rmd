@@ -165,6 +165,7 @@ Red (R), green (G), and blue (B) are called primary colors. Mixing two primary c
 **Shapes:**  
 Use CSS Styline to create a crescent moon shape:
 ```
+/*
 <style>
 .center
 {
@@ -183,6 +184,7 @@ Use CSS Styline to create a crescent moon shape:
 }
 </style>
 <div class="center"></div>
+*/
 ```
 
 **Pseudo-elements:**    
@@ -192,6 +194,7 @@ Use CSS Styline to create a crescent moon shape:
 The animation properties control how the animation should behave and the `@keyframes` rule controls what happens during that animation. animation-name sets the name of the animation, which is later used by `@keyframes` to tell CSS which rules go with which animations; it uses percentages similarly to frames.  0% is at the beginning and 100% is at the end.  
 Change the background color from blue to yellow in 3 seconds: 
 ```
+/*
 #anim {
   animation-name: colorful;
   animation-duration: 3s;
@@ -204,6 +207,7 @@ Change the background color from blue to yellow in 3 seconds:
     background-color: yellow;
   }
 }
+*/
 ```
 ```
 <style>
