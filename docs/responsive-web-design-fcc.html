@@ -93,7 +93,9 @@
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#applied-acessibility"><i class="fa fa-check"></i><b>3.4</b> Applied Acessibility</a></li>
 <li class="chapter" data-level="3.5" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#responsive-web-design"><i class="fa fa-check"></i><b>3.5</b> Responsive Web Design</a></li>
-<li class="chapter" data-level="3.6" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#css-flexbox"><i class="fa fa-check"></i><b>3.6</b> CSS Flexbox</a></li>
+<li class="chapter" data-level="3.6" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#css-flexbox"><i class="fa fa-check"></i><b>3.6</b> CSS Flexbox</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#display-flex"><i class="fa fa-check"></i><b>3.6.1</b> display: flex;</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -491,7 +493,37 @@ The max-width property of 100% scales the image to fit the width of its containe
 </div>
 <div id="css-flexbox" class="section level2">
 <h2><span class="header-section-number">3.6</span> CSS Flexbox</h2>
+<p>A website’s User Interface (“UI”) has two components. First, there are the visual elements, such as colors, fonts, and images. Second, there is the placement or positioning of those elements. In Responsive Web Design, a UI layout must accommodate many different browsers and devices accessing the content. CSS3 introduced Flexible Boxes, or flexbox, to create page layouts for a dynamic UI. It is a layout mode that arranges elements in a predictable way for different screen sizes and browsers. While somewhat new, all popular modern browsers support flexbox. This section covers how to use flexbox and the different layout options it offers.</p>
+<div id="display-flex" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> display: flex;</h3>
+<p>Adding <code>display: flex</code> to an element turns it into a flex container. This makes it possible to align any children of that element into rows or columns. You do this by adding the <code>flex-direction</code> property to the parent item and setting it to row or column. Creating a row will align the children horizontally, and creating a column will align the children vertically. Other options for flex-direction are row-reverse and column-reverse. The default value for the flex-direction property is row.</p>
+<pre><code>&lt;style&gt;
+  #box-container {
+    /* remove flex to see what they look like originally */
+    display: flex;
+    flex-direction: row-reverse;
+    height: 500px;
+    
+  }
+  #box-1 {
+    background-color: dodgerblue;
+    width: 50%;
+    height: 50%;
+  }
 
+  #box-2 {
+    background-color: orangered;
+    width: 50%;
+    height: 50%;
+  }
+&lt;/style&gt;
+
+&lt;div id=&quot;box-container&quot;&gt;
+  &lt;div id=&quot;box-1&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;box-2&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+</div>
 </div>
 </div>
             </section>

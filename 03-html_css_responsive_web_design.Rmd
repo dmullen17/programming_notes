@@ -114,7 +114,7 @@ text-decoration | `text-decoration: underline;` is the same as wrapping text in 
 font-style | `font-style: italic;` is the same as wrapping text in `<em></em>`
 `<hr>` | create a horizontal line (self-closing tag)
 rgba() | add opacity argument. `background-color: rgba(45, 45, 45, 0.1)` produces a dark gray that is nearly transparent
-font-size | font-size
+font-size | font-size.  Units in `px` `%` - relative to window, and `em` (2em means 2 times the size)
 opacity | adjusts the transparency. 0 is see through, 1 is opaque. 
 text - transform | lowercase, uppercase, capitalize (sentence-casing), initial, none, inherit (inherit parent props)
 line-height | vertical amount of space between lines 
@@ -132,6 +132,7 @@ transform: | `transform: rotate(-45deg);` rotates an element
 **Box-shadow:**  
 Makes the `<div>` appear likes it's floating on the page by adding shadow around it.  The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order. The blur-radius and spread-radius values are optional.
 ```
+
 /* Multiple shadows with some blur */
 box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 ```
@@ -329,13 +330,86 @@ The page structure and CSS rules should be flexible to accommodate these differe
 **Resonsive Images:**  
 The max-width property of 100% scales the image to fit the width of its container, but the image won't stretch wider than its original width. Setting the display property to block changes the image from an inline element (its default), to a block element on its own line. The height property of auto keeps the original aspect ratio of the image.
 ```
+/*
 img {
   max-width: 100%;
   display: block; 
   height: auto;
 }
+*/
 ```
 <hr>
 
 
 ## CSS Flexbox
+A website's User Interface ("UI") has two components. First, there are the visual elements, such as colors, fonts, and images. Second, there is the placement or positioning of those elements. In Responsive Web Design, a UI layout must accommodate many different browsers and devices accessing the content. CSS3 introduced Flexible Boxes, or flexbox, to create page layouts for a dynamic UI. It is a layout mode that arranges elements in a predictable way for different screen sizes and browsers. While somewhat new, all popular modern browsers support flexbox. This section covers how to use flexbox and the different layout options it offers.
+
+### display: flex;   
+Adding `display: flex` to an element turns it into a flex container. This makes it possible to align any children of that element into rows or columns. You do this by adding the `flex-direction` property to the parent item and setting it to row or column. Creating a row will align the children horizontally, and creating a column will align the children vertically. Other options for flex-direction are row-reverse and column-reverse. The default value for the flex-direction property is row.
+```
+/*
+<style>
+  #box-container {
+    /* remove flex to see what they look like originally */
+    display: flex;
+    flex-direction: row-reverse;
+    height: 500px;
+    
+  }
+  #box-1 {
+    background-color: dodgerblue;
+    width: 50%;
+    height: 50%;
+  }
+
+  #box-2 {
+    background-color: orangered;
+    width: 50%;
+    height: 50%;
+  }
+</style>
+
+<div id="box-container">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
+</div>
+*/
+```
+
+### justify-content  
+ A flex container set as a column places the flex items in a vertical stack from top-to-bottom. For each, the direction the flex items are arranged is called the main axis. For a row, this is a horizontal line that cuts through each item. And for a column, the main axis is a vertical line through the items.
+ 
++ `justify-content: center;` aligns all the flex items to the center inside the container
++ `flex-end`: row - pushes to the right, column - pushes to bottom 
++ `space-between` - aligns items evenly, first and last items are locked to edges
++ `space-around` - similar to between except first and last items are not locked to edges
+
+### align-items
+Flex containers also have a cross axis which is the opposite of the main axis. For rows, the cross axis is vertical and for columns, the cross axis is horizontal.  
+
++ `flex-start:` aligns items to the start of the flex container. For rows, this aligns items to the top of the container. For columns, this aligns items to the left of the container.
++ `flex-end:` aligns items to the end of the flex container. For rows, this aligns items to the bottom of the container. For columns, this aligns items to the right of the container.
++ `center:` align items to the center. For rows, this vertically aligns items (equal space above and below the items). For columns, this horizontally aligns them (equal space to the left and right of the items).
++ `stretch:` stretch the items to fill the flex container. For example, rows items are stretched to fill the flex container top-to-bottom.
++ `baseline:` align items to their baselines. Baseline is a text concept, think of it as the line that the letters sit on.
+
+### flex-wrap
+Using the flex-wrap property, it tells CSS to wrap items. This means extra items move into a new row or column. The break point of where the wrapping happens depends on the size of the items and the size of the container.
+
++ `nowrap:` this is the default setting, and does not wrap items.
++ `wrap:` wraps items from left-to-right if they are in a row, or top-to-bottom if they are in a column.
++ `wrap-reverse:` wraps items from bottom-to-top if they are in a row, or right-to-left if they are in a column.
+
+### flex-shrink, grow, and basis 
+`flex-shrink` allows an item to shrink if the flex container is too small. Items shrink when the width of the parent container is smaller than the combined widths of all the flex items within it. The `flex-shrink` property takes numbers as values. The higher the number, the more it will shrink compared to the other items in the container. For example, if one item has a `flex-shrink` value of 1 and the other has a flex-shrink value of 3, the one with the value of 3 will shrink three times as much as the other. 
+  The opposite of `flex-shrink` is the `flex-grow` property. Recall that `flex-shrink` controls the size of the items when the container shrinks. The `flex-grow` property controls the size of items when the parent container expands.
+  `flex-basis` property specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex-grow.  It takes em, px, and % units. 
+
+### flex shorthand 
+For example, `flex: 1 0 10px`; will set the item to `flex-grow: 1;, flex-shrink: 0;, and flex-basis: 10px;`
+
+### order 
+Tells CSS the order of flex items.  They are in the HTML order by default.  `order` takes numbers as values, and negatives can be used.  
+
+### align-self
+Allows you to adjust each flex item's alignments individually.  Accepts the same values as `align-items`

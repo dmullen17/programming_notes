@@ -1,3 +1,8 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 # Introduction {#intro}
 These are my notes from my time spent becoming a self-taught software developer.  My apologies 
 if some sections are difficult to read - they're mainly for my own reference and 
