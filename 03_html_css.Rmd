@@ -4,43 +4,42 @@ These are my notes from the Responsive Web Design certification from the<a href=
 
 ## HTML and HTML5 
 Basic structure for each page: 
-```
+```{eval=F}
 <!DOCTYPE html>
-<html>
+  <html>
   <head>
-    <!-- metadata elements -->
+  <!-- metadata elements -->
   </head>
   <body>
-    <!-- page contents -->
+  <!-- page contents -->
   </body>
-</html>
+  </html>
 ```
 
 + It's best practice to include an alt tag w/ an image: `<img src='' alt='alt text>`
 + Anchor element links to other pages `<a href="https://freecodecamp.org">this links to freecodecamp.org</a>`
-    + To create an internal link, you assign a link's href attribute to a hash symbol # plus the value of the id attribute for the element that you want to internally link to
-    + `href="#"` to make a placeholder link
-    + You can nest an image in an anchor tag to make it a link
++ To create an internal link, you assign a link's href attribute to a hash symbol # plus the value of the id attribute for the element that you want to internally link to
++ `href="#"` to make a placeholder link
++ You can nest an image in an anchor tag to make it a link
 + `<input type='text' placeholder='dummy text'>` creates a box for user input text 
 
 Example of a user submission form: 
 ```
-  <form action="/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
+<form action="/submit-cat-photo">
+<input type="text" placeholder="cat photo URL" required>
+<button type="submit">Submit</button>
+</form>
 ```
-<br>
 
 Example of a radio button list: 
 The `for` attribute allows us to link between the parent input elements 
 ```
-  <label for='indoor'>
-    <input id='indoor' type='radio' name='indoor-outdoor'> Indoor
-  </label>
-  <label for='outdoor'>
-    <input id='outdoor' type='radio' name='indoor-outdoor'> Outdoor
-  </label>
+<label for='indoor'>
+<input id='indoor' type='radio' name='indoor-outdoor'> Indoor
+</label>
+<label for='outdoor'>
+<input id='outdoor' type='radio' name='indoor-outdoor'> Outdoor
+</label>
 ```
 <br>
 <hr>
@@ -57,21 +56,21 @@ Child elements inherit properties from their parent elements.  Giving an element
 
 **Hexadecimal colors:**  
 In CSS, we can use 6 hexadecimal digits to represent colors, two each for the red (R), green (G), and blue (B) components. For example, #000000 is black and is also the lowest possible value.  You can shorten this to one digit for each color, for example red = #F00. Instead of using six hexadecimal digits like you do with hex code, with RGB you specify the brightness of each color with a number between 0 and 255: orange - `background-color: rgb(255, 165, 0);`
-  
+
 **CSS Variables:**  
 CSS Variables are a powerful way to change many CSS style properties at once by changing only one value. To create a CSS Variable, you just need to give it a name with two dashes in front of it and assign it a value like this: `--background-variable: orange`.  After you create your variable, you can assign its value to other CSS properties by referencing the name you gave it: `background-color: var(--background-variable)`.  When using your variable as a CSS property value, you can attach a fallback value that your browser will revert to if the given variable is invalid: `--background-color: var(--background-variable, black)`. 
-  When you create a variable, it becomes available for you to use inside the element in which you create it. It also becomes available within any elements nested within it. This effect is known as cascading. CSS variables are often created in the `:root` element so they're available everywhere throughout the page: `:root {--variable: pink}`.  You can then re-define a variable within a class to overwrite the `:root` rule.  
+When you create a variable, it becomes available for you to use inside the element in which you create it. It also becomes available within any elements nested within it. This effect is known as cascading. CSS variables are often created in the `:root` element so they're available everywhere throughout the page: `:root {--variable: pink}`.  You can then re-define a variable within a class to overwrite the `:root` rule.  
 
 **Browser Fallbacks**:  
 When your browser parses the CSS of a webpage, it ignores any properties that it doesn't recognize or support. For example, if you use a CSS variable to assign a background color on a site, Internet Explorer will ignore the background color because it does not support CSS variables. In that case, the browser will use whatever value it has for that property. If it can't find any other value set for that property, it will revert to the default value, which is typically not ideal. This means that if you do want to provide a browser fallback, it's as easy as providing another more widely supported value immediately before your declaration. That way an older browser will have something to fall back on, while a newer browser will just interpret whatever declaration comes later in the cascade.
 **Example:**
 ```
-  .red-box {
-    background: red; /*For older browswers*/
-    background: var(--red-color);
-    height: 200px;
-    width:200px;
-  }
+.red-box {
+background: red; /*For older browswers*/
+background: var(--red-color);
+height: 200px;
+width:200px;
+}
 ```
 
 
@@ -80,7 +79,7 @@ When your browser parses the CSS of a webpage, it ignores any properties that it
 + `[attr=value]` is the attribute selector.  Example:
 ```
 [type='radio'] {
-  margin: 20px 0px 20px 0px;
+margin: 20px 0px 20px 0px;
 }
 ```
 
@@ -88,14 +87,14 @@ When your browser parses the CSS of a webpage, it ignores any properties that it
 + we can have the browser choose from a list of fonts depending on which are available: 
 ```
 p {
-  font-family: Helvetica, sans-serif;
+font-family: Helvetica, sans-serif;
 }
 ```
 + You can apply multiple classes to one element!!!!
 + `width:15px;` doesn't have a space between 15 and px - I think i've seen it differently elsewhere?
 + `border-radius: 15px;` rounds the corners 
-    + `border-radius 50%` makes it circular 
-    
++ `border-radius 50%` makes it circular 
+
 Element | Description 
 ------- | ----------------------------------------------------------------------
 padding | amount of space between the element's content and it's border. We can set this in one line (also margin). Ex. `padding: 40px 40px 20px 20px` (clockwise:top, right, bottom, left) 
@@ -142,7 +141,7 @@ A pseudo-class is a keyword that can be added to selectors, in order to select a
 ```
 /* When hovering over an anchor tag, change its color to red */
 a:hover {
-  color: red;
+color: red;
 }
 ```
 
@@ -152,9 +151,9 @@ a:hover {
 When the position of an element is set to relative, it allows you to specify how CSS should move it relative to its current position in the normal flow of the page. It pairs with the CSS offset properties of left or right, and top or bottom. These say how many pixels, percentages, or ems to move the item away from where it is normally positioned. The following example moves the paragraph 10 pixels away from the bottom:
 ```
 p {
-  /* Relative positions move away from top, bottom, left and right */ 
-  position: relative;
-  bottom: 10px;
+/* Relative positions move away from top, bottom, left and right */ 
+position: relative;
+bottom: 10px;
 }
 ```
 *Absolute:* The next option for the CSS position property is absolute, which locks the element in place relative to its parent container. Unlike the relative position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position.
@@ -170,18 +169,18 @@ Use CSS Styline to create a crescent moon shape:
 <style>
 .center
 {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
-  
-  background-color: transparent; /* Change this to see the initial shape */
-  border-radius: 50%;
-  box-shadow: 25px 10px 0px 0px blue; 
+position: absolute;
+margin: auto;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+width: 100px;
+height: 100px;
+
+background-color: transparent; /* Change this to see the initial shape */
+border-radius: 50%;
+box-shadow: 25px 10px 0px 0px blue; 
 }
 </style>
 <div class="center"></div>
@@ -197,39 +196,39 @@ Change the background color from blue to yellow in 3 seconds:
 ```
 /*
 #anim {
-  animation-name: colorful;
-  animation-duration: 3s;
+animation-name: colorful;
+animation-duration: 3s;
 }
 @keyframes colorful {
-  0% {
-    background-color: blue;
-  }
-  100% {
-    background-color: yellow;
-  }
+0% {
+background-color: blue;
+}
+100% {
+background-color: yellow;
+}
 }
 */
 ```
 ```
 <style>
-  button {
-    border-radius: 5px;
-    color: white;
-    background-color: #0F5897;
-    padding: 5px 10px 8px 10px;
-  }
-  button:hover {
-    animation-name: background-color;
-    animation-duration: 500ms;
-    /* add your code below this line */
-    animation-fill-mode: forwards;
-    /* add your code above this line */
-  }
-  @keyframes background-color {
-    100% {
-      background-color: #4791d0;
-    }
-  }
+button {
+border-radius: 5px;
+color: white;
+background-color: #0F5897;
+padding: 5px 10px 8px 10px;
+}
+button:hover {
+animation-name: background-color;
+animation-duration: 500ms;
+/* add your code below this line */
+animation-fill-mode: forwards;
+/* add your code above this line */
+}
+@keyframes background-color {
+100% {
+background-color: #4791d0;
+}
+}
 </style>
 <button>Register</button>
 ```
@@ -272,26 +271,26 @@ animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
 + `<figure> and <figcaption>` Wrap a visual representation along with its caption:
 ```
 <figure>
-  <img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
-  <br>
-  <figcaption>
-    Master Camper Cat demonstrates proper form of a roundhouse kick.
-  </figcaption>
+<img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
+<br>
+<figcaption>
+Master Camper Cat demonstrates proper form of a roundhouse kick.
+</figcaption>
 </figure>
 ```
 + Add a `label` on `inputs` where the for attribute matches the id attribute on input.  This links them together. 
 + fieldset tag surrounds the entire grouping of radio buttons to achieve this. It often uses a legend tag to provide a description for the grouping, which is read by screen readers for each choice in the fieldset element.
 ```
 <form>
-  <fieldset>
-    <legend>Choose one of these three items:</legend>
-    <input id="one" type="radio" name="items" value="one">
-    <label for="one">Choice One</label><br>
-    <input id="two" type="radio" name="items" value="two">
-    <label for="two">Choice Two</label><br>
-    <input id="three" type="radio" name="items" value="three">
-    <label for="three">Choice Three</label>
-  </fieldset>
+<fieldset>
+<legend>Choose one of these three items:</legend>
+<input id="one" type="radio" name="items" value="one">
+<label for="one">Choice One</label><br>
+<input id="two" type="radio" name="items" value="two">
+<label for="two">Choice Two</label><br>
+<input id="three" type="radio" name="items" value="three">
+<label for="three">Choice Three</label>
+</fieldset>
 </form>
 ```
 + Date picker `<label for="input1">Enter a date:</label><input type="date" id="input1" name="input1">`
@@ -305,12 +304,12 @@ animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
 CSS's magic can also improve accessibility on your page when you want to visually hide content meant only for screen readers. This happens when information is in a visual format (like a chart), but screen reader users need an alternative presentation (like a table) to access the data. CSS is used to position the screen reader-only elements off the visual area of the browser window.
 ```
 .sr-only {
-  position: absolute;
-  left: -10000px;
-  width: 1px;
-  height: 1px;
-  top: auto;
-  overflow: hidden;
+position: absolute;
+left: -10000px;
+width: 1px;
+height: 1px;
+top: auto;
+overflow: hidden;
 }
 ```
 <hr> 
@@ -319,22 +318,22 @@ CSS's magic can also improve accessibility on your page when you want to visuall
 The page structure and CSS rules should be flexible to accommodate these differences. In general, design the page's CSS to your target audience. If you expect most of your traffic to be from mobile users, take a 'mobile-first' approach. Then add conditional rules for larger screen sizes.
 
 + A media query applies CSS rules if the condition is true. This query applies CSS rules if the width is < 100px
-    + `@media (max-width: 100px) { /* CSS Rules */ }`
++ `@media (max-width: 100px) { /* CSS Rules */ }`
 + "retina" - define your images as only half of their height/width in px
 + viewport units
-    + `vh: 3vh;` 3% of the viewport's height
-    + `vw: 10vh;` 10% of the viewport's width 
-    + `vmin: 70vmin` 70% of the viewport's smaller dimension 
-    + `vmax: 100vmax` 100% of the viewport's bigger dimension
++ `vh: 3vh;` 3% of the viewport's height
++ `vw: 10vh;` 10% of the viewport's width 
++ `vmin: 70vmin` 70% of the viewport's smaller dimension 
++ `vmax: 100vmax` 100% of the viewport's bigger dimension
 
 **Resonsive Images:**  
 The max-width property of 100% scales the image to fit the width of its container, but the image won't stretch wider than its original width. Setting the display property to block changes the image from an inline element (its default), to a block element on its own line. The height property of auto keeps the original aspect ratio of the image.
 ```
 /*
 img {
-  max-width: 100%;
-  display: block; 
-  height: auto;
+max-width: 100%;
+display: block; 
+height: auto;
 }
 */
 ```
@@ -349,36 +348,36 @@ Adding `display: flex` to an element turns it into a flex container. This makes 
 ```
 /*
 <style>
-  #box-container {
-    /* remove flex to see what they look like originally */
-    display: flex;
-    flex-direction: row-reverse;
-    height: 500px;
-    
-  }
-  #box-1 {
-    background-color: dodgerblue;
-    width: 50%;
-    height: 50%;
-  }
+#box-container {
+/* remove flex to see what they look like originally */
+display: flex;
+flex-direction: row-reverse;
+height: 500px;
 
-  #box-2 {
-    background-color: orangered;
-    width: 50%;
-    height: 50%;
-  }
+}
+#box-1 {
+background-color: dodgerblue;
+width: 50%;
+height: 50%;
+}
+
+#box-2 {
+background-color: orangered;
+width: 50%;
+height: 50%;
+}
 </style>
 
 <div id="box-container">
-  <div id="box-1"></div>
-  <div id="box-2"></div>
+<div id="box-1"></div>
+<div id="box-2"></div>
 </div>
 */
 ```
 
 ### justify-content  
- A flex container set as a column places the flex items in a vertical stack from top-to-bottom. For each, the direction the flex items are arranged is called the main axis. For a row, this is a horizontal line that cuts through each item. And for a column, the main axis is a vertical line through the items.
- 
+A flex container set as a column places the flex items in a vertical stack from top-to-bottom. For each, the direction the flex items are arranged is called the main axis. For a row, this is a horizontal line that cuts through each item. And for a column, the main axis is a vertical line through the items.
+
 + `justify-content: center;` aligns all the flex items to the center inside the container
 + `flex-end`: row - pushes to the right, column - pushes to bottom 
 + `space-between` - aligns items evenly, first and last items are locked to edges
@@ -402,8 +401,8 @@ Using the flex-wrap property, it tells CSS to wrap items. This means extra items
 
 ### flex-shrink, grow, and basis 
 `flex-shrink` allows an item to shrink if the flex container is too small. Items shrink when the width of the parent container is smaller than the combined widths of all the flex items within it. The `flex-shrink` property takes numbers as values. The higher the number, the more it will shrink compared to the other items in the container. For example, if one item has a `flex-shrink` value of 1 and the other has a flex-shrink value of 3, the one with the value of 3 will shrink three times as much as the other. 
-  The opposite of `flex-shrink` is the `flex-grow` property. Recall that `flex-shrink` controls the size of the items when the container shrinks. The `flex-grow` property controls the size of items when the parent container expands.
-  `flex-basis` property specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex-grow.  It takes em, px, and % units. 
+The opposite of `flex-shrink` is the `flex-grow` property. Recall that `flex-shrink` controls the size of the items when the container shrinks. The `flex-grow` property controls the size of items when the parent container expands.
+`flex-basis` property specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex-grow.  It takes em, px, and % units. 
 
 ### flex shorthand 
 For example, `flex: 1 0 10px`; will set the item to `flex-grow: 1;, flex-shrink: 0;, and flex-basis: 10px;`
@@ -423,36 +422,36 @@ CSS Grid helps you easily build complex web designs. It works by turning an HTML
 + `grid-template-columns: 50px 50px;` - creates two columns that are 50px wide
 + `grid-template-rows: 50px 50px;` -creates two rows that are 50px tall
 + `grid-template-columns: auto 50px 10% 2fr 1fr;`
-    + This snippet creates five columns. The first column is as wide as its content, the second column is 50px, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.
++ This snippet creates five columns. The first column is as wide as its content, the second column is 50px, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.
 + `grid-column-gap: 10px;` - creates 10px of empty space between columns
 + `grip-gap 5px 10px`: (shorthand). one value = gap between rows and columns. two values = rows then columns 
 
 ```
 <style>
-  .d1{background:LightSkyBlue;}
-  .d2{background:LightSalmon;}
-  .d3{background:PaleTurquoise;}
-  .d4{background:LightPink;}
-  .d5{background:PaleGreen;}
-  
-  .container {
-    font-size: 40px;
-    width: 100%;
-    background: LightGray;
-    display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 50px 50px;
-    grid-column-gap: 10px; 
-    grid-row-gap: 5px;
-  }
+.d1{background:LightSkyBlue;}
+.d2{background:LightSalmon;}
+.d3{background:PaleTurquoise;}
+.d4{background:LightPink;}
+.d5{background:PaleGreen;}
+
+.container {
+font-size: 40px;
+width: 100%;
+background: LightGray;
+display: grid;
+grid-template-columns: 100px 100px 100px;
+grid-template-rows: 50px 50px;
+grid-column-gap: 10px; 
+grid-row-gap: 5px;
+}
 </style>
-  
+
 <div class="container">
-  <div class="d1">1</div>
-  <div class="d2">2</div>
-  <div class="d3">3</div>
-  <div class="d4">4</div>
-  <div class="d5">5</div>
+<div class="d1">1</div>
+<div class="d2">2</div>
+<div class="d3">3</div>
+<div class="d4">4</div>
+<div class="d5">5</div>
 </div>
 ```
 
@@ -475,16 +474,16 @@ The content of each item is located in a box which is referred to as a cell. You
 This code merges the top three cells together into an area named header, the bottom three cells into a footer area, and it makes two areas in the middle row; advert and content. Every word in the code represents a cell and every pair of quotation marks represent a row. In addition to custom labels, you can use a period (.) to designate an empty cell in the grid.
 ```
 grid-template-areas:
-  "header header header"
-  ". content content"
-  "footer footer footer";
+"header header header"
+". content content"
+"footer footer footer";
 ```
 Once we have defined a grid-template-area we can place items (CSS rules) in areas by giving them the `grid:area` property followed by the names we want to apply it to. 
 ```
-  .item5 {
-    background: PaleGreen;
-    grid-area: footer;
-    }
+.item5 {
+background: PaleGreen;
+grid-area: footer;
+}
 ```
 We can also use `grid-area` even if areas haven't been defined. The following stands for horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at.   
 ```
@@ -512,63 +511,65 @@ Auto-fit works almost identically except if your container can't fit all your it
 
 ### Grids within grids 
 ```
+/*
 <style>
-  .container {
-    font-size: 1.5em;
-    min-height: 300px;
-    width: 100%;
-    background: LightGray;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-gap: 10px;
-    grid-template-areas:
-      "advert header"
-      "advert content"
-      "advert footer";
-  }
-  .item1 {
-    background: LightSkyBlue;
-    grid-area: header;
-  }
-  
-  .item2 {
-    background: LightSalmon;
-    grid-area: advert;
-  }
-  
-  .item3 {
-    background: PaleTurquoise;
-    grid-area: content;
-    /* enter your code below this line */
-    display: grid;
-    grid-template-columns: auto 1fr;
-    
-    /* enter your code above this line */
-  }
-  
-  .item4 {
-    background: lightpink;
-    grid-area: footer;
-  }
-  
-  .itemOne {
-    background: PaleGreen;
-  }
-  
-  .itemTwo {
-    background: BlanchedAlmond;
-  }
-  
+.container {
+font-size: 1.5em;
+min-height: 300px;
+width: 100%;
+background: LightGray;
+display: grid;
+grid-template-columns: auto 1fr;
+grid-template-rows: auto 1fr auto;
+grid-gap: 10px;
+grid-template-areas:
+"advert header"
+"advert content"
+"advert footer";
+}
+.item1 {
+background: LightSkyBlue;
+grid-area: header;
+}
+
+.item2 {
+background: LightSalmon;
+grid-area: advert;
+}
+
+.item3 {
+background: PaleTurquoise;
+grid-area: content;
+/* enter your code below this line */
+display: grid;
+grid-template-columns: auto 1fr;
+
+/* enter your code above this line */
+}
+
+.item4 {
+background: lightpink;
+grid-area: footer;
+}
+
+.itemOne {
+background: PaleGreen;
+}
+
+.itemTwo {
+background: BlanchedAlmond;
+}
+
 </style>
-  
+
 <div class="container">
-  <div class="item1">header</div>
-  <div class="item2">advert</div>
-  <div class="item3">
-    <div class="itemOne">paragraph1</div>
-    <div class="itemTwo">paragraph2</div>
-  </div>
-  <div class="item4">footer</div>
+<div class="item1">header</div>
+<div class="item2">advert</div>
+<div class="item3">
+<div class="itemOne">paragraph1</div>
+<div class="itemTwo">paragraph2</div>
 </div>
+<div class="item4">footer</div>
+</div>
+*/
 ```

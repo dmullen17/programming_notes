@@ -6,3 +6,8 @@ site: bookdown::bookdown_site
 documentclass: book
 description: "This is my programming notes and progress tracker for becoming a self-taught software developer."
 ---
+
+# Introduction {-}
+These are my notes from my time spent becoming a self-taught software developer.  My apologies 
+if some sections are difficult to read - they're mainly for my own reference and 
+to track my progress. 
