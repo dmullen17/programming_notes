@@ -413,3 +413,162 @@ Tells CSS the order of flex items.  They are in the HTML order by default.  `ord
 
 ### align-self
 Allows you to adjust each flex item's alignments individually.  Accepts the same values as `align-items`
+
+<hr> 
+
+
+## CSS Grid (display: grid;)
+CSS Grid helps you easily build complex web designs. It works by turning an HTML element into a grid container with rows and columns for you to place children elements where you want within the grid. Turn any HTML element into a grid container by setting its display property to grid (`display:grid`). This gives you the ability to use all the other properties associated with CSS Grid. In CSS Grid, the parent element is referred to as the container and its children are called items.
+
++ `grid-template-columns: 50px 50px;` - creates two columns that are 50px wide
++ `grid-template-rows: 50px 50px;` -creates two rows that are 50px tall
++ `grid-template-columns: auto 50px 10% 2fr 1fr;`
+    + This snippet creates five columns. The first column is as wide as its content, the second column is 50px, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.
++ `grid-column-gap: 10px;` - creates 10px of empty space between columns
++ `grip-gap 5px 10px`: (shorthand). one value = gap between rows and columns. two values = rows then columns 
+
+```
+<style>
+  .d1{background:LightSkyBlue;}
+  .d2{background:LightSalmon;}
+  .d3{background:PaleTurquoise;}
+  .d4{background:LightPink;}
+  .d5{background:PaleGreen;}
+  
+  .container {
+    font-size: 40px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 50px 50px;
+    grid-column-gap: 10px; 
+    grid-row-gap: 5px;
+  }
+</style>
+  
+<div class="container">
+  <div class="d1">1</div>
+  <div class="d2">2</div>
+  <div class="d3">3</div>
+  <div class="d4">4</div>
+  <div class="d5">5</div>
+</div>
+```
+
+### grid-column / grid-row
+The hypothetical horizontal and vertical lines that create the grid are referred to as lines. These lines are numbered starting with 1 at the top left corner of the grid and move right for columns and down for rows, counting upward. To control the amount of columns an item will consume, you can use the grid-column property in conjunction with the line numbers you want the item to start and stop at. 
+```
+/* This item will span from the first to third "line" in the grid - spanning columns one and two */
+grid-column: 1 / 3; 
+```
+
+### Cell alignment (justify-self, align-self, and justify-items) 
+The content of each item is located in a box which is referred to as a cell. You can align the content's position within its cell horizontally using the `justify-self` property on a grid item. By default, this property has a value of stretch, which will make the content fill the whole width of the cell. `align-self` justifies elements vertically, it accepts all the same arguments.
+
++ `justify-self: start;` aligns content at left of cell (top for align-self)
++ `justify-self: center;` centers content 
++ `justify-self: end;` right-aligns (end for align-self)
++ `justify-items: center` - applies to both rows and columns 
+
+### grid-template-areas
+This code merges the top three cells together into an area named header, the bottom three cells into a footer area, and it makes two areas in the middle row; advert and content. Every word in the code represents a cell and every pair of quotation marks represent a row. In addition to custom labels, you can use a period (.) to designate an empty cell in the grid.
+```
+grid-template-areas:
+  "header header header"
+  ". content content"
+  "footer footer footer";
+```
+Once we have defined a grid-template-area we can place items (CSS rules) in areas by giving them the `grid:area` property followed by the names we want to apply it to. 
+```
+  .item5 {
+    background: PaleGreen;
+    grid-area: footer;
+    }
+```
+We can also use `grid-area` even if areas haven't been defined. The following stands for horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at.   
+```
+item1 { grid-area: 1/1/2/4; }
+```
+
+### repeat()
+We can use the `.repeat()` function to reduce code.  The first argument is # of repetitions and the second argument is the input. 
+```
+grid-template-columns: repeat(2, 1fr 50px) 20px;
+```
+
+### minmax()
+This function is used to limit the size of the items when the container changes. This creates two columns; the first is 100px wide, and the second has the minimum width of 50px and the maximum width of 200px 
+```
+grid-template-columns: 100px minmax(50px, 200px);
+```
+
+### auto-fill and auto-fit
+You can create flexible layouts when combining auto-fill with minmax. 
+```
+repeat(auto-fill, minmax(60px, 1fr));
+```
+Auto-fit works almost identically except if your container can't fit all your items on one row, it will move them down to a new one.
+
+### Grids within grids 
+```
+<style>
+  .container {
+    font-size: 1.5em;
+    min-height: 300px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 10px;
+    grid-template-areas:
+      "advert header"
+      "advert content"
+      "advert footer";
+  }
+  .item1 {
+    background: LightSkyBlue;
+    grid-area: header;
+  }
+  
+  .item2 {
+    background: LightSalmon;
+    grid-area: advert;
+  }
+  
+  .item3 {
+    background: PaleTurquoise;
+    grid-area: content;
+    /* enter your code below this line */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    
+    /* enter your code above this line */
+  }
+  
+  .item4 {
+    background: lightpink;
+    grid-area: footer;
+  }
+  
+  .itemOne {
+    background: PaleGreen;
+  }
+  
+  .itemTwo {
+    background: BlanchedAlmond;
+  }
+  
+</style>
+  
+<div class="container">
+  <div class="item1">header</div>
+  <div class="item2">advert</div>
+  <div class="item3">
+    <div class="itemOne">paragraph1</div>
+    <div class="itemTwo">paragraph2</div>
+  </div>
+  <div class="item4">footer</div>
+</div>
+```

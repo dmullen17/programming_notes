@@ -1,6 +1,12 @@
 # JavaScript Algorithms and Data Structures FCC 
 These are my notes from the JavaScript Algorithms and Data Structures certification from the<a href="https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/basic-javascript"> FreeCodeCamp lessons</a>
 
+### Mutating strings .charAt() methods
+Strings are immuatable - the best way I've seen to modify a string is to create a new and use the `.charAt` and `.splice` methods 
+```
+after = after.charAt(0).toUpperCase()+after.slice(1);
+```
+
 ## ES6 
 Arrow function defintion syntax: 
 ```
@@ -26,6 +32,9 @@ let result = fccRegex.test(myString);
 + `[\s]` matches all whitespace characters, `[\S]` is the inverse 
 + `?` checks for all or none (think of it as optional)
 + .trim() and .replace() methods exist 
++ Add a `^` symbol to a class for NOT.  ex. not vowels: `[^aeiou]`
++ If you need to pass a variable to create a regex expression use: `var regex = new RegExp(variable, "i")`
+
 
 
 ## Debugging 
@@ -479,6 +488,147 @@ function destroyer(arr) {
 destroyer([1, 2, 3, 1, 2, 3], 2, 3);
 ```
 
+4. Translate the provided string to pig latin. Pig Latin takes the first consonant (or consonant cluster) of an English word, moves it to the end of the word and suffixes an "ay". If a word begins with a vowel you just add "way" to the end.
+```
+function translatePigLatin(str) {
+  if (str.split('')[0].match(/[aeiou]/) !== null) {
+    return str + 'way';
+  } 
+  let chars = str.match(/[^aeiou]+/).toString().split('');
+  return (str.split('').splice(chars.length).join('') + chars.join('') + 'ay');
+}
+translatePigLatin("consonant");
+```
+
 5. Convert a string to spinal case. Spinal case is all-lowercase-words-joined-by-dashes.
 - split string on all non alphabet characters 
 - join string on dashes 
+  
+6. Perform a search and replace on the sentence using the arguments provided and return the new sentence. Preserve the case of the first character in the original word when you are replacing it. For example if you mean to replace the word "Book" with the word "dog", it should be replaced as "Dog". 
+- match pattern and extract (case insensitive regex)
+- if you need to pass a variable to create a regex expression use: `var regex = new RegExp(variable, "i")`
+- check for caps using str === str.toLowerCase()
+- if true then replace, if false capitalize then replace
+```
+function myReplace(str, before, after) {
+  var regex = new RegExp(before, "i"); 
+  var out = str.match(regex).toString(); 
+  if (out === before.toLowerCase()) {
+    return str.replace(regex, after);
+  } else {
+    let arr = after.split('')
+    var firstLetter = arr.shift().toUpperCase();
+    arr.unshift(firstLetter); 
+    var afterCapitalized = arr.join('');
+    return str.replace(regex, afterCapitalized);
+  }
+}
+myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+
+// Cool alternate solution to uppercase matching and string mutations.
+//Check whether the first letter is uppercase or not
+  if(/[A-Z]/.test(before[0])){
+  //Change the word to be capitalized
+    after = after.charAt(0).toUpperCase()+after.slice(1);
+     }
+```
+
+7. The DNA strand is missing the pairing element. Take each character, get its pair, and return the results as a 2d array.
+- create a hashmap object with all pairs 
+- split string into array, then map to a 2-D array returning each element + its hashmap lookup
+```
+function pairElement(str) {
+  const hashmap = {
+    A: 'T',
+    T: 'A', 
+    C: 'G',
+    G: 'C'
+  }
+  let dna = str.split('');
+  return dna.map(el => [el, hashmap[el]])
+}
+pairElement("GCG");
+```
+
+8. Find the missing letter in the passed letter range and return it. If all letters are present in the range, return undefined.
+- want to avoid using a for loop 
+- decompose the input string to an array
+- loop through each entry, if it matches return true and push the element onto a regex exp
+- when it returns false we return that letter
+```
+function fearNotLetter(str) {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz"; 
+  let letters = str.split('');
+  for (let i=0; i < letters.length; i++) {
+    var regex = new RegExp(letters.slice(0,i+1).join(''))
+    if (!alphabet.match(regex)) {
+      return letters[i];
+    }
+  }
+
+  return undefined;
+}
+fearNotLetter("abce");
+```
+
+9. Check if the predicate (second argument) is truthy on all elements of a collection (first argument). In other words, you are given an array collection of objects. The predicate pre will be an object property and you need to return true if its value is truthy. Otherwise, return false.
+- use the Boolean function to convert to true/false
+- select values in object using []
+```
+function truthCheck(collection, pre) {
+  return collection.map(el => Boolean(el[pre])).every(el => el === true);
+}
+truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
+```
+
+10. Create a function that sums two arguments together. If only one argument is provided, then return a function that expects one argument and returns the sum. For example, addTogether(2, 3) should return 5, and addTogether(2) should return a function. Calling this returned function with a single argument will then return the sum: var sumTwoAnd = addTogether(2); sumTwoAnd(3) returns 5.
+- need to use the `arguments object for this` 
+- if it's length 2 return the sum 
+- if it's length 1 return a function 
+- my solution ended up looking terrible: 
+```
+function addTogether(arg1, arg2) {
+  if (!(typeof arg1 === 'number')) {
+    return undefined; 
+  }
+    if (arguments.length === 2) {
+      if (typeof arg2 === 'number') {
+        return arguments[0] + arguments[1];
+      } else {
+        return undefined;
+      }
+    }
+    if (arguments.length === 1) {
+       return function(y) {
+         if (typeof y === 'number') {
+           return arg1 + y;
+         } else {
+           return undefined;
+         }
+       } 
+    }
+    return undefined; 
+}
+addTogether(2,3);
+```
+- try to improve on it before reading more solutions
+- use a function to check the typeof the args
+
+11. Write a function that takes two or more arrays and returns a new array of unique values in the order of the original provided arrays.
+- the first array always stays the same 
+- combine the next arguments into one (here use .splice and .reduce to create one array)
+- if the first array doesn't contain an argument the .push it into that array. 
+- use forEach so we don't return an array? 
+```
+function uniteUnique() {
+  let unique = arguments[0];
+  let numbers = Array.from(arguments).splice(1).reduce((a,b) => [...a, ...b]);
+  console.log(numbers); // see what this looks like
+  numbers.forEach(el => { 
+    if (!(unique.includes(el)))
+      unique.push(el);
+  })
+  return unique;
+}
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+```
