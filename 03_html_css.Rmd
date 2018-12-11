@@ -35,10 +35,10 @@ Example of a radio button list:
 The `for` attribute allows us to link between the parent input elements 
 ```
 <label for='indoor'>
-<input id='indoor' type='radio' name='indoor-outdoor'> Indoor
+<input id='indoor' type='radio' name='indoor-outdoor value='indoor'>Indoor
 </label>
 <label for='outdoor'>
-<input id='outdoor' type='radio' name='indoor-outdoor'> Outdoor
+<input id='outdoor' type='radio' name='indoor-outdoor' value='outdoor'>Outdoor
 </label>
 ```
 <br>
@@ -416,7 +416,8 @@ Allows you to adjust each flex item's alignments individually.  Accepts the same
 <hr> 
 
 
-## CSS Grid (display: grid;)
+## CSS Grid
+**display: grid;**
 CSS Grid helps you easily build complex web designs. It works by turning an HTML element into a grid container with rows and columns for you to place children elements where you want within the grid. Turn any HTML element into a grid container by setting its display property to grid (`display:grid`). This gives you the ability to use all the other properties associated with CSS Grid. In CSS Grid, the parent element is referred to as the container and its children are called items.
 
 + `grid-template-columns: 50px 50px;` - creates two columns that are 50px wide
@@ -572,4 +573,182 @@ background: BlanchedAlmond;
 <div class="item4">footer</div>
 </div>
 */
+```
+
+## Project 1: Build a Tribute Page
+
+### vertical line spacing between <li> items 
+```
+li {
+    margin: 12px 0;
+}
+```
+
+### Project Code: 
+```
+/*
+<style>
+.main {
+  background-color: #e0e0eb; 
+  font-family: Times New Roman;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+  font-weight: 100; 
+  font-style: none;
+}
+
+h2 {
+  text-align: center;
+}
+
+.title-sub{
+  text-align: center;
+}
+
+img {
+  /* want to make it slightly transparent */
+  transform: scale(.85);
+  opacity: .85;
+  margin: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 15px               20px rgba(0,0,0,0.23);
+  width: 75%; 
+  margin-left: 12.5%;
+  display: block;
+  max-width: 100%;
+}
+
+.img-div {
+  background-color: #efeff5;
+  display: float;
+  margin: 25px 2% 0px 2%;
+}
+
+.image-label {
+  text-align: center;
+  margin-top: -15px;
+  padding-bottom: 15px;
+}
+
+.tribute-info {
+  padding-top: 15px;
+  width: 40%; 
+  text-align: left;
+  margin-left: 30%; 
+}
+
+ul {
+  font-size: 120%;
+}
+
+li {
+    margin: 12px 0;
+}
+
+.wiki {
+  padding: 20px 0 30px 0;
+  font-size: 140%;
+  width: 60%;
+  margin-left: 25%;
+}
+
+.quote {
+  padding-top: 10px;
+  text-align: center;
+}
+</style>
+<main>
+  <header></header>
+  <body>
+ <div class='main' id='main'>
+   
+  <h1 class='title' id='title'>Wardell Stephen Curry II</h1>
+   
+  <div class='title-sub'>
+      <em>-the man who rained fire<em>
+  </div>
+        
+  <div class='img-div' id='img-div'>
+    <img src='https://clutchpoints.com/wp-content/uploads/2018/12/stephen-curry-2.jpg' id = 'image' alt='stephen curry photo'><br><div class='image-label' id='img-caption'>Stephen Curry, first from left, adorns 3 point shot goggles.  Also pictured: Stephen Curry, second from right, in a shooting stance.
+    </div>
+        </div>
+        <div class='tribute-info' id='tribute-info'>
+          <h2>
+            Here's a timelime of Steph's life:
+          </h2>
+         <div class='list'>
+          <ul>
+            <li>Born March 14th, 1988.</li>
+            <li>Curry is the son of former NBA player Dell Curry and older brother of current NBA player Seth Curry. </li>
+            <li>He played college basketball for Davidson. There, he was twice named Southern Conference Player of the Year and set the all-time scoring record for both Davidson and the Southern Conference.</li>
+            <li>June 25, 2009, Curry was selected with the seventh overall pick in the 2009 NBA draft by the Golden State Warriors.</li>
+            <li>In 2014–15, Curry won the NBA Most Valuable Player Award and led the Warriors to their first championship since 1975.</li>
+            <li>He and teammate Klay Thompson were nicknamed the Splash Brothers en route to setting the NBA record for combined three-pointers in a season with 484, a record they broke the following season (525) and again in the 2015–16 season (678).</li>
+          </ul>
+          </div>
+        </div>
+        <div class='quote'>"I mean, this is terrifying. This is NBA helplessness. You can feel the panic among San Antonio players, fans, and coaches. I almost shriek on their behalf just watching."</div>
+        <br>
+        <div class='quote'>-- Zach Lowe on Stephen Curry</div>
+  <div class='wiki'>
+            If you have time, read more about the greatest shooter who ever lived on his <a href='https://en.wikipedia.org/wiki/Stephen_Curry' id='tribute-link' alt='wikipedia link steph curry' target='_blank'>Wikipedia Page</a>
+          </div>
+  </div>
+  
+   </body> 
+
+</main>
+*/
+```
+
+## Project 2: Build a Survey Form 
+
+### inline-block vs inline
+Compared to display: inline, the major difference is that display: inline-block allows to set a width and height on the element.  Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not. Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.
+
+### Format an <input> 
+Use `padding: 5px` to make the box around an input field expand 5px in each direction past the `placeholder` text.  Use `text-align: left` as well 
+
+### Dropdown list 
+Add a disabled value to the top of the list. 
+```
+<select name="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="fiat">Fiat</option>
+  <option value="audi">Audi</option>
+</select>
+```
+
+### Throw HTML5 validation error 
+We can throw a validation error if only want a certain type of input.  For instance here we only want numeric input in the first box and email input in the second one. 
+```
+<input type='number' class='input-div' placeholder='Age' id='number' required>
+<input type='email' class='input-div' placeholder='Enter your email' id='email' required> 
+```
+
+### Checkbox input
+Create a checkbox list 
+```
+<div>
+<input type='checkbox' value='front-end-projects' checked>
+<span>Front End Projects</span>
+</div>
+<div>
+<input type='checkbox' value='back-end-projects'>
+<span>Back End Projects</span>
+</div>
+```
+
+### Add min/max attributes to an input field 
+```
+<input type='number' class='input-div' min=2 max= 150 placeholder='Age' id='number' required> 
+```
+
+### textarea 
+creates a box that the user can write in for comments and suggestions.  It can be sized with the "rows" and "cols" attributes. 
+```
+<textarea rows='6' cols='40'></textarea>
 ```
