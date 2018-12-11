@@ -314,7 +314,7 @@ duck.glide();
 <hr>
 
 
-## Function Programming Challenges 
+## Functional Programming Challenges 
 Functional programming is an approach to software development based around the evaluation of functions. Like mathematics, functions in programming map input to output to produce a result. You can combine basic functions in many ways to build more and more complex programs. The functional programming software development approach breaks a program into small, testable parts. This section covers basic functional programming principles in JavaScript.
   **Callbacks** are the functions that are slipped or passed into another function to decide the invocation of that function. Functions that can be assigned to a variable, passed into another function, or returned from another function just like any other normal value, are called **first class** functions. In JavaScript, all functions are first class functions. The functions that take a function as an argument, or return a function as a return value are called **higher order** functions. When the functions are passed in to another function or returned from another function, then those functions which gets passed in or returned can be called a **lambda.** 
 Example of these principles: 
@@ -413,21 +413,25 @@ Array.prototype.myFilter = function(callback){
 };
 ```
 
+### filter
 `.filter` method takes a callback function input and returns elements in a new array if it evaluates to true
 The following code chunk works, but it won't work if we wrap {} around the arrown function in .filter.  Why is that?
 ```
 var filteredList = watchList.filter(el => parseInt(el.imdbRating) >= 8).map(el => {return {title: el.Title, rating: el.imdbRating}});
 ```
 
+### concat
 + `.concat` allows us to push items to the end of an array in a non mutating way. 
 
-+ `.reduce` example: 
+### reduce
+The array `.reduce` methods takes simplifies an into an object of length one based on a callback function. The `a and b` inputs to the function are `arr[0]` and `arr[1]` on the first call, then the result of the first call and `arr[2]` on the second call, etc. 
 ```
 var nolan_movies = watchList.filter(el => el.Director === 'Christopher Nolan');
 var averageRating = nolan_movies.map(el => parseFloat(el.imdbRating)).reduce((a, b) => a + b)/(nolan_movies.length);
 ```
-
-+ Sorting examples. Sorting defaults to unicode which converts numbers to characters.  We need callback functions to sort numeric values correctly.  Sort also mutates the original array.  
+  
+### Sorting examples
+Sorting defaults to unicode which converts numbers to characters.  We need callback functions to sort numeric values correctly.  Sort also mutates the original array.  
 ```
 function ascendingOrder(arr) {
   return arr.sort(function(a, b) {
@@ -435,7 +439,6 @@ function ascendingOrder(arr) {
   });
 }
 ascendingOrder([1, 5, 2, 3, 4]);
-// Returns [1, 2, 3, 4, 5]
 
 function reverseAlpha(arr) {
   return arr.sort(function(a, b) {
@@ -443,11 +446,16 @@ function reverseAlpha(arr) {
   });
 }
 reverseAlpha(['l', 'h', 'z', 'b', 's']);
-// Returns ['z', 's', 'l', 'h', 'b']
 ```
-+ `.join('delimiter')` joins elements of an array using a delimiter 
-+ `.every` takes a callback function and checks if every value is true.  
-    +`.some` (any in R) method checks if any applications of the callback function are true
+
+### join  
+The array `.join('delimiter')` method joins elements of an array using a delimiter
+```
+['hello', 'world'].join(' ');
+```
+
+### every / some
+The `.every` method takes a callback function and checks if every value is true. The `.some` method (any in R) method checks if any applications of the callback function are true
     
 **Curry and Partial Application:**
 + `arity` is the number of arguments a function requires
@@ -522,6 +530,7 @@ translatePigLatin("consonant");
 - if you need to pass a variable to create a regex expression use: `var regex = new RegExp(variable, "i")`
 - check for caps using str === str.toLowerCase()
 - if true then replace, if false capitalize then replace
+
 ```
 function myReplace(str, before, after) {
   var regex = new RegExp(before, "i"); 
@@ -543,7 +552,7 @@ myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
   if(/[A-Z]/.test(before[0])){
   //Change the word to be capitalized
     after = after.charAt(0).toUpperCase()+after.slice(1);
-     }
+}
 ```
 
 7. The DNA strand is missing the pairing element. Take each character, get its pair, and return the results as a 2d array.
@@ -568,6 +577,7 @@ pairElement("GCG");
 - decompose the input string to an array
 - loop through each entry, if it matches return true and push the element onto a regex exp
 - when it returns false we return that letter
+
 ```
 function fearNotLetter(str) {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"; 
@@ -587,6 +597,7 @@ fearNotLetter("abce");
 9. Check if the predicate (second argument) is truthy on all elements of a collection (first argument). In other words, you are given an array collection of objects. The predicate pre will be an object property and you need to return true if its value is truthy. Otherwise, return false.
 - use the Boolean function to convert to true/false
 - select values in object using []
+
 ```
 function truthCheck(collection, pre) {
   return collection.map(el => Boolean(el[pre])).every(el => el === true);
@@ -598,7 +609,8 @@ truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "ma
 - need to use the `arguments object for this` 
 - if it's length 2 return the sum 
 - if it's length 1 return a function 
-- my solution ended up looking terrible: 
+- my solution ended up looking terrible:
+
 ```
 function addTogether(arg1, arg2) {
   if (!(typeof arg1 === 'number')) {
@@ -632,6 +644,7 @@ addTogether(2,3);
 - combine the next arguments into one (here use .splice and .reduce to create one array)
 - if the first array doesn't contain an argument the .push it into that array. 
 - use forEach so we don't return an array? 
+
 ```
 function uniteUnique() {
   let unique = arguments[0];
@@ -711,6 +724,7 @@ console.log(dropElements([0, 1, 0, 1], function(n) {return n === 1;}));
 ```
 
 16. Fill in the object constructor with the following methods below: getFirstName() getLastName() getFullName() setFirstName(first) setLastName(last) setFullName(firstAndLast). 
+
 ```
 var Person = function(input) {
   var arr = input.split(' ');
@@ -748,6 +762,7 @@ bob.getFullName();
 - create an obortial period class constructor 
 - it takes in the satellites name and avgAlt and returns an object with name and orbital period 
 - I could've also looped through the array, calculated period for each object, and deleted the avgAlt prop from each one.  
+
 ```
 function orbitalPeriod(arr) {
   function calculatePeriod(altitude) {
@@ -764,4 +779,48 @@ function orbitalPeriod(arr) {
   return arr.map(el => orbitalPeriod(el['name'], el['avgAlt']));
 }
 console.log(orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]));
+```
+
+## Project 2: Roman Numerals
+Roman Numeral Converter. Convert the given number into a roman numeral. All [roman numerals](https://www.mathsisfun.com/roman-numerals.html) answers should be provided in upper-case.
+- initially thought of writing four functions: one each of the places: ones, tens, hundreds, and thousands columns.  
+- then I realized the body of these functions would be the same: except for the characters it assigns 
+- we can combine then into one function that takes two inputs: a number (0-9) and a character array of roman numerals or "rules" to assign.  
+
+```
+function convertToRoman(num) {
+  var numbers = num.toString().split('').reverse().map(el => parseInt(el));
+  var romanNumerals = [['I', 'V', 'X'], ['X', 'L', 'C'],
+                      ['C', 'D', 'M'], ['M', 'Vbar', 'Xbar']];
+  var inputs = [];
+  for (let i = 0; i < numbers.length; i++) {
+      inputs[i] = [numbers[i], romanNumerals[i]];
+  }
+
+  var replaceWithRoman = function(num, romanNumerals) {
+     let out; 
+     switch(true) {
+        case num == 0:
+            out = '';
+            break;
+        case num <= 3:
+            out = romanNumerals[0].repeat(num);
+            break;
+        case num == 4:
+            out = romanNumerals[0] + romanNumerals[1];
+            break;
+        case num <= 8:
+            out = romanNumerals[1] + romanNumerals[0].repeat(num-5);
+            break;
+        case num == 9: 
+            out = romanNumerals[0] + romanNumerals[2];
+            break;
+     }
+     return out;
+ }
+ return inputs.map(el => replaceWithRoman(el[0], el[1])).reverse().join('')
+}
+console.log(convertToRoman(36));
+console.log(convertToRoman(400));
+console.log(convertToRoman(1000));
 ```
