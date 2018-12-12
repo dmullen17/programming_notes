@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-11">
+<meta name="date" content="2018-12-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="javascript-algorithms-and-data-structures-fcc.html">
-<link rel="next" href="chapter-4.html">
+<link rel="next" href="front-end-libraries.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,43 @@
 
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -77,8 +114,10 @@
 <li class="chapter" data-level="1.6" data-path="command-line.html"><a href="command-line.html#miscellaneous"><i class="fa fa-check"></i><b>1.6</b> Miscellaneous</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html"><i class="fa fa-check"></i><b>2</b> JavaScript Algorithms and Data Structures FCC</a><ul>
-<li class="chapter" data-level="2.0.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#mutating-strings-.charat-methods"><i class="fa fa-check"></i><b>2.0.1</b> Mutating strings .charAt() methods</a></li>
-<li class="chapter" data-level="2.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#es6"><i class="fa fa-check"></i><b>2.1</b> ES6</a></li>
+<li class="chapter" data-level="2.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#es6"><i class="fa fa-check"></i><b>2.1</b> ES6</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#charat"><i class="fa fa-check"></i><b>2.1.1</b> charAt</a></li>
+<li class="chapter" data-level="2.1.2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#charcodeat"><i class="fa fa-check"></i><b>2.1.2</b> charCodeAt</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#regex"><i class="fa fa-check"></i><b>2.2</b> Regex</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#lookaheads"><i class="fa fa-check"></i><b>2.2.1</b> lookaheads</a></li>
 <li class="chapter" data-level="2.2.2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#replace"><i class="fa fa-check"></i><b>2.2.2</b> replace</a></li>
@@ -96,7 +135,10 @@
 <li class="chapter" data-level="2.7.6" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#every-some"><i class="fa fa-check"></i><b>2.7.6</b> every / some</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#intermediate-algorithm-scripting"><i class="fa fa-check"></i><b>2.8</b> Intermediate Algorithm Scripting</a></li>
-<li class="chapter" data-level="2.9" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#project-2-roman-numerals"><i class="fa fa-check"></i><b>2.9</b> Project 2: Roman Numerals</a></li>
+<li class="chapter" data-level="2.9" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#project-1-palindrome-checker"><i class="fa fa-check"></i><b>2.9</b> Project 1: Palindrome checker</a></li>
+<li class="chapter" data-level="2.10" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#project-2-roman-numerals"><i class="fa fa-check"></i><b>2.10</b> Project 2: Roman Numerals</a></li>
+<li class="chapter" data-level="2.11" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#project-3-caesars-cipher"><i class="fa fa-check"></i><b>2.11</b> Project 3: Caesar’s Cipher</a></li>
+<li class="chapter" data-level="2.12" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#project-4-telephone-number-validator"><i class="fa fa-check"></i><b>2.12</b> Project 4: Telephone Number Validator</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html"><i class="fa fa-check"></i><b>3</b> Responsive Web Design FCC</a><ul>
 <li class="chapter" data-level="3.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#html-and-html5"><i class="fa fa-check"></i><b>3.1</b> HTML and HTML5</a></li>
@@ -136,9 +178,19 @@
 <li class="chapter" data-level="3.9.5" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#checkbox-input"><i class="fa fa-check"></i><b>3.9.5</b> Checkbox input</a></li>
 <li class="chapter" data-level="3.9.6" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#add-minmax-attributes-to-an-input-field"><i class="fa fa-check"></i><b>3.9.6</b> Add min/max attributes to an input field</a></li>
 <li class="chapter" data-level="3.9.7" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#textarea"><i class="fa fa-check"></i><b>3.9.7</b> textarea</a></li>
+<li class="chapter" data-level="3.9.8" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-code-1"><i class="fa fa-check"></i><b>3.9.8</b> Project Code</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-4-technical-documenation"><i class="fa fa-check"></i><b>3.10</b> Project 4: Technical Documenation</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#code"><i class="fa fa-check"></i><b>3.10.1</b> <code>&lt;code&gt;</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>4</b> Chapter 4</a></li>
+<li class="chapter" data-level="4" data-path="front-end-libraries.html"><a href="front-end-libraries.html"><i class="fa fa-check"></i><b>4</b> Front End Libraries</a><ul>
+<li class="chapter" data-level="4.1" data-path="front-end-libraries.html"><a href="front-end-libraries.html#bootstrap"><i class="fa fa-check"></i><b>4.1</b> Bootstrap</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="front-end-libraries.html"><a href="front-end-libraries.html#add-bootstrap"><i class="fa fa-check"></i><b>4.1.1</b> Add bootstrap</a></li>
+<li class="chapter" data-level="4.1.2" data-path="front-end-libraries.html"><a href="front-end-libraries.html#bootstrap-classes"><i class="fa fa-check"></i><b>4.1.2</b> Bootstrap classes</a></li>
+<li class="chapter" data-level="4.1.3" data-path="front-end-libraries.html"><a href="front-end-libraries.html#buttons"><i class="fa fa-check"></i><b>4.1.3</b> Buttons</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -883,6 +935,7 @@ li {
 
 &lt;/main&gt;
 */</code></pre>
+<hr>
 </div>
 </div>
 <div id="project-2-build-a-survey-form" class="section level2">
@@ -931,6 +984,214 @@ li {
 <h3><span class="header-section-number">3.9.7</span> textarea</h3>
 <p>creates a box that the user can write in for comments and suggestions. It can be sized with the “rows” and “cols” attributes.</p>
 <pre><code>&lt;textarea rows=&#39;6&#39; cols=&#39;40&#39;&gt;&lt;/textarea&gt;</code></pre>
+</div>
+<div id="project-code-1" class="section level3">
+<h3><span class="header-section-number">3.9.8</span> Project Code</h3>
+<pre><code>&lt;style&gt;
+body {
+  text-align: center;
+  background-color: #ccffff;
+  min-width: 320px; 
+  font-family: Helvetica; 
+  font-weight: 100;
+}
+
+.survey-form {
+  background-color: #ffffff;
+  margin: 0px 15% 0px 15%;
+}
+
+form {
+  padding-top: 15px;
+}
+
+
+label {
+  text-align: left
+}
+
+div {
+  display: block;
+  padding: 6px
+}
+
+input {
+  border-radius: 2px;
+}
+
+.label-div {
+  width: 30%;
+  text-align: right; 
+  padding-top: 9px;
+  padding-right: 15px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.input-div {
+  width: 45%;
+  display: inline-block;
+  text-align: left; 
+  padding: 5px;
+  vertical-align: top;
+}
+
+.dropdown {
+  width: 35%;
+  height: 30px;
+}
+
+.button-submit {
+  border-radius: 5px;
+  background-color: #0099ff;
+  width: 12%;
+  height: 40px; 
+  font-size: 150%;
+  color: #FFFFFF;
+  margin-left: -10%;
+  margin-top: 10px;
+}
+&lt;/style&gt;
+&lt;body id=&#39;main&#39;&gt;
+  &lt;div&gt;
+    &lt;h1 id=&#39;title&#39;&gt;Survey Form&lt;/h1&gt;
+  &lt;/div&gt;
+    
+  &lt;form class=&#39;survey-form&#39; id=&#39;survey-form&#39;&gt;
+    &lt;p id=&#39;description&#39;&gt;
+        Let us know how we can improve FreeCodeCamp
+    &lt;/p&gt;   
+&lt;div class=&#39;row&#39;&gt;
+    &lt;div class=&#39;label-div&#39;&gt;
+      &lt;label id=&#39;name-label&#39; for=&#39;name&#39;&gt;* Name: &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&#39;input-div&#39;&gt;
+    &lt;input type=&#39;text&#39; class=&#39;input-div&#39; placeholder=&#39;Enter your name&#39; id=&#39;name&#39; required&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#39;row&#39;&gt;
+    &lt;div class=&#39;label-div&#39;&gt;
+      &lt;label id=&#39;email-label&#39; for=&#39;email&#39;&gt;* Email: &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&#39;input-div&#39;&gt;
+      &lt;input type=&#39;email&#39; class=&#39;input-div&#39; placeholder=&#39;Enter your email&#39; id=&#39;email&#39; required&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#39;row&#39;&gt;
+    &lt;div class=&#39;label-div&#39;&gt;
+      &lt;label id=&#39;number-label&#39; for=&#39;number&#39;&gt;* Age: &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&#39;input-div&#39;&gt;
+      &lt;input type=&#39;number&#39; class=&#39;input-div&#39; min=2 max= 150 placeholder=&#39;Age&#39; id=&#39;number&#39; required&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+    
+&lt;div class=&#39;row&#39;&gt;
+    &lt;div class=&#39;label-div&#39;&gt;
+      &lt;label for=&#39;dropdown&#39;&gt;Which option best describes your current role? &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&#39;input-div&#39;&gt;
+      &lt;select name=&#39;dropdown&#39; id=&#39;dropdown&#39; class=&#39;dropdown&#39;&gt;
+        &lt;option value=&#39;disabled&#39; disabled value selected&gt;Choose an option:&lt;/option&gt;
+        &lt;option value=&#39;student&#39;&gt;Student&lt;/option&gt;
+        &lt;option value=&#39;full-time&#39;&gt;Full-time employed&lt;/option&gt;
+        &lt;option value=&#39;part-time&#39;&gt;Part-time employed&lt;/option&gt;
+        &lt;option value=&#39;other&#39;&gt;Other&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#39;row&#39;&gt;
+  &lt;div class=&#39;label-div&#39;&gt;
+    &lt;label&gt;How likely are you to reccomend freeCodeCamp to a friend?&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class=&#39;radio input-div&#39;&gt;
+    &lt;label for=&#39;definitely&#39;&gt;
+      &lt;input id=&#39;definitely&#39; type=&#39;radio&#39; name=&#39;reccomenadation&#39; value=&#39;definitely&#39;&gt;Definitely
+    &lt;/label&gt;
+&lt;label for=&#39;maybe&#39;&gt;
+&lt;input id=&#39;maybe&#39; type=&#39;radio&#39; name=&#39;reccomenadation&#39; value=&#39;maybe&#39;&gt;Maybe
+&lt;/label&gt;
+    &lt;label for=&#39;not-sure&#39;&gt;&lt;input id=&#39;not-sure&#39; type=&#39;radio&#39; name=&#39;reccomenadation&#39; value=&#39;not-sure&#39;&gt;Not sure&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#39;row&#39;&gt;
+    &lt;div class=&#39;label-div&#39;&gt;
+      &lt;label for=&#39;dropdown2&#39;&gt;What do you like most in FCC?&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&#39;input-div&#39;&gt;
+      &lt;select name=&#39;dropdown2&#39; id=&#39;dropdown&#39; class=&#39;dropdown&#39;&gt;
+        &lt;option value=&#39;disabled&#39; disabled value selected&gt;Choose an option:&lt;/option&gt;
+        &lt;option value=&#39;projects&#39;&gt;Projects&lt;/option&gt;
+        &lt;option value=&#39;community&#39;&gt;Community&lt;/option&gt;
+        &lt;option value=&#39;open-source&#39;&gt;Open Source&lt;/option&gt;
+        &lt;option value=&#39;other&#39;&gt;Other&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&#39;row&#39;&gt;
+  &lt;div class=&#39;label-div&#39;&gt;
+    &lt;label&gt;Things that should be improved in the future (check all that apply)&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class=&#39;input-div&#39;&gt;
+    &lt;div&gt;
+    &lt;input type=&#39;checkbox&#39; value=&#39;front-end-projects&#39; checked&gt;
+    &lt;span&gt;Front End Projects&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type=&#39;checkbox&#39; value=&#39;back-end-projects&#39;&gt;
+    &lt;span&gt;Back End Projects&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type=&#39;checkbox&#39; class=&#39;checkbox&#39; value=&#39;challenges&#39;&gt;
+    &lt;span&gt;Challenges&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&#39;checkbox&#39; value=&#39;additional-courses&#39;&gt;
+    &lt;span&gt;Additional courses&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&#39;checkbox&#39; value=&#39;videos&#39;&gt;
+    &lt;span&gt;Videos&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;div class=&#39;row&#39;&gt;
+  &lt;div class=&#39;label-div&#39;&gt;
+    Any comments or suggestions?
+  &lt;/div&gt;
+  &lt;div class=&#39;input-div&#39;&gt;
+    &lt;textarea rows=&#39;6&#39; cols=&#39;40&#39;&gt;&lt;/textarea&gt;
+  &lt;div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+ &lt;div&gt;
+  &lt;button type=&#39;submit&#39; class=&#39;button-submit&#39; id=&#39;submit&#39;&gt;Submit&lt;/button&gt;
+    &lt;/div&gt;
+    
+&lt;/form&gt;
+&lt;/body&gt;</code></pre>
+<hr>
+</div>
+</div>
+<div id="project-4-technical-documenation" class="section level2">
+<h2><span class="header-section-number">3.10</span> Project 4: Technical Documenation</h2>
+<div id="code" class="section level3">
+<h3><span class="header-section-number">3.10.1</span> <code>&lt;code&gt;</code></h3>
+<p>Use <code> tags in html to output text in code chunks. The following CSS styles a code block:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code {
+    display<span class="op">:</span><span class="st"> </span>block;
+    text<span class="op">-</span>align<span class="op">:</span><span class="st"> </span>left;
+    white<span class="op">-</span>space<span class="op">:</span><span class="st"> </span>pre;
+    position<span class="op">:</span><span class="st"> </span>relative;
+    word<span class="op">-</span><span class="cf">break</span><span class="op">:</span><span class="st"> </span>normal;
+    word<span class="op">-</span>wrap<span class="op">:</span><span class="st"> </span>normal;
+    line<span class="op">-</span>height<span class="op">:</span><span class="st"> </span><span class="dv">2</span>;
+    background<span class="op">-</span>color<span class="op">:</span><span class="st"> </span><span class="co">#f7f7f7;</span>
+<span class="st">    </span>padding<span class="op">:</span><span class="st"> </span>15px;
+    margin<span class="op">:</span><span class="st"> </span>10px;
+    border<span class="op">-</span>radius<span class="op">:</span><span class="st"> </span>5px;
+}</code></pre></div>
 
 </div>
 </div>
@@ -941,7 +1202,7 @@ li {
         </div>
       </div>
 <a href="javascript-algorithms-and-data-structures-fcc.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="front-end-libraries.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

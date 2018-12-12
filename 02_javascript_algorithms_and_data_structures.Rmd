@@ -1,18 +1,24 @@
 # JavaScript Algorithms and Data Structures FCC 
 These are my notes from the JavaScript Algorithms and Data Structures certification from the<a href="https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/basic-javascript"> FreeCodeCamp lessons</a>
 
-### Mutating strings .charAt() methods
-Strings are immuatable - the best way I've seen to modify a string is to create a new and use the `.charAt` and `.splice` methods 
-```
-after = after.charAt(0).toUpperCase()+after.slice(1);
-```
-
 ## ES6 
 Arrow function defintion syntax: 
 ```
 let printAandB = (a, b) => {
   console.log(`${a} = a and ${b} = b`);
 }
+```
+
+### charAt
+Strings are immuatable - the best way I've seen to modify a string is to create a new and use the `.charAt` and `.splice` methods 
+```
+after = after.charAt(0).toUpperCase()+after.slice(1);
+```
+
+### charCodeAt
+The string method charCodeAt returns the ASCII character encoding at a given index in a string.  Below is a useful way of mapping all of the encodings to an array.  
+```
+str.split('').map(el => el.charCodeAt(0))
 ```
 
 ## Regex 
@@ -781,6 +787,39 @@ function orbitalPeriod(arr) {
 console.log(orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]));
 ```
 
+<hr>
+
+
+## Project 1: Palindrome checker
+Return true if the given string is a palindrome. Otherwise, return false. A palindrome is a word or sentence that's spelled the same way both forward and backward, ignoring punctuation, case, and spacing.
+
+- check length of the string, remove middle character if it's odd.  (does this apply for strings with spaces?)
+- seems like I should remove whitespace, underscores and periods from the strings.
+- check length of the string 
+- for loop solution: start at the front and back of the string using `.charAt` checking if values are equal, break if they aren't. 
+
+```
+function palindrome(str) {
+  let chars = str.replace(/[\W]|_/g, "").toLowerCase();
+  console.log(chars);
+
+  // for loop solution 
+  var out = true; 
+  for (let i = 0; i < chars.length/2; i++) {
+    out = chars.charAt(i) === chars.charAt(chars.length-i-1);
+    if (out === false) {
+      break;
+    }
+  }
+  return out;
+  
+}
+console.log(palindrome("eye"));
+console.log(palindrome("1 eye for of 1 eye."));
+console.log(palindrome("0_0 (: /-\ :) 0-0"));
+console.log(palindrome("My age is 0, 0 si ega ym."));
+```
+
 ## Project 2: Roman Numerals
 Roman Numeral Converter. Convert the given number into a roman numeral. All [roman numerals](https://www.mathsisfun.com/roman-numerals.html) answers should be provided in upper-case.
 - initially thought of writing four functions: one each of the places: ones, tens, hundreds, and thousands columns.  
@@ -823,4 +862,85 @@ function convertToRoman(num) {
 console.log(convertToRoman(36));
 console.log(convertToRoman(400));
 console.log(convertToRoman(1000));
+```
+
+<hr>
+
+## Project 3: Caesar's Cipher
+One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount. A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places. Thus 'A' ↔ 'N', 'B' ↔ 'O' and so on. Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+
+- A is 65 and Z is 90 in ASCII encodings 
+- return each characters charCode `str.split('').map(el => el.charCodeAt(0))`
+- decoding algorithm is easy if you write out 65:90 and 65:90 + 13.  You see that 65-77 is + 13, and 78-90 is -13.  So we just write an if-else statement. 
+
+```
+function rot13(str) { // LBH QVQ VG!
+  const rot13Decode = function(num) {
+    return (num < 65 || num > 90) ? num : num <= 77 ? num + 13 : num - 13;
+  }
+  let asciiCodes = str.split('').map(el => el.charCodeAt(0));
+
+  return asciiCodes.map(el => String.fromCharCode(rot13Decode(el))).join('');
+}
+rot13("SERR PBQR PNZC");
+```
+
+<hr> 
+
+## Project 4: Telephone Number Validator
+Return true if the passed string looks like a valid US phone number. The user may fill out the form field any way they choose as long as it has the format of a valid US number.
+
+- probably need to write a lot of rules
+- check that first character is either a number or a "(" - if not return false
+- created a function that returned true / false for every invalid entry 
+- created an array of each function call on the string input 
+- tested that every entry in the array was true 
+
+```
+function telephoneCheck(str) {
+  const testFirstChar = function(str) {
+    let regex = /[\d]|\(/;
+    return regex.test(str.charAt(0));
+  } 
+
+  const testLength = function(str) {
+    return str.length < 10 ? false : true
+  }
+
+  // if a string contains parentheses, check that they're pattern: (555)
+  const testParentheses = function(str) {
+    let out = true; 
+    var regex = /\(|\)/;
+    if (regex.test(str)) {
+      var regex = /\([\d]{3}\)/;
+      out = regex.test(str);
+    }
+    return out; 
+  }
+
+  const countIntegersInStr = function(str) {
+    let regex = /[\d]/;
+    return str.split('').map(el => regex.test(el)).filter(el => el === true).length;
+  }
+
+  const testNumberOfIntegers = function(str) {
+    return countIntegersInStr(str) > 11 ? false : true;
+  }
+
+  const testCountryCode = function(str) {
+    return (countIntegersInStr(str) === 11) ? (str.charAt(0) == 1) ? true : false : true;
+  }
+
+  const testSpecialCharacters = function(str) {
+    let regex = /[\d]|-|\(|\)|[\s]/;
+    return str.split('').map(el => regex.test(el)).every(el => el === true);
+  }
+
+  let tests = [testFirstChar(str), testLength(str), testParentheses(str),
+               testNumberOfIntegers(str), testCountryCode(str),
+               testSpecialCharacters(str)];
+
+  return tests.every(el => el === true);
+}
+console.log(telephoneCheck("555-555-5555?"));
 ```

@@ -703,6 +703,9 @@ li {
 */
 ```
 
+<hr>
+
+
 ## Project 2: Build a Survey Form 
 
 ### inline-block vs inline
@@ -751,4 +754,217 @@ Create a checkbox list
 creates a box that the user can write in for comments and suggestions.  It can be sized with the "rows" and "cols" attributes. 
 ```
 <textarea rows='6' cols='40'></textarea>
+```
+
+### Project Code 
+
+```
+<style>
+body {
+  text-align: center;
+  background-color: #ccffff;
+  min-width: 320px; 
+  font-family: Helvetica; 
+  font-weight: 100;
+}
+
+.survey-form {
+  background-color: #ffffff;
+  margin: 0px 15% 0px 15%;
+}
+
+form {
+  padding-top: 15px;
+}
+
+
+label {
+  text-align: left
+}
+
+div {
+  display: block;
+  padding: 6px
+}
+
+input {
+  border-radius: 2px;
+}
+
+.label-div {
+  width: 30%;
+  text-align: right; 
+  padding-top: 9px;
+  padding-right: 15px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.input-div {
+  width: 45%;
+  display: inline-block;
+  text-align: left; 
+  padding: 5px;
+  vertical-align: top;
+}
+
+.dropdown {
+  width: 35%;
+  height: 30px;
+}
+
+.button-submit {
+  border-radius: 5px;
+  background-color: #0099ff;
+  width: 12%;
+  height: 40px; 
+  font-size: 150%;
+  color: #FFFFFF;
+  margin-left: -10%;
+  margin-top: 10px;
+}
+</style>
+<body id='main'>
+  <div>
+    <h1 id='title'>Survey Form</h1>
+  </div>
+    
+  <form class='survey-form' id='survey-form'>
+    <p id='description'>
+        Let us know how we can improve FreeCodeCamp
+    </p>   
+<div class='row'>
+    <div class='label-div'>
+      <label id='name-label' for='name'>* Name: </label>
+    </div>
+    <div class='input-div'>
+    <input type='text' class='input-div' placeholder='Enter your name' id='name' required>
+    </div>
+</div>
+<div class='row'>
+    <div class='label-div'>
+      <label id='email-label' for='email'>* Email: </label>
+    </div>
+    <div class='input-div'>
+      <input type='email' class='input-div' placeholder='Enter your email' id='email' required> 
+    </div>
+</div>
+<div class='row'>
+    <div class='label-div'>
+      <label id='number-label' for='number'>* Age: </label>
+    </div>
+    <div class='input-div'>
+      <input type='number' class='input-div' min=2 max= 150 placeholder='Age' id='number' required> 
+    </div>
+</div>
+    
+<div class='row'>
+    <div class='label-div'>
+      <label for='dropdown'>Which option best describes your current role? </label>
+    </div>
+    <div class='input-div'>
+      <select name='dropdown' id='dropdown' class='dropdown'>
+        <option value='disabled' disabled value selected>Choose an option:</option>
+        <option value='student'>Student</option>
+        <option value='full-time'>Full-time employed</option>
+        <option value='part-time'>Part-time employed</option>
+        <option value='other'>Other</option>
+      </select>
+    </div>
+</div>
+<div class='row'>
+  <div class='label-div'>
+    <label>How likely are you to reccomend freeCodeCamp to a friend?</label>
+  </div>
+  <div class='radio input-div'>
+    <label for='definitely'>
+      <input id='definitely' type='radio' name='reccomenadation' value='definitely'>Definitely
+    </label>
+<label for='maybe'>
+<input id='maybe' type='radio' name='reccomenadation' value='maybe'>Maybe
+</label>
+    <label for='not-sure'><input id='not-sure' type='radio' name='reccomenadation' value='not-sure'>Not sure</label>
+  </div>
+</div>
+
+<div class='row'>
+    <div class='label-div'>
+      <label for='dropdown2'>What do you like most in FCC?</label>
+    </div>
+    <div class='input-div'>
+      <select name='dropdown2' id='dropdown' class='dropdown'>
+        <option value='disabled' disabled value selected>Choose an option:</option>
+        <option value='projects'>Projects</option>
+        <option value='community'>Community</option>
+        <option value='open-source'>Open Source</option>
+        <option value='other'>Other</option>
+      </select>
+    </div>
+</div>
+
+<div class='row'>
+  <div class='label-div'>
+    <label>Things that should be improved in the future (check all that apply)</label>
+  </div>
+  <div class='input-div'>
+    <div>
+    <input type='checkbox' value='front-end-projects' checked>
+    <span>Front End Projects</span>
+    </div>
+    <div>
+    <input type='checkbox' value='back-end-projects'>
+    <span>Back End Projects</span>
+    </div>
+    <div>
+    <input type='checkbox' class='checkbox' value='challenges'>
+    <span>Challenges</span>
+    </div>
+    <div>
+        <input type='checkbox' value='additional-courses'>
+    <span>Additional courses</span>
+    </div>
+    <div>
+        <input type='checkbox' value='videos'>
+    <span>Videos</span>
+    </div>
+  </div>
+<div class='row'>
+  <div class='label-div'>
+    Any comments or suggestions?
+  </div>
+  <div class='input-div'>
+    <textarea rows='6' cols='40'></textarea>
+  <div>
+</div>
+</div>
+ <div>
+  <button type='submit' class='button-submit' id='submit'>Submit</button>
+    </div>
+    
+</form>
+</body>
+```
+
+<hr>
+
+
+## Project 4: Technical Documenation 
+
+### `<code>`
+Use <code> tags in html to output text in code chunks. The following CSS styles a code block: 
+
+```{r, eval=F}
+code {
+    display: block;
+    text-align: left;
+    white-space: pre;
+    position: relative;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 2;
+    background-color: #f7f7f7;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+}
 ```
