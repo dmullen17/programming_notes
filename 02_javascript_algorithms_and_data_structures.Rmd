@@ -944,3 +944,11 @@ function telephoneCheck(str) {
 }
 console.log(telephoneCheck("555-555-5555?"));
 ```
+
+<hr> 
+
+
+## Project 5: Cash Register
+Design a cash register drawer function checkCashRegister() that accepts purchase price as the first argument (price), payment as the second argument (cash), and cash-in-drawer (cid) as the third argument. Example input: ```
+checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+```

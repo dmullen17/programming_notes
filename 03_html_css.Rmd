@@ -948,6 +948,16 @@ input {
 <hr>
 
 
+## Project 3: Project Landing Page
+Build a product landing page
+
+### fixed navbar
+Use the following code to fix an object in place - usually reservered for menus.
+```
+position: fixed;
+```
+
+
 ## Project 4: Technical Documenation 
 
 ### `<code>`
