@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-13">
+<meta name="date" content="2018-12-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -183,6 +183,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-3-project-landing-page"><i class="fa fa-check"></i><b>3.10</b> Project 3: Project Landing Page</a><ul>
 <li class="chapter" data-level="3.10.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#fixed-navbar"><i class="fa fa-check"></i><b>3.10.1</b> fixed navbar</a></li>
+<li class="chapter" data-level="3.10.2" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-code-2"><i class="fa fa-check"></i><b>3.10.2</b> Project Code</a></li>
 </ul></li>
 <li class="chapter" data-level="3.11" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-4-technical-documenation"><i class="fa fa-check"></i><b>3.11</b> Project 4: Technical Documenation</a><ul>
 <li class="chapter" data-level="3.11.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#code"><i class="fa fa-check"></i><b>3.11.1</b> <code>&lt;code&gt;</code></a></li>
@@ -198,6 +199,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.1.6" data-path="front-end-libraries.html"><a href="front-end-libraries.html#font-awesome"><i class="fa fa-check"></i><b>4.1.6</b> Font awesome</a></li>
 <li class="chapter" data-level="4.1.7" data-path="front-end-libraries.html"><a href="front-end-libraries.html#create-a-bootstrap-layout."><i class="fa fa-check"></i><b>4.1.7</b> Create a bootstrap layout.</a></li>
 <li class="chapter" data-level="4.1.8" data-path="front-end-libraries.html"><a href="front-end-libraries.html#class-targeting"><i class="fa fa-check"></i><b>4.1.8</b> Class targeting</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="front-end-libraries.html"><a href="front-end-libraries.html#jquery"><i class="fa fa-check"></i><b>4.2</b> jQuery</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="front-end-libraries.html"><a href="front-end-libraries.html#methods"><i class="fa fa-check"></i><b>4.2.1</b> Methods</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -759,8 +763,13 @@ pairElement(&quot;GCG&quot;);</code></pre></li>
 <li>decompose the input string to an array</li>
 <li>loop through each entry, if it matches return true and push the element onto a regex exp</li>
 <li>when it returns false we return that letter</li>
+<li>abandoning the above approach ^</li>
+<li>find the starting index in the alphabet string by using <code>.findIndex</code></li>
+<li><code>slice</code> the alphabet string from index to str.length</li>
+<li>compare each value, if false return it</li>
 </ul>
-<pre><code>function fearNotLetter(str) {
+<pre><code>// First attempt that didn&#39;t work 
+function fearNotLetter(str) {
   const alphabet = &quot;abcdefghijklmnopqrstuvwxyz&quot;; 
   let letters = str.split(&#39;&#39;);
   for (let i=0; i &lt; letters.length; i++) {
@@ -773,6 +782,21 @@ pairElement(&quot;GCG&quot;);</code></pre></li>
   return undefined;
 }
 fearNotLetter(&quot;abce&quot;);</code></pre>
+<pre><code>// Second attempt
+function fearNotLetter(str) {
+  let alphabet = &quot;abcdefghijklmnopqrstuvwxyz&quot;.split(&#39;&#39;);
+  let start = alphabet.findIndex(el =&gt; el === str.charAt(0)); 
+  let key = alphabet.slice(start, start + str.length);
+  let letters = str.split(&#39;&#39;);
+
+  for (let i = 0; i &lt; letters.length; i++) {
+    if (letters[i] !== key[i]) {
+      return key[i];
+    }
+  }
+  return undefined;
+}
+console.log(fearNotLetter(&quot;abce&quot;));</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Check if the predicate (second argument) is truthy on all elements of a collection (first argument). In other words, you are given an array collection of objects. The predicate pre will be an object property and you need to return true if its value is truthy. Otherwise, return false.</li>
 </ol>

@@ -957,6 +957,226 @@ Use the following code to fix an object in place - usually reservered for menus.
 position: fixed;
 ```
 
+### Project Code 
+
+```
+<style>
+header {
+  position: fixed;
+}
+
+body {
+  font-family: Sans-serif; 
+}
+
+section {
+  padding-top: 80px;
+  text-align: center;
+}
+
+div {
+  display: flex;
+}
+
+.block_display {
+  display: block;
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  /* remove styling from the list */
+  list-style-type: none;
+  margin-top: 0;
+  margin-right: 0;
+  padding-top: 10px;
+}
+
+
+a li {
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.4em;
+  padding-right: 30px;
+  color: black;
+}
+
+input {
+  width: 200px;
+  height: 24px;
+  margin-top: 10px;
+  padding: 3px;
+}
+
+.hello {
+  border-radius: 10px;
+  width: 100px;
+  padding: 3px;
+}
+
+i {
+  color: #e67e22;
+  padding: 8px 20px 0 0; 
+}
+
+.flex-container {
+  flex-direction: row; 
+}
+
+.company-name {
+  font-size: 1.8em;
+  font-family: Tangerine;
+  padding-top: 10px;
+  text-shadow: 4px 4px 4px #aaa;
+  width: 55vw; 
+}
+
+.middle-home-page {
+  flex-direction: column; 
+}
+
+.company-motto {
+  padding-top: 80px;
+  font-size: 1.75em;
+  width: 100vw;
+  justify-content: center;
+}
+
+.email-box {
+  justify-content: center;
+  width: 100vw;
+}
+
+.btn_lets_go {
+  justify-content: center;
+  padding-top: 10px; 
+}
+
+.grid-container {
+  padding-top: 80px;
+  display: grid; 
+  grid-template-columns: auto 50vw; 
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: left;
+}
+
+/* Select the child <div> elements of the .grid_container class */
+.grid-container div {
+  padding-top: 25px;
+}
+
+.hide {
+  z-index: 0; 
+  width: 0;
+  height: 0;
+}
+
+#pricing {
+  display: flex;
+}
+
+#flask1, #flask2, #flask3 {
+  display: block;
+  margin: 15px;
+  border: 1px solid black; 
+  flex-direction: row;
+  width: calc(100%/3);
+}
+
+#flask1-h2, #flask2-h2, #flask3-h2 {
+  background: #f0f0f5;
+  padding: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
+</style>
+<head>
+  <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine">
+  <link href="https://unpkg.com/ionicons@4.4.8/dist/css/ionicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <header id='header'>
+    <div class='flex-container'>
+    <div>
+      <i class="fa fa-rebel fa-2x" aria-hidden="true"></i>
+      <img src='https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3684893.jpg' id='header-img' class='hide'>
+    </div>
+    <div class='company-name'>
+      HydroFlask 
+    </div>
+      <nav id='nav-bar'>
+        <ul>
+          <a href='#features' alt='features' class='nav-link'><li>Features</li></a>
+          <a href='#how-it-works' alt='how-it-works' class='nav-link'><li>How it works</li></a>
+          <a href='#pricing' alt='pricing' class='nav-link'><li>Pricing</li></a>
+        </ul>
+      </nav>
+      </header>
+    <main>
+    </section>
+   <div class='middle-home-page'>
+    <div class='company-motto'>
+      Handcrafted, homemade, water bottles 
+    </div>
+   <form id='form' action='https://www.freecodecamp.com/email-submit'>
+    <div class='email-box'>
+      <input type='email' placeholder='Enter your email address' id='email' name='email' required>
+    </div>
+    <div class='btn_lets_go'>
+      <input type='submit' id='submit' value= 'Get Started' class='hello'>
+    </div>
+     </form>
+  </div>
+  <section class='grid-container' id='features'>
+    <div><i class="fa fa-superpowers fa-4x" aria-hidden="true"></i>
+</div>
+    <div class='block_display'><h2>Benefits</h2><p>Drinking from hydroflasks is guaranteed to give you one random superpower or your money back. Superpowers include hydration (this is the most commonly bestowed power).</p></div>
+    <div><i class="fa fa-rocket fa-4x" aria-hidden="true"></i>
+</div>
+    <div class='block_display'><h2>Fast Shipping!</h2><p>The instant you order we'll personally send a staff member on an oddyssey of great personal peril to hand-deliver your new HydroFlask.</p></div>
+    <div><i class="fa fa-eercast fa-4x" aria-hidden="true"></i>
+</div>
+    <div class='block_display'><h2>Quality Assurance</h2><p>For every purchase you make, we will ensure there are no damages or faults and we will check and test the pitch of your instrument.</p></div>
+    </section>
+    <section id='how-it-works'>
+      <iframe id='video' width="560" height="315" src="https://www.youtube.com/embed/tQANVXppDPE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </section>
+    <section id='pricing'>
+      <div id='flask1'>
+        <div id='flask1-h2'><h2>Basic Flask</h2></div>
+        <ul id='flask-list1'>
+          <li>46 oz. of liquid storage space</li>
+          <li>Keeps contents at constant temperature</li>
+          <li>Best flask for beginners</li>
+        </ul>
+      </div>
+      <div id='flask2'>
+        <div id='flask2-h2'><h2>Deluxe Flask</h2></div>
+      </div>
+      <div id='flask3'>
+        <div id='flask3-h2'><h2>Uber Flask</h2></div>
+      </div>
+    </section>
+  </main>
+</body>
+```
+
 
 ## Project 4: Technical Documenation 
 

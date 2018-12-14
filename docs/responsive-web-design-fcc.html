@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-13">
+<meta name="date" content="2018-12-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -183,6 +183,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-3-project-landing-page"><i class="fa fa-check"></i><b>3.10</b> Project 3: Project Landing Page</a><ul>
 <li class="chapter" data-level="3.10.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#fixed-navbar"><i class="fa fa-check"></i><b>3.10.1</b> fixed navbar</a></li>
+<li class="chapter" data-level="3.10.2" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-code-2"><i class="fa fa-check"></i><b>3.10.2</b> Project Code</a></li>
 </ul></li>
 <li class="chapter" data-level="3.11" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#project-4-technical-documenation"><i class="fa fa-check"></i><b>3.11</b> Project 4: Technical Documenation</a><ul>
 <li class="chapter" data-level="3.11.1" data-path="responsive-web-design-fcc.html"><a href="responsive-web-design-fcc.html#code"><i class="fa fa-check"></i><b>3.11.1</b> <code>&lt;code&gt;</code></a></li>
@@ -198,6 +199,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.1.6" data-path="front-end-libraries.html"><a href="front-end-libraries.html#font-awesome"><i class="fa fa-check"></i><b>4.1.6</b> Font awesome</a></li>
 <li class="chapter" data-level="4.1.7" data-path="front-end-libraries.html"><a href="front-end-libraries.html#create-a-bootstrap-layout."><i class="fa fa-check"></i><b>4.1.7</b> Create a bootstrap layout.</a></li>
 <li class="chapter" data-level="4.1.8" data-path="front-end-libraries.html"><a href="front-end-libraries.html#class-targeting"><i class="fa fa-check"></i><b>4.1.8</b> Class targeting</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="front-end-libraries.html"><a href="front-end-libraries.html#jquery"><i class="fa fa-check"></i><b>4.2</b> jQuery</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="front-end-libraries.html"><a href="front-end-libraries.html#methods"><i class="fa fa-check"></i><b>4.2.1</b> Methods</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -1190,6 +1194,224 @@ input {
 <h3><span class="header-section-number">3.10.1</span> fixed navbar</h3>
 <p>Use the following code to fix an object in place - usually reservered for menus.</p>
 <pre><code>position: fixed;</code></pre>
+</div>
+<div id="project-code-2" class="section level3">
+<h3><span class="header-section-number">3.10.2</span> Project Code</h3>
+<pre><code>&lt;style&gt;
+header {
+  position: fixed;
+}
+
+body {
+  font-family: Sans-serif; 
+}
+
+section {
+  padding-top: 80px;
+  text-align: center;
+}
+
+div {
+  display: flex;
+}
+
+.block_display {
+  display: block;
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  /* remove styling from the list */
+  list-style-type: none;
+  margin-top: 0;
+  margin-right: 0;
+  padding-top: 10px;
+}
+
+
+a li {
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.4em;
+  padding-right: 30px;
+  color: black;
+}
+
+input {
+  width: 200px;
+  height: 24px;
+  margin-top: 10px;
+  padding: 3px;
+}
+
+.hello {
+  border-radius: 10px;
+  width: 100px;
+  padding: 3px;
+}
+
+i {
+  color: #e67e22;
+  padding: 8px 20px 0 0; 
+}
+
+.flex-container {
+  flex-direction: row; 
+}
+
+.company-name {
+  font-size: 1.8em;
+  font-family: Tangerine;
+  padding-top: 10px;
+  text-shadow: 4px 4px 4px #aaa;
+  width: 55vw; 
+}
+
+.middle-home-page {
+  flex-direction: column; 
+}
+
+.company-motto {
+  padding-top: 80px;
+  font-size: 1.75em;
+  width: 100vw;
+  justify-content: center;
+}
+
+.email-box {
+  justify-content: center;
+  width: 100vw;
+}
+
+.btn_lets_go {
+  justify-content: center;
+  padding-top: 10px; 
+}
+
+.grid-container {
+  padding-top: 80px;
+  display: grid; 
+  grid-template-columns: auto 50vw; 
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: left;
+}
+
+/* Select the child &lt;div&gt; elements of the .grid_container class */
+.grid-container div {
+  padding-top: 25px;
+}
+
+.hide {
+  z-index: 0; 
+  width: 0;
+  height: 0;
+}
+
+#pricing {
+  display: flex;
+}
+
+#flask1, #flask2, #flask3 {
+  display: block;
+  margin: 15px;
+  border: 1px solid black; 
+  flex-direction: row;
+  width: calc(100%/3);
+}
+
+#flask1-h2, #flask2-h2, #flask3-h2 {
+  background: #f0f0f5;
+  padding: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
+&lt;/style&gt;
+&lt;head&gt;
+  &lt;link rel=&quot;stylesheet&quot;
+          href=&quot;https://fonts.googleapis.com/css?family=Tangerine&quot;&gt;
+  &lt;link href=&quot;https://unpkg.com/ionicons@4.4.8/dist/css/ionicons.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header id=&#39;header&#39;&gt;
+    &lt;div class=&#39;flex-container&#39;&gt;
+    &lt;div&gt;
+      &lt;i class=&quot;fa fa-rebel fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+      &lt;img src=&#39;https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3684893.jpg&#39; id=&#39;header-img&#39; class=&#39;hide&#39;&gt;
+    &lt;/div&gt;
+    &lt;div class=&#39;company-name&#39;&gt;
+      HydroFlask 
+    &lt;/div&gt;
+      &lt;nav id=&#39;nav-bar&#39;&gt;
+        &lt;ul&gt;
+          &lt;a href=&#39;#features&#39; alt=&#39;features&#39; class=&#39;nav-link&#39;&gt;&lt;li&gt;Features&lt;/li&gt;&lt;/a&gt;
+          &lt;a href=&#39;#how-it-works&#39; alt=&#39;how-it-works&#39; class=&#39;nav-link&#39;&gt;&lt;li&gt;How it works&lt;/li&gt;&lt;/a&gt;
+          &lt;a href=&#39;#pricing&#39; alt=&#39;pricing&#39; class=&#39;nav-link&#39;&gt;&lt;li&gt;Pricing&lt;/li&gt;&lt;/a&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+      &lt;/header&gt;
+    &lt;main&gt;
+    &lt;/section&gt;
+   &lt;div class=&#39;middle-home-page&#39;&gt;
+    &lt;div class=&#39;company-motto&#39;&gt;
+      Handcrafted, homemade, water bottles 
+    &lt;/div&gt;
+   &lt;form id=&#39;form&#39; action=&#39;https://www.freecodecamp.com/email-submit&#39;&gt;
+    &lt;div class=&#39;email-box&#39;&gt;
+      &lt;input type=&#39;email&#39; placeholder=&#39;Enter your email address&#39; id=&#39;email&#39; name=&#39;email&#39; required&gt;
+    &lt;/div&gt;
+    &lt;div class=&#39;btn_lets_go&#39;&gt;
+      &lt;input type=&#39;submit&#39; id=&#39;submit&#39; value= &#39;Get Started&#39; class=&#39;hello&#39;&gt;
+    &lt;/div&gt;
+     &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;section class=&#39;grid-container&#39; id=&#39;features&#39;&gt;
+    &lt;div&gt;&lt;i class=&quot;fa fa-superpowers fa-4x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+    &lt;div class=&#39;block_display&#39;&gt;&lt;h2&gt;Benefits&lt;/h2&gt;&lt;p&gt;Drinking from hydroflasks is guaranteed to give you one random superpower or your money back. Superpowers include hydration (this is the most commonly bestowed power).&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;i class=&quot;fa fa-rocket fa-4x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+    &lt;div class=&#39;block_display&#39;&gt;&lt;h2&gt;Fast Shipping!&lt;/h2&gt;&lt;p&gt;The instant you order we&#39;ll personally send a staff member on an oddyssey of great personal peril to hand-deliver your new HydroFlask.&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;i class=&quot;fa fa-eercast fa-4x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+    &lt;div class=&#39;block_display&#39;&gt;&lt;h2&gt;Quality Assurance&lt;/h2&gt;&lt;p&gt;For every purchase you make, we will ensure there are no damages or faults and we will check and test the pitch of your instrument.&lt;/p&gt;&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section id=&#39;how-it-works&#39;&gt;
+      &lt;iframe id=&#39;video&#39; width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/tQANVXppDPE&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+    &lt;/section&gt;
+    &lt;section id=&#39;pricing&#39;&gt;
+      &lt;div id=&#39;flask1&#39;&gt;
+        &lt;div id=&#39;flask1-h2&#39;&gt;&lt;h2&gt;Basic Flask&lt;/h2&gt;&lt;/div&gt;
+        &lt;ul id=&#39;flask-list1&#39;&gt;
+          &lt;li&gt;46 oz. of liquid storage space&lt;/li&gt;
+          &lt;li&gt;Keeps contents at constant temperature&lt;/li&gt;
+          &lt;li&gt;Best flask for beginners&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div id=&#39;flask2&#39;&gt;
+        &lt;div id=&#39;flask2-h2&#39;&gt;&lt;h2&gt;Deluxe Flask&lt;/h2&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id=&#39;flask3&#39;&gt;
+        &lt;div id=&#39;flask3-h2&#39;&gt;&lt;h2&gt;Uber Flask&lt;/h2&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;</code></pre>
 </div>
 </div>
 <div id="project-4-technical-documenation" class="section level2">

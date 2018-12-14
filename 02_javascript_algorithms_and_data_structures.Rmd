@@ -583,8 +583,13 @@ pairElement("GCG");
 - decompose the input string to an array
 - loop through each entry, if it matches return true and push the element onto a regex exp
 - when it returns false we return that letter
+- abandoning the above approach ^ 
+- find the starting index in the alphabet string by using `.findIndex` 
+- `slice` the alphabet string from index to str.length 
+- compare each value, if false return it 
 
 ```
+// First attempt that didn't work 
 function fearNotLetter(str) {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"; 
   let letters = str.split('');
@@ -598,6 +603,24 @@ function fearNotLetter(str) {
   return undefined;
 }
 fearNotLetter("abce");
+```
+
+```
+// Second attempt
+function fearNotLetter(str) {
+  let alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+  let start = alphabet.findIndex(el => el === str.charAt(0)); 
+  let key = alphabet.slice(start, start + str.length);
+  let letters = str.split('');
+
+  for (let i = 0; i < letters.length; i++) {
+    if (letters[i] !== key[i]) {
+      return key[i];
+    }
+  }
+  return undefined;
+}
+console.log(fearNotLetter("abce"));
 ```
 
 9. Check if the predicate (second argument) is truthy on all elements of a collection (first argument). In other words, you are given an array collection of objects. The predicate pre will be an object property and you need to return true if its value is truthy. Otherwise, return false.

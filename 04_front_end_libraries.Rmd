@@ -111,3 +111,60 @@ Sometimes we apply classes to html elements without any CSS styling to select th
 ```
 <button class="btn btn-default target"></button>
 ```
+
+<hr>
+
+## jQuery
+jQuery is one of the many libraries for JavaScript. It is designed to simplify scripting done on the client side. jQuery's most recognizable characteristic is its dollar sign ($) syntax. With it, you can easily manipulate elements, create animations and handle input events.
+
+Add the following code to the top of the HTML document to initialize jQuery: 
+```
+<script>$(document).ready(function() {
+});
+</script>
+```
+
+### Methods 
+#### selector 
+All jQuery functions start with a $, usually referred to as a dollar sign operator, or as bling.
+jQuery often selects an HTML element with a selector, then does something to that element. For example, let's make all of the button elements bounce. 
+```
+<script>
+  $(document).ready(function() {
+  $("button").addClass("animated bounce");
+  });
+</script>
+```
+
+We can target a classes and ids by using the same `.` and `#` syntax: 
+```
+$('.class-name').addClass('animated shake');
+$("#target3").addClass("animated fadeOut");
+```
+
+#### Change CSS
+We can change the CSS of an element by using the `.css()` function. 
+```
+$('#target1').css('color', 'blue');
+``` 
+
+#### Change properties
+jQuery has a function called `.prop()` that allows you to adjust the properties of elements.
+Here's how you would disable all buttons:
+```
+$("button").prop("disabled", true);
+```
+
+#### Change text inside elements
+jQuery has a function called `.html()` that lets you add HTML tags and text within an element. Any content previously within the element will be completely replaced with the content you provide using this function.
+```
+$("h3").html("<em>jQuery Playground</em>");
+```
+jQuery also has a similar function called .text() that only alters text without adding tags. In other words, this function will not evaluate any HTML tags passed to it, but will instead treat it as the text you want to replace the existing content with.
+
+
+#### remove elements 
+We can remove elements by using the `.remove()` function. 
+```
+$('#target4').remove();
+```
