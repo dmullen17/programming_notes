@@ -395,6 +395,37 @@ $(&quot;#target3&quot;).addClass(&quot;animated fadeOut&quot;);</code></pre>
 <h4><span class="header-section-number">4.2.1.5</span> remove elements</h4>
 <p>We can remove elements by using the <code>.remove()</code> function.</p>
 <pre><code>$(&#39;#target4&#39;).remove();</code></pre>
+</div>
+<div id="move-elements" class="section level4">
+<h4><span class="header-section-number">4.2.1.6</span> move elements</h4>
+<p>jQuery has a function called <code>appendTo()</code> that allows you to select HTML elements and append them to another element.</p>
+<pre><code>$(&#39;.class&#39;).appendTo(&#39;#id&#39;)</code></pre>
+</div>
+<div id="clone-elements" class="section level4">
+<h4><span class="header-section-number">4.2.1.7</span> clone elements</h4>
+<p>jQuery has a function called <code>clone()</code> that makes a copy of an element. We can use this in conjunction with <code>appendTo()</code> to copy-paste elements</p>
+<pre><code>$(&#39;#id&#39;).clone().appendTo(&#39;.class&#39;)</code></pre>
+</div>
+<div id="parent-function" class="section level4">
+<h4><span class="header-section-number">4.2.1.8</span> parent function</h4>
+<p>jQuery has a function called <code>parent()</code> that accesses the parent of the selected element. This examples changes the parent’s background color</p>
+<pre><code>$(&#39;.class&#39;).parent().css(&#39;background-color&#39;, &#39;blue)</code></pre>
+</div>
+<div id="children-function" class="section level4">
+<h4><span class="header-section-number">4.2.1.9</span> children function</h4>
+<p>jQuery has a function called <code>children()</code> that allows you to access the children of whichever element you’ve selected.</p>
+<pre><code>$(&quot;#left-well&quot;).children().css(&quot;color&quot;, &quot;blue&quot;)</code></pre>
+</div>
+<div id="css-selectors" class="section level4">
+<h4><span class="header-section-number">4.2.1.10</span> CSS Selectors</h4>
+<p>jQuery uses CSS Selectors to target elements. The <code>target:nth-child(n)</code> CSS selector allows you to select all the nth elements with the target class or element type. NOTE: you don’t select the parent element - you specify the class you’re targeting and nth-child specifies what index you want. A better name for this would be <code>nth-index</code>. NOTE: this will also select that index for every grouping of these classes. If, for instance, there are two lists and you want the second item, this will select the second item in BOTH lists.</p>
+<pre><code>$(&quot;.target:nth-child(3)&quot;).addClass(&quot;animated bounce&quot;);</code></pre>
+<p>We can also target even or odd elements (based on index) with similar syntax:</p>
+<pre><code>$(&quot;.target:odd&quot;).addClass(&quot;animated shake&quot;);</code></pre>
+</div>
+<div id="hilarious-page-animation" class="section level4">
+<h4><span class="header-section-number">4.2.1.11</span> Hilarious page animation</h4>
+<pre><code>    $(&#39;body&#39;).addClass(&#39;animated hinge&#39;)</code></pre>
 
 </div>
 </div>

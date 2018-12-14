@@ -168,3 +168,42 @@ We can remove elements by using the `.remove()` function.
 ```
 $('#target4').remove();
 ```
+
+#### move elements
+jQuery has a function called `appendTo()` that allows you to select HTML elements and append them to another element.
+```
+$('.class').appendTo('#id')
+```
+
+#### clone elements 
+jQuery has a function called `clone()` that makes a copy of an element. We can use this in conjunction with `appendTo()` to copy-paste elements 
+```
+$('#id').clone().appendTo('.class')
+```
+
+#### parent function
+jQuery has a function called `parent()` that accesses the parent of the selected element.  This examples changes the parent's background color 
+```
+$('.class').parent().css('background-color', 'blue)
+```
+
+#### children function 
+jQuery has a function called `children()` that allows you to access the children of whichever element you've selected.
+```
+$("#left-well").children().css("color", "blue")
+```
+
+#### CSS Selectors 
+jQuery uses CSS Selectors to target elements. The `target:nth-child(n)` CSS selector allows you to select all the nth elements with the target class or element type. NOTE: you don't select the parent element - you specify the class you're targeting and nth-child specifies what index you want.  A better name for this would be `nth-index`.  NOTE: this will also select that index for every grouping of these classes.  If, for instance, there are two lists and you want the second item, this will select the second item in BOTH lists.  
+```
+$(".target:nth-child(3)").addClass("animated bounce");
+```
+We can also target even or odd elements (based on index) with similar syntax: 
+```
+$(".target:odd").addClass("animated shake");
+```
+
+#### Hilarious page animation 
+```
+    $('body').addClass('animated hinge')
+```
