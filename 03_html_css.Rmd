@@ -575,6 +575,48 @@ background: BlanchedAlmond;
 */
 ```
 
+## Useful Code Snippets: 
+These are code snippets I've re-used that are quite useful. 
+
+### Center a div inside a section 
+```
+.center-text-in-image {
+    position: absolute;
+    width: 1140px; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*moves image back by 50% of width and height*/
+}
+```
+
+### Create a background image 
+
+```
+#welcome-section {
+  background: linear-gradient(rgba(0, 0, 0, .7),               rgba(0, 0, 0, .7)), url(http://assets.vg247.com/current//2015/08/jax_4_concept_art-3.jpg);
+  height: 100vh;
+  background-position: center; 
+  background-size: cover; /* re-size image based on window */
+  background-attachment: fixed; /*image stays in   the same place when you scroll */
+  color: white;
+}
+```
+
+### Create an underline psuedoclass for headers 
+
+```
+h2:after {
+/* Appears after the h2 class, after = psuedoclass */
+    display:block; 
+    height: 2px; 
+    background-color: var(--orange);
+    content: ' '; /* required for an after psuedoclass */
+    width: 100px; 
+    margin: 0 auto 0 auto /* centers it */;
+    margin-top: 30px;
+}
+```
+
 ## Project 1: Build a Tribute Page
 
 ### vertical line spacing between <li> items 
