@@ -359,3 +359,386 @@ We can import the properties from one class to another class if we wish to add o
   font-size: 2em;
 }
 ```
+
+<hr>
+
+
+## React 
+React, popularized by Facebook, is an open-source JavaScript library for building user interfaces. It is used to create components, handle state and props, utilize event listeners and certain life cycle methods to update data as it changes. React combines HTML with JavaScript functionality to create its own markup language, JSX. This section will introduce you to all of these concepts and how to implement them for use with your own projects.
+  
+Intro: React is an Open Source view library created and maintained by Facebook. It's a great tool to render the User Interface (UI) of modern web applications.
+  
+React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable. For the most part, JSX is similar to the HTML that you have already learned, however there are a few key differences that will be covered throughout these challenges.
+  
+For instance, because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: { 'this is treated as JavaScript code' }. Keep this in mind, since it's used in several future challenges.
+  
+However, because JSX is not valid JavaScript, JSX code must be compiled into JavaScript. The transpiler Babel is a popular tool for this process. For your convenience, it's already added behind the scenes for these challenges. If you happen to write syntactically invalid JSX, you will see the first test in these challenges fail.
+  
+It's worth noting that under the hood the challenges are calling ReactDOM.render(JSX, document.getElementById('root')). This function call is what places your JSX into React's own lightweight representation of the DOM. React then uses snapshots of its own DOM to optimize updating only specific parts of the actual DOM.  
+
+### Complex element 
+Elements must be transpiled as single elements.  Therefore if you have multiple elements they must be wrapped in a single parent element. The following is invalid JSX (it needs to be wrapped in a `div` parent): 
+```
+<p>Paragraph One</p>
+<p>Paragraph Two</p>
+<p>Paragraph Three</p>
+```
+We can optionally wrap these declarations in parentheses - though it is considered good practice to do so. 
+
+### Comments 
+To add comments we use the following syntax: `{/* */}`
+
+### Render HTML elements to the DOM
+ReactDOM.render(componentToRender, targetNode), where the first argument is the React element or component that you want to render, and the second argument is the DOM node that you want to render the component to.
+```
+const JSX = (
+  <div>
+    <h1>Hello World</h1>
+    <p>Lets render this to the DOM</p>
+  </div>
+);
+ReactDOM.render(JSX, document.getElementById('challenge-node'));
+```
+
+### Classes in JSX 
+These declarations are slightly different because "class" is a reserved word in JS.  Instead we use "className" to define classes in JSX. The naming convention switches to camel case also - onclick becomes onClick, onchange to onChange, etc. 
+```
+const JSX = (
+  <div className='myDiv'>
+    <h1>Add a class to this div</h1>
+  </div>
+);
+```
+
+### Self-closing tags
+In html we can use some elements that don't include a closing tag like `<br>`.  In JSX all elements must either be followed by a closing tag or be written in self-closing format `<br>` --> `<br />`.  
+```
+const JSX = (
+  <div>
+    <h2>Welcome to React!</h2> <br />
+    <p>Be sure to close all tags!</p>
+    <hr />
+  </div>
+);
+```
+
+### Components 
+Components are the core of React. Everything in React is a component. There are two ways to create a React component. The first way is to use a JavaScript function. Defining a component in this way creates a stateless functional component. A stateless component is one that can receive data and render it, but does not manage or track changes to that data. To create a component with a function, you simply write a JavaScript function that returns either JSX or null. One important thing to note is that React requires your function name to begin with a capital letter.
+  
+Because a JSX component represents HTML, you could put several components together to create a more complex HTML page. This is one of the key advantages of the component architecture React provides. It allows you to compose your UI from many separate, isolated components. This makes it easier to build and maintain complex user interfaces.
+```
+const MyComponent = function() {
+  // change code below this line
+  return (
+    <div>dummy text</div>
+  );
+}
+```
+
+#### Create a componenet with ES6 syntax 
+```
+class Kitten extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <h1>Hi</h1>
+    );
+  }
+}
+```
+This creates an ES6 class Kitten which extends the React.Component class. So the Kitten class now has access to many useful React features, such as local state and lifecycle hooks.
+  
+Also notice the Kitten class has a constructor defined within it that calls super(). It uses super() to call the constructor of the parent class, in this case React.Component. The constructor is a special method used during the initialization of objects that are created with the class keyword. It is best practice to call a component's constructor with super, and pass props to both. This makes sure the component is initialized properly.
+
+#### Composition
+We can put multiple components together into one - for instance navbar, dashboard, and footer components.  To compose then together we create a parent component that calls then.  They are called using self-closing JSX tag syntax. 
+```
+return (
+<App>
+  <Navbar />
+  <Dashboard />
+  <Footer />
+</App>
+)
+```
+
++ More extensive example: 
+
+```
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the child</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>I am the parent</h1>
+        { /* change code below this line */ }
+
+          <ChildComponent />
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+
++ Even more extensive example: 
+
+```
+const TypesOfFruit = () => {
+  return (
+    <div>
+      <h2>Fruits:</h2>
+      <ul>
+        <li>Apples</li>
+        <li>Blueberries</li>
+        <li>Strawberries</li>
+        <li>Bananas</li>
+      </ul>
+    </div>
+  );
+};
+
+const Fruits = () => {
+  return (
+    <div>
+      { /* change code below this line */ }
+      <TypesOfFruit />
+      { /* change code above this line */ }
+    </div>
+  );
+};
+
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        { /* change code below this line */ }
+          <Fruits />
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+
+#### Render components 
+React components are passed into `ReactDOM.render()` a little differently than JSX elements. For JSX elements, you pass in the name of the element that you want to render. However, for React components, you need to use the same syntax as if you were rendering a nested component, for example `ReactDOM.render(<ComponentToRender />, targetNode)`. You use this syntax for both ES6 class components and functional components.
+
+#### Props 
+In React, you can pass props, or properties, to child components. Say you have an App component which renders a child component called `Welcome` that is a stateless functional component. You can pass `Welcome` a user property by writing:
+```
+<App>
+  <Welcome user='Mark' />
+</App>
+```
+You use custom HTML attributes that React provides support for to pass the property `user` to the component `Welcome`. Since `Welcome` is a stateless functional component, it has access to this value like so:
+```
+const Welcome = (props) => <h1>Hello, {props.user}!</h1>
+```
+
++ Example (pass information from a parent to a child through props): 
+
+```
+const CurrentDate = (props) => {
+  return (
+    <div>
+      { /* change code below this line */ }
+      <p>The current date is: {props.date}</p>
+      { /* change code above this line */ }
+    </div>
+  );
+};
+
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>What date is it?</h3>
+        { /* change code below this line */ }
+        <CurrentDate date={Date()}/>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+
++ Pass an array in as a prop.  We can call methods in the child component, in this case we call `join`
+
+```
+const List= (props) => {
+  { /* change code below this line */ }
+  return <p>{props.tasks.join(", ")}</p>
+  { /* change code above this line */ }
+};
+
+class ToDo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>To Do Lists</h1>
+        <h2>Today</h2>
+        { /* change code below this line */ }
+        <List tasks={['hackathon', 'React', 'exercise']}/>
+        <h2>Tomorrow</h2>
+        <List tasks={['gym', 'redux', 'eat']}/>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+
+#### Default Props 
+We can set default properties using the following syntax.  These are good for initial values. 
+```
+const ShoppingCart = (props) => {
+  return (
+    <div>
+      <h1>Shopping Cart Component</h1>
+    </div>
+  )
+};
+// change code below this line
+ShoppingCart.defaultProps = {items: 0}
+```
+
+#### PropTypes
+We can specify what kind of type a property should. If the wrong input is passed into it then it will throw a helpful warning. As of React v15.5.0, PropTypes is imported independently from React, like this: `import React, { PropTypes } from 'react';`
+```
+Items.defaultProps = {
+  quantity: 0
+};
+Items.propTypes = {quantity: PropTypes.number.isRequired};
+```
+
+#### Props in ES6 class component
+Anytime you refer to a class component within itself, you use the this keyword. To access props within a class component, you preface the code that you use to access it with `this`. For example, if an ES6 class component has a prop called data, you write {this.props.data} in JSX.
+
++ Example: 
+
+```
+class ReturnTempPassword extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+  render() {
+    return (
+        <div>
+            { /* change code below this line */ }
+            <p>Your temporary password is: <strong>{this.props.tempPassword}</strong></p>
+            { /* change code above this line */ }
+        </div>
+    );
+  }
+};
+
+class ResetPassword extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+  render() {
+    return (
+        <div>
+          <h2>Reset Password</h2>
+          <h3>We've generated a new temporary password for you.</h3>
+          <h3>Please reset this password from your account settings ASAP.</h3>
+          { /* change code below this line */ }
+            <ReturnTempPassword tempPassword='hellocow'/>
+          { /* change code above this line */ }
+        </div>
+    );
+  }
+};
+```
+
+
+A stateless functional component is any function you write which accepts props and returns JSX. A stateless component, on the other hand, is a class that extends React.Component, but does not use internal state (covered in the next challenge). Finally, a stateful component is any component that does maintain its own internal state. You may see stateful components referred to simply as components or React components.
+
+A common pattern is to try to minimize statefulness and to create stateless functional components wherever possible. This helps contain your state management to a specific area of your application. 
+
+### State
+State consists of any data your application needs to know about, that can change over time. You want your apps to respond to state changes and present an updated UI when necessary. You create state in a React component by declaring a `stat`e property on the component class in its constructor. This initializes the component with state when it is created. The state property must be set to a JavaScript object. Declaring it looks like this:
+
+```
+class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    // initialize state here
+    this.state = {
+      name: 'Dom'
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+```
+
++ Longer Defintion of State: 
+
+Once you define a component's initial state, you can display any part of it in the UI that is rendered. If a component is stateful, it will always have access to the data in state in its render() method. You can access the data with this.state.
+  
+If you want to access a state value within the return of the render method, you have to enclose the value in curly braces.
+  
+State is one of the most powerful features of components in React. It allows you to track important data in your app and render a UI in response to changes in this data. If your data changes, your UI will change. React uses what is called a virtual DOM, to keep track of changes behind the scenes. When state data updates, it triggers a re-render of the components using that data - including child components that received the data as a prop. React updates the actual DOM, but only where necessary. This means you don't have to worry about changing the DOM. You simply declare what the UI should look like.
+  
+Note that if you make a component stateful, no other components are aware of its state. Its state is completely encapsulated, or local to that component, unless you pass state data to a child component as props. This notion of encapsulated state is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.
+
+#### Access state with JS variables 
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp'
+    }
+  }
+  render() {
+    // change code below this line
+    const name = this.state.name
+    // change code above this line
+    return (
+      <div>
+        { /* change code below this line */ }
+          <h1>{name}</h1>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+
+#### Update state 
+You call the `setState` method within your component class like so: this.setState(), passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data.

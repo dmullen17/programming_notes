@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-16">
+<meta name="date" content="2018-12-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -215,6 +215,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3.4" data-path="front-end-libraries.html"><a href="front-end-libraries.html#while"><i class="fa fa-check"></i><b>4.3.4</b> while</a></li>
 <li class="chapter" data-level="4.3.5" data-path="front-end-libraries.html"><a href="front-end-libraries.html#partials"><i class="fa fa-check"></i><b>4.3.5</b> Partials</a></li>
 <li class="chapter" data-level="4.3.6" data-path="front-end-libraries.html"><a href="front-end-libraries.html#extend"><i class="fa fa-check"></i><b>4.3.6</b> extend</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="front-end-libraries.html"><a href="front-end-libraries.html#react"><i class="fa fa-check"></i><b>4.4</b> React</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="front-end-libraries.html"><a href="front-end-libraries.html#complex-element"><i class="fa fa-check"></i><b>4.4.1</b> Complex element</a></li>
+<li class="chapter" data-level="4.4.2" data-path="front-end-libraries.html"><a href="front-end-libraries.html#comments"><i class="fa fa-check"></i><b>4.4.2</b> Comments</a></li>
+<li class="chapter" data-level="4.4.3" data-path="front-end-libraries.html"><a href="front-end-libraries.html#render-html-elements-to-the-dom"><i class="fa fa-check"></i><b>4.4.3</b> Render HTML elements to the DOM</a></li>
+<li class="chapter" data-level="4.4.4" data-path="front-end-libraries.html"><a href="front-end-libraries.html#classes-in-jsx"><i class="fa fa-check"></i><b>4.4.4</b> Classes in JSX</a></li>
+<li class="chapter" data-level="4.4.5" data-path="front-end-libraries.html"><a href="front-end-libraries.html#self-closing-tags"><i class="fa fa-check"></i><b>4.4.5</b> Self-closing tags</a></li>
+<li class="chapter" data-level="4.4.6" data-path="front-end-libraries.html"><a href="front-end-libraries.html#components"><i class="fa fa-check"></i><b>4.4.6</b> Components</a></li>
+<li class="chapter" data-level="4.4.7" data-path="front-end-libraries.html"><a href="front-end-libraries.html#state"><i class="fa fa-check"></i><b>4.4.7</b> State</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -565,7 +574,354 @@ h1 {
   width: 150px;
   font-size: 2em;
 }</code></pre>
+<hr>
+</div>
+</div>
+<div id="react" class="section level2">
+<h2><span class="header-section-number">4.4</span> React</h2>
+<p>React, popularized by Facebook, is an open-source JavaScript library for building user interfaces. It is used to create components, handle state and props, utilize event listeners and certain life cycle methods to update data as it changes. React combines HTML with JavaScript functionality to create its own markup language, JSX. This section will introduce you to all of these concepts and how to implement them for use with your own projects.</p>
+<p>Intro: React is an Open Source view library created and maintained by Facebook. It’s a great tool to render the User Interface (UI) of modern web applications.</p>
+<p>React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable. For the most part, JSX is similar to the HTML that you have already learned, however there are a few key differences that will be covered throughout these challenges.</p>
+<p>For instance, because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: { ‘this is treated as JavaScript code’ }. Keep this in mind, since it’s used in several future challenges.</p>
+<p>However, because JSX is not valid JavaScript, JSX code must be compiled into JavaScript. The transpiler Babel is a popular tool for this process. For your convenience, it’s already added behind the scenes for these challenges. If you happen to write syntactically invalid JSX, you will see the first test in these challenges fail.</p>
+<p>It’s worth noting that under the hood the challenges are calling ReactDOM.render(JSX, document.getElementById(‘root’)). This function call is what places your JSX into React’s own lightweight representation of the DOM. React then uses snapshots of its own DOM to optimize updating only specific parts of the actual DOM.</p>
+<div id="complex-element" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Complex element</h3>
+<p>Elements must be transpiled as single elements. Therefore if you have multiple elements they must be wrapped in a single parent element. The following is invalid JSX (it needs to be wrapped in a <code>div</code> parent):</p>
+<pre><code>&lt;p&gt;Paragraph One&lt;/p&gt;
+&lt;p&gt;Paragraph Two&lt;/p&gt;
+&lt;p&gt;Paragraph Three&lt;/p&gt;</code></pre>
+<p>We can optionally wrap these declarations in parentheses - though it is considered good practice to do so.</p>
+</div>
+<div id="comments" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Comments</h3>
+<p>To add comments we use the following syntax: <code>{/* */}</code></p>
+</div>
+<div id="render-html-elements-to-the-dom" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Render HTML elements to the DOM</h3>
+<p>ReactDOM.render(componentToRender, targetNode), where the first argument is the React element or component that you want to render, and the second argument is the DOM node that you want to render the component to.</p>
+<pre><code>const JSX = (
+  &lt;div&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+    &lt;p&gt;Lets render this to the DOM&lt;/p&gt;
+  &lt;/div&gt;
+);
+ReactDOM.render(JSX, document.getElementById(&#39;challenge-node&#39;));</code></pre>
+</div>
+<div id="classes-in-jsx" class="section level3">
+<h3><span class="header-section-number">4.4.4</span> Classes in JSX</h3>
+<p>These declarations are slightly different because “class” is a reserved word in JS. Instead we use “className” to define classes in JSX. The naming convention switches to camel case also - onclick becomes onClick, onchange to onChange, etc.</p>
+<pre><code>const JSX = (
+  &lt;div className=&#39;myDiv&#39;&gt;
+    &lt;h1&gt;Add a class to this div&lt;/h1&gt;
+  &lt;/div&gt;
+);</code></pre>
+</div>
+<div id="self-closing-tags" class="section level3">
+<h3><span class="header-section-number">4.4.5</span> Self-closing tags</h3>
+<p>In html we can use some elements that don’t include a closing tag like <code>&lt;br&gt;</code>. In JSX all elements must either be followed by a closing tag or be written in self-closing format <code>&lt;br&gt;</code> –&gt; <code>&lt;br /&gt;</code>.</p>
+<pre><code>const JSX = (
+  &lt;div&gt;
+    &lt;h2&gt;Welcome to React!&lt;/h2&gt; &lt;br /&gt;
+    &lt;p&gt;Be sure to close all tags!&lt;/p&gt;
+    &lt;hr /&gt;
+  &lt;/div&gt;
+);</code></pre>
+</div>
+<div id="components" class="section level3">
+<h3><span class="header-section-number">4.4.6</span> Components</h3>
+<p>Components are the core of React. Everything in React is a component. There are two ways to create a React component. The first way is to use a JavaScript function. Defining a component in this way creates a stateless functional component. A stateless component is one that can receive data and render it, but does not manage or track changes to that data. To create a component with a function, you simply write a JavaScript function that returns either JSX or null. One important thing to note is that React requires your function name to begin with a capital letter.</p>
+<p>Because a JSX component represents HTML, you could put several components together to create a more complex HTML page. This is one of the key advantages of the component architecture React provides. It allows you to compose your UI from many separate, isolated components. This makes it easier to build and maintain complex user interfaces.</p>
+<pre><code>const MyComponent = function() {
+  // change code below this line
+  return (
+    &lt;div&gt;dummy text&lt;/div&gt;
+  );
+}</code></pre>
+<div id="create-a-componenet-with-es6-syntax" class="section level4">
+<h4><span class="header-section-number">4.4.6.1</span> Create a componenet with ES6 syntax</h4>
+<pre><code>class Kitten extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
+  render() {
+    return (
+      &lt;h1&gt;Hi&lt;/h1&gt;
+    );
+  }
+}</code></pre>
+<p>This creates an ES6 class Kitten which extends the React.Component class. So the Kitten class now has access to many useful React features, such as local state and lifecycle hooks.</p>
+<p>Also notice the Kitten class has a constructor defined within it that calls super(). It uses super() to call the constructor of the parent class, in this case React.Component. The constructor is a special method used during the initialization of objects that are created with the class keyword. It is best practice to call a component’s constructor with super, and pass props to both. This makes sure the component is initialized properly.</p>
+</div>
+<div id="composition" class="section level4">
+<h4><span class="header-section-number">4.4.6.2</span> Composition</h4>
+<p>We can put multiple components together into one - for instance navbar, dashboard, and footer components. To compose then together we create a parent component that calls then. They are called using self-closing JSX tag syntax.</p>
+<pre><code>return (
+&lt;App&gt;
+  &lt;Navbar /&gt;
+  &lt;Dashboard /&gt;
+  &lt;Footer /&gt;
+&lt;/App&gt;
+)</code></pre>
+<ul>
+<li>More extensive example:</li>
+</ul>
+<pre><code>const ChildComponent = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;I am the child&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;I am the parent&lt;/h1&gt;
+        { /* change code below this line */ }
+
+          &lt;ChildComponent /&gt;
+        { /* change code above this line */ }
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+<ul>
+<li>Even more extensive example:</li>
+</ul>
+<pre><code>const TypesOfFruit = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Fruits:&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Apples&lt;/li&gt;
+        &lt;li&gt;Blueberries&lt;/li&gt;
+        &lt;li&gt;Strawberries&lt;/li&gt;
+        &lt;li&gt;Bananas&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+
+const Fruits = () =&gt; {
+  return (
+    &lt;div&gt;
+      { /* change code below this line */ }
+      &lt;TypesOfFruit /&gt;
+      { /* change code above this line */ }
+    &lt;/div&gt;
+  );
+};
+
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Types of Food:&lt;/h1&gt;
+        { /* change code below this line */ }
+          &lt;Fruits /&gt;
+        { /* change code above this line */ }
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+</div>
+<div id="render-components" class="section level4">
+<h4><span class="header-section-number">4.4.6.3</span> Render components</h4>
+<p>React components are passed into <code>ReactDOM.render()</code> a little differently than JSX elements. For JSX elements, you pass in the name of the element that you want to render. However, for React components, you need to use the same syntax as if you were rendering a nested component, for example <code>ReactDOM.render(&lt;ComponentToRender /&gt;, targetNode)</code>. You use this syntax for both ES6 class components and functional components.</p>
+</div>
+<div id="props" class="section level4">
+<h4><span class="header-section-number">4.4.6.4</span> Props</h4>
+<p>In React, you can pass props, or properties, to child components. Say you have an App component which renders a child component called <code>Welcome</code> that is a stateless functional component. You can pass <code>Welcome</code> a user property by writing:</p>
+<pre><code>&lt;App&gt;
+  &lt;Welcome user=&#39;Mark&#39; /&gt;
+&lt;/App&gt;</code></pre>
+<p>You use custom HTML attributes that React provides support for to pass the property <code>user</code> to the component <code>Welcome</code>. Since <code>Welcome</code> is a stateless functional component, it has access to this value like so:</p>
+<pre><code>const Welcome = (props) =&gt; &lt;h1&gt;Hello, {props.user}!&lt;/h1&gt;</code></pre>
+<ul>
+<li>Example (pass information from a parent to a child through props):</li>
+</ul>
+<pre><code>const CurrentDate = (props) =&gt; {
+  return (
+    &lt;div&gt;
+      { /* change code below this line */ }
+      &lt;p&gt;The current date is: {props.date}&lt;/p&gt;
+      { /* change code above this line */ }
+    &lt;/div&gt;
+  );
+};
+
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h3&gt;What date is it?&lt;/h3&gt;
+        { /* change code below this line */ }
+        &lt;CurrentDate date={Date()}/&gt;
+        { /* change code above this line */ }
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+<ul>
+<li>Pass an array in as a prop. We can call methods in the child component, in this case we call <code>join</code></li>
+</ul>
+<pre><code>const List= (props) =&gt; {
+  { /* change code below this line */ }
+  return &lt;p&gt;{props.tasks.join(&quot;, &quot;)}&lt;/p&gt;
+  { /* change code above this line */ }
+};
+
+class ToDo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;To Do Lists&lt;/h1&gt;
+        &lt;h2&gt;Today&lt;/h2&gt;
+        { /* change code below this line */ }
+        &lt;List tasks={[&#39;hackathon&#39;, &#39;React&#39;, &#39;exercise&#39;]}/&gt;
+        &lt;h2&gt;Tomorrow&lt;/h2&gt;
+        &lt;List tasks={[&#39;gym&#39;, &#39;redux&#39;, &#39;eat&#39;]}/&gt;
+        { /* change code above this line */ }
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+</div>
+<div id="default-props" class="section level4">
+<h4><span class="header-section-number">4.4.6.5</span> Default Props</h4>
+<p>We can set default properties using the following syntax. These are good for initial values.</p>
+<pre><code>const ShoppingCart = (props) =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Shopping Cart Component&lt;/h1&gt;
+    &lt;/div&gt;
+  )
+};
+// change code below this line
+ShoppingCart.defaultProps = {items: 0}</code></pre>
+</div>
+<div id="proptypes" class="section level4">
+<h4><span class="header-section-number">4.4.6.6</span> PropTypes</h4>
+<p>We can specify what kind of type a property should. If the wrong input is passed into it then it will throw a helpful warning. As of React v15.5.0, PropTypes is imported independently from React, like this: <code>import React, { PropTypes } from 'react';</code></p>
+<pre><code>Items.defaultProps = {
+  quantity: 0
+};
+Items.propTypes = {quantity: PropTypes.number.isRequired};</code></pre>
+</div>
+<div id="props-in-es6-class-component" class="section level4">
+<h4><span class="header-section-number">4.4.6.7</span> Props in ES6 class component</h4>
+<p>Anytime you refer to a class component within itself, you use the this keyword. To access props within a class component, you preface the code that you use to access it with <code>this</code>. For example, if an ES6 class component has a prop called data, you write {this.props.data} in JSX.</p>
+<ul>
+<li>Example:</li>
+</ul>
+<pre><code>class ReturnTempPassword extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+  render() {
+    return (
+        &lt;div&gt;
+            { /* change code below this line */ }
+            &lt;p&gt;Your temporary password is: &lt;strong&gt;{this.props.tempPassword}&lt;/strong&gt;&lt;/p&gt;
+            { /* change code above this line */ }
+        &lt;/div&gt;
+    );
+  }
+};
+
+class ResetPassword extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+  render() {
+    return (
+        &lt;div&gt;
+          &lt;h2&gt;Reset Password&lt;/h2&gt;
+          &lt;h3&gt;We&#39;ve generated a new temporary password for you.&lt;/h3&gt;
+          &lt;h3&gt;Please reset this password from your account settings ASAP.&lt;/h3&gt;
+          { /* change code below this line */ }
+            &lt;ReturnTempPassword tempPassword=&#39;hellocow&#39;/&gt;
+          { /* change code above this line */ }
+        &lt;/div&gt;
+    );
+  }
+};</code></pre>
+<p>A stateless functional component is any function you write which accepts props and returns JSX. A stateless component, on the other hand, is a class that extends React.Component, but does not use internal state (covered in the next challenge). Finally, a stateful component is any component that does maintain its own internal state. You may see stateful components referred to simply as components or React components.</p>
+<p>A common pattern is to try to minimize statefulness and to create stateless functional components wherever possible. This helps contain your state management to a specific area of your application.</p>
+</div>
+</div>
+<div id="state" class="section level3">
+<h3><span class="header-section-number">4.4.7</span> State</h3>
+<p>State consists of any data your application needs to know about, that can change over time. You want your apps to respond to state changes and present an updated UI when necessary. You create state in a React component by declaring a <code>stat</code>e property on the component class in its constructor. This initializes the component with state when it is created. The state property must be set to a JavaScript object. Declaring it looks like this:</p>
+<pre><code>class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    // initialize state here
+    this.state = {
+      name: &#39;Dom&#39;
+    }
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;{this.state.name}&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+<ul>
+<li>Longer Defintion of State:</li>
+</ul>
+<p>Once you define a component’s initial state, you can display any part of it in the UI that is rendered. If a component is stateful, it will always have access to the data in state in its render() method. You can access the data with this.state.</p>
+<p>If you want to access a state value within the return of the render method, you have to enclose the value in curly braces.</p>
+<p>State is one of the most powerful features of components in React. It allows you to track important data in your app and render a UI in response to changes in this data. If your data changes, your UI will change. React uses what is called a virtual DOM, to keep track of changes behind the scenes. When state data updates, it triggers a re-render of the components using that data - including child components that received the data as a prop. React updates the actual DOM, but only where necessary. This means you don’t have to worry about changing the DOM. You simply declare what the UI should look like.</p>
+<p>Note that if you make a component stateful, no other components are aware of its state. Its state is completely encapsulated, or local to that component, unless you pass state data to a child component as props. This notion of encapsulated state is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.</p>
+<div id="access-state-with-js-variables" class="section level4">
+<h4><span class="header-section-number">4.4.7.1</span> Access state with JS variables</h4>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: &#39;freeCodeCamp&#39;
+    }
+  }
+  render() {
+    // change code below this line
+    const name = this.state.name
+    // change code above this line
+    return (
+      &lt;div&gt;
+        { /* change code below this line */ }
+          &lt;h1&gt;{name}&lt;/h1&gt;
+        { /* change code above this line */ }
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+</div>
+<div id="update-state" class="section level4">
+<h4><span class="header-section-number">4.4.7.2</span> Update state</h4>
+<p>You call the <code>setState</code> method within your component class like so: this.setState(), passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data.</p>
+
+</div>
 </div>
 </div>
 </div>
