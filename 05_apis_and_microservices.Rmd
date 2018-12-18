@@ -1,0 +1,33 @@
+# APIs and microservices 
+These are my notes from the APIs and microservices [certification](https://learn.freecodecamp.org/apis-and-microservices/managing-packages-with-npm) from FreeCodeCamp! 
+
+## NPM
+The Node Package Manager (npm) is a command-line tool used by developers to share and control modules (or packages) of JavaScript code written for use with Node.js. When starting a new project, npm generates a package.json file. This file lists the package dependencies for your project. Since npm packages are regularly updated, the package.json file allows you to set specific version numbers for each dependency. This ensures that updates to a package don't break your project.
+
++ npm saves packages in a folder named nodemodules. These packages can be installed in two ways:
+    + globally in a root nodemodules folder, accessible by all projects.
+    + locally within a project's own node_modules folder, accessible only to that project.
+
+Most developers prefer to install packages local to each project to create a separation between the dependencies of different projects. 
+
+### package.json
+The file package.json is the center of any Node.js project or npm package. It stores information about your project just like the <head>-section in a HTML document describes the content of a webpage. The package.json consists of a single JSON-object where information is stored in "key": value-pairs. There are only two required fields in a minimal package.json - name and version - but it’s a good practice to provide additional information about your project that could be useful to future users or maintainers.
+```
+"author" : "Dominic Mullen",
+"description" : "learning about npm",
+"keywords": [
+  "learning", "npm", "freecodecamp", "backend"
+  ],
+"license": "MIT",
+"version": "1.5", 
+"dependencies": {
+  "moment": "~2.10.2",
+  "package": "^1.1.1"
+}
+```
+
+#### SemVer
+Semantic Versioning is an industry standard for versioning software. Given a version number MAJOR.MINOR.PATCH, increment the: MAJOR version when you make incompatible API changes, MINOR version when you add functionality in a backwards-compatible manner, and PATCH version when you make backwards-compatible bug fixes.
+
++ Including a `~` in `"moment": "~2.10.2"` allows npm to look for and install any `PATCH` fixes.
++ Including a `^` in `"moment": "^2.10.2"` allows npm to look for and install any `MINOR` fixes.
