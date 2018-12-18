@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-17">
+<meta name="date" content="2018-12-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -224,6 +224,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.5" data-path="front-end-libraries.html"><a href="front-end-libraries.html#self-closing-tags"><i class="fa fa-check"></i><b>4.4.5</b> Self-closing tags</a></li>
 <li class="chapter" data-level="4.4.6" data-path="front-end-libraries.html"><a href="front-end-libraries.html#components"><i class="fa fa-check"></i><b>4.4.6</b> Components</a></li>
 <li class="chapter" data-level="4.4.7" data-path="front-end-libraries.html"><a href="front-end-libraries.html#state"><i class="fa fa-check"></i><b>4.4.7</b> State</a></li>
+<li class="chapter" data-level="4.4.8" data-path="front-end-libraries.html"><a href="front-end-libraries.html#styles"><i class="fa fa-check"></i><b>4.4.8</b> Styles</a></li>
+<li class="chapter" data-level="4.4.9" data-path="front-end-libraries.html"><a href="front-end-libraries.html#use-javascript-in-methods"><i class="fa fa-check"></i><b>4.4.9</b> Use javascript in methods</a></li>
+<li class="chapter" data-level="4.4.10" data-path="front-end-libraries.html"><a href="front-end-libraries.html#ifelse-example"><i class="fa fa-check"></i><b>4.4.10</b> If/Else example</a></li>
+<li class="chapter" data-level="4.4.11" data-path="front-end-libraries.html"><a href="front-end-libraries.html#section"><i class="fa fa-check"></i><b>4.4.11</b> &amp;&amp;</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -920,8 +924,264 @@ class ResetPassword extends React.Component {
 <div id="update-state" class="section level4">
 <h4><span class="header-section-number">4.4.7.2</span> Update state</h4>
 <p>You call the <code>setState</code> method within your component class like so: this.setState(), passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data.</p>
-
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: &#39;Initial State&#39;
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    // change code below this line
+    this.setState({
+      name: &#39;React Rocks!&#39;
+    })
+    // change code above this line
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;button onClick={this.handleClick}&gt;Click Me&lt;/button&gt;
+        &lt;h1&gt;{this.state.name}&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
 </div>
+<div id="add-methods" class="section level4">
+<h4><span class="header-section-number">4.4.7.3</span> Add Methods</h4>
+<p>A class method typically needs to use the <code>this</code> keyword so it can access properties on the class (such as <code>state</code> and <code>props</code>) inside the scope of the method. One common way is to explicitly bind <code>this</code> in the constructor so <code>this</code> becomes bound to the class methods when the component is initialized.</p>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemCount: 0
+    };
+    // change code below this line
+    this.addItem = this.addItem.bind(this);
+    // change code above this line
+  }
+  addItem() {
+    this.setState({
+      itemCount: this.state.itemCount + 1
+    });
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        { /* change code below this line */ }
+        &lt;button onClick={this.addItem}&gt;Click Me&lt;/button&gt;
+        { /* change code above this line */ }
+        &lt;h1&gt;Current Item Count: {this.state.itemCount}&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+</div>
+<div id="use-state-to-toggle-and-element" class="section level4">
+<h4><span class="header-section-number">4.4.7.4</span> Use State to Toggle and Element</h4>
+<p>You can use <code>state</code> in React applications in more complex ways than what you’ve seen so far. One example is to monitor the status of a value, then render the UI conditionally based on this value.</p>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: false
+    };
+    // change code below this line
+    this.toggleVisibility = this.toggleVisibility.bind(this);
+    // change code above this line
+  }
+  // change code below this line
+  toggleVisibility() {
+    let value = this.state.visibility ? false : true;
+    this.setState({visibility: value}); 
+  }
+  // change code above this line
+  render() {
+    if (this.state.visibility) {
+      return (
+        &lt;div&gt;
+          &lt;button onClick={this.toggleVisibility}&gt;Click Me&lt;/button&gt;
+          &lt;h1&gt;Now you see me!&lt;/h1&gt;
+        &lt;/div&gt;
+      );
+    } else {
+      return (
+        &lt;div&gt;
+          &lt;button onClick={this.toggleVisibility}&gt;Click Me&lt;/button&gt;
+        &lt;/div&gt;
+      );
+    }
+  }
+};</code></pre>
+<ul>
+<li>Another example using a counter to set state:</li>
+</ul>
+<pre><code>class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+    // change code below this line
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
+    this.reset = this.reset.bind(this);
+    // change code above this line
+  }
+  // change code below this line
+  increment() {
+    this.setState({count: this.state.count + 1})
+  }
+  decrement() {
+    this.setState({count: this.state.count -1})
+  }
+  reset() {
+    this.setState({count: 0})
+  }
+  // change code above this line
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;button className=&#39;inc&#39; onClick={this.increment}&gt;Increment!&lt;/button&gt;
+        &lt;button className=&#39;dec&#39; onClick={this.decrement}&gt;Decrement!&lt;/button&gt;
+        &lt;button className=&#39;reset&#39; onClick={this.reset}&gt;Reset&lt;/button&gt;
+        &lt;h1&gt;Current Count: {this.state.count}&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+</div>
+<div id="controlled-input-form" class="section level4">
+<h4><span class="header-section-number">4.4.7.5</span> Controlled Input form</h4>
+</div>
+</div>
+<div id="styles" class="section level3">
+<h3><span class="header-section-number">4.4.8</span> Styles</h3>
+<p>We can apply CSS styles to React elements the same way as JS. Set the <code>className</code> attribute equal to an imported class from a stylesheet. We can also use inline-styling, here’s an example of the syntax.</p>
+<pre><code>&lt;div style={{color: &quot;yellow&quot;, fontSize: 16}}&gt;Mellow Yellow&lt;/div&gt;</code></pre>
+<p>Hyphenated styles like <code>font-size</code> are changed to camelCase <code>fontSize</code>. All property value units are assumed to be <code>px</code> unless otherwise specified. Other than length values all other property values should be wrapped in quotes. If you have a large number of styles you can declare an object and use that instead.</p>
+<pre><code>const styles = {
+  color: &#39;purple&#39;,
+  fontSize: 40,
+  border: &#39;2px solid purple&#39;
+}</code></pre>
+</div>
+<div id="use-javascript-in-methods" class="section level3">
+<h3><span class="header-section-number">4.4.9</span> Use javascript in methods</h3>
+<p>We can use advanced javascript in methods before we render the output. Then when we want to render we just evaluate the JS (hopefully just a variable) in curly braces.</p>
+<pre><code>const inputStyle = {
+  width: 235,
+  margin: 5
+}
+
+class MagicEightBall extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: &#39;&#39;,
+      randomIndex: &#39;&#39;
+    }
+    this.ask = this.ask.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: &#39;&#39;
+      });
+    }
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {
+    const possibleAnswers = [
+      &#39;It is certain&#39;,
+      &#39;It is decidedly so&#39;,
+      &#39;Without a doubt&#39;, 
+      &#39;Yes, definitely&#39;,
+      &#39;You may rely on it&#39;,
+      &#39;As I see it, yes&#39;,
+      &#39;Outlook good&#39;,
+      &#39;Yes&#39;,
+      &#39;Signs point to yes&#39;,
+      &#39;Reply hazy try again&#39;,
+      &#39;Ask again later&#39;,
+      &#39;Better not tell you now&#39;,
+      &#39;Cannot predict now&#39;,
+      &#39;Concentrate and ask again&#39;,
+      &#39;Don\&#39;t count on it&#39;, 
+      &#39;My reply is no&#39;,
+      &#39;My sources say no&#39;,
+      &#39;Most likely&#39;,
+      &#39;Outlook not so good&#39;,
+      &#39;Very doubtful&#39;
+    ];
+    const answer = possibleAnswers[this.state.randomIndex] // &lt;&lt; change code here
+    return (
+      &lt;div&gt;
+        &lt;input
+          type=&quot;text&quot;
+          value={this.state.userInput}
+          onChange={this.handleChange}
+          style={inputStyle} /&gt;&lt;br /&gt;
+        &lt;button onClick={this.ask}&gt;
+          Ask the Magic Eight Ball!
+        &lt;/button&gt;&lt;br /&gt;
+        &lt;h3&gt;Answer:&lt;/h3&gt;
+        &lt;p&gt;
+          { /* change code below this line */ }
+          {answer}
+          { /* change code above this line */ }
+        &lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+};</code></pre>
+</div>
+<div id="ifelse-example" class="section level3">
+<h3><span class="header-section-number">4.4.10</span> If/Else example</h3>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState({
+      display: !this.state.display
+    });
+  }
+  render() {
+    // change code below this line
+    if(this.state.display) {
+    return (
+       &lt;div&gt;
+         &lt;button onClick={this.toggleDisplay}&gt;Toggle Display&lt;/button&gt;
+         &lt;h1&gt;Displayed!&lt;/h1&gt;
+       &lt;/div&gt;
+    );
+  } else {
+    return (
+       &lt;div&gt;
+         &lt;button onClick={this.toggleDisplay}&gt;Toggle Display&lt;/button&gt;
+       &lt;/div&gt;
+    );
+  }
+  }
+};</code></pre>
+</div>
+<div id="section" class="section level3">
+<h3><span class="header-section-number">4.4.11</span> &amp;&amp;</h3>
+<p><code>&amp;&amp;</code> allows you to evaluate an expression and if true it can render the subsequent JSX markup. This allows us to chain together more complex if/else blocks in a more concise manner.</p>
+
 </div>
 </div>
 </div>

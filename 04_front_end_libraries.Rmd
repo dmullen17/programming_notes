@@ -742,3 +742,273 @@ class MyComponent extends React.Component {
 
 #### Update state 
 You call the `setState` method within your component class like so: this.setState(), passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data.
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Initial State'
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    // change code below this line
+    this.setState({
+      name: 'React Rocks!'
+    })
+    // change code above this line
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+```
+
+#### Add Methods 
+A class method typically needs to use the `this` keyword so it can access properties on the class (such as `state` and `props`) inside the scope of the method. One common way is to explicitly bind `this` in the constructor so `this` becomes bound to the class methods when the component is initialized. 
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemCount: 0
+    };
+    // change code below this line
+    this.addItem = this.addItem.bind(this);
+    // change code above this line
+  }
+  addItem() {
+    this.setState({
+      itemCount: this.state.itemCount + 1
+    });
+  }
+  render() {
+    return (
+      <div>
+        { /* change code below this line */ }
+        <button onClick={this.addItem}>Click Me</button>
+        { /* change code above this line */ }
+        <h1>Current Item Count: {this.state.itemCount}</h1>
+      </div>
+    );
+  }
+};
+```
+
+#### Use State to Toggle and Element
+You can use `state` in React applications in more complex ways than what you've seen so far. One example is to monitor the status of a value, then render the UI conditionally based on this value.
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: false
+    };
+    // change code below this line
+    this.toggleVisibility = this.toggleVisibility.bind(this);
+    // change code above this line
+  }
+  // change code below this line
+  toggleVisibility() {
+    let value = this.state.visibility ? false : true;
+    this.setState({visibility: value}); 
+  }
+  // change code above this line
+  render() {
+    if (this.state.visibility) {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+          <h1>Now you see me!</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+        </div>
+      );
+    }
+  }
+};
+```
+
++ Another example using a counter to set state: 
+
+```
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+    // change code below this line
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
+    this.reset = this.reset.bind(this);
+    // change code above this line
+  }
+  // change code below this line
+  increment() {
+    this.setState({count: this.state.count + 1})
+  }
+  decrement() {
+    this.setState({count: this.state.count -1})
+  }
+  reset() {
+    this.setState({count: 0})
+  }
+  // change code above this line
+  render() {
+    return (
+      <div>
+        <button className='inc' onClick={this.increment}>Increment!</button>
+        <button className='dec' onClick={this.decrement}>Decrement!</button>
+        <button className='reset' onClick={this.reset}>Reset</button>
+        <h1>Current Count: {this.state.count}</h1>
+      </div>
+    );
+  }
+};
+```
+
+#### Controlled Input form 
+
+### Styles
+We can apply CSS styles to React elements the same way as JS.  Set the `className` attribute equal to an imported class from a stylesheet. We can also use inline-styling, here's an example of the syntax.
+```
+<div style={{color: "yellow", fontSize: 16}}>Mellow Yellow</div>
+```
+Hyphenated styles like `font-size` are changed to camelCase `fontSize`.  All property value units are assumed to be `px` unless otherwise specified.  Other than length values all other property values should be wrapped in quotes.  If you have a large number of styles you can declare an object and use that instead. 
+```
+const styles = {
+  color: 'purple',
+  fontSize: 40,
+  border: '2px solid purple'
+}
+```
+
+### Use javascript in methods
+We can use advanced javascript in methods before we render the output.  Then when we want to render we just evaluate the JS (hopefully just a variable) in curly braces. 
+
+```
+const inputStyle = {
+  width: 235,
+  margin: 5
+}
+
+class MagicEightBall extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: '',
+      randomIndex: ''
+    }
+    this.ask = this.ask.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: ''
+      });
+    }
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {
+    const possibleAnswers = [
+      'It is certain',
+      'It is decidedly so',
+      'Without a doubt', 
+      'Yes, definitely',
+      'You may rely on it',
+      'As I see it, yes',
+      'Outlook good',
+      'Yes',
+      'Signs point to yes',
+      'Reply hazy try again',
+      'Ask again later',
+      'Better not tell you now',
+      'Cannot predict now',
+      'Concentrate and ask again',
+      'Don\'t count on it', 
+      'My reply is no',
+      'My sources say no',
+      'Most likely',
+      'Outlook not so good',
+      'Very doubtful'
+    ];
+    const answer = possibleAnswers[this.state.randomIndex] // << change code here
+    return (
+      <div>
+        <input
+          type="text"
+          value={this.state.userInput}
+          onChange={this.handleChange}
+          style={inputStyle} /><br />
+        <button onClick={this.ask}>
+          Ask the Magic Eight Ball!
+        </button><br />
+        <h3>Answer:</h3>
+        <p>
+          { /* change code below this line */ }
+          {answer}
+          { /* change code above this line */ }
+        </p>
+      </div>
+    );
+  }
+};
+```
+
+### If/Else example 
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState({
+      display: !this.state.display
+    });
+  }
+  render() {
+    // change code below this line
+    if(this.state.display) {
+    return (
+       <div>
+         <button onClick={this.toggleDisplay}>Toggle Display</button>
+         <h1>Displayed!</h1>
+       </div>
+    );
+  } else {
+    return (
+       <div>
+         <button onClick={this.toggleDisplay}>Toggle Display</button>
+       </div>
+    );
+  }
+  }
+};
+```
+
+### &&
+`&&` allows you to evaluate an expression and if true it can render the subsequent JSX markup.  This allows us to chain together more complex if/else blocks in a more concise manner.  
