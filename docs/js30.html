@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="apis-and-microservices.html">
 
-<link rel="next" href="command-line.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -265,23 +265,114 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">My Programming Notes</h1>
-<p class="author"><em>Dominic Mullen</em></p>
-<p class="date"><em>2018-12-19</em></p>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p>These are my notes from my time spent becoming a self-taught software developer. My apologies if some sections are difficult to read - they’re mainly for my own reference and to track my progress.</p>
+<div id="js30" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> JS30</h1>
+<p>These are my notes from Wes Bos’s free Javscript 30 <a href="https://javascript30.com/">course</a></p>
+<div id="drumkit-project" class="section level2">
+<h2><span class="header-section-number">6.1</span> Drumkit Project</h2>
+<div id="center-div-within-div" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Center div within div</h3>
+<p>We need to add text-align: center to the parent div to center text horizontally. Then in the child div elements we add top 50% and position relative to center them vertically.</p>
+<pre><code>.parent-div {
+  text-align: center;
+}
 
+.child-div {
+  top: 50%; 
+  position: relative; 
+}</code></pre>
+</div>
+<div id="document.queryselectorall" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> document.querySelectorAll</h3>
+<p><strong>Add a class to a div on keypress:</strong> This method returns a NodeList element so it’s necessary to use indexing to find the one we want. This is usually [0] if we’re using data attributes to search. Here we use querySelectorAll method to find the div where we set the data attribute <code>data-key</code> equal to the <code>event.keyCode</code></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+<span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;key&#39;</span><span class="ot"> id=</span><span class="st">&#39;key-1&#39;</span><span class="ot"> data-key=</span><span class="st">&#39;65&#39;</span><span class="kw">&gt;&lt;h2&gt;</span>A<span class="kw">&lt;/h2&gt;&lt;p</span><span class="ot"> class=</span><span class="st">&#39;key-p&#39;</span><span class="kw">&gt;</span>CLAP<span class="kw">&lt;/p&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;script&gt;</span> 
+<span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;keypress&#39;</span><span class="op">,</span> <span class="kw">function</span>(event)<span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="va">event</span>.<span class="at">keyCode</span>)<span class="op">;</span>
+    <span class="va">document</span>.<span class="at">querySelectorAll</span>(<span class="vs">`[data-key=&#39;</span><span class="sc">${</span><span class="va">event</span>.<span class="at">keyCode</span><span class="sc">}</span><span class="vs">&#39;]`</span>)[<span class="dv">0</span>].<span class="va">classList</span>.<span class="at">add</span>(<span class="st">&#39;key-press&#39;</span>)<span class="op">;</span>
+<span class="op">&lt;</span><span class="ss">/script&gt;</span>
+<span class="ss">&lt;/html</span><span class="op">&gt;</span></code></pre></div>
+</div>
+<div id="event-bubbling" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Event Bubbling</h3>
+<p>When an event is triggered it will “bubble” up through its parent elements until it reaches the window. If it reaches any event handlers those will process if they match the event. When we have multiple children we typically add an event handler to their parent element so we only need to write the code once.</p>
+<ul>
+<li>Example of event bubbling</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;style</span><span class="ot"> type=</span><span class="st">&#39;text/css&#39;</span><span class="kw">&gt;</span>  
+            <span class="fl">.styling</span> <span class="kw">{</span>
+                <span class="kw">display:</span> <span class="dt">table-cell</span><span class="kw">;</span>
+                <span class="kw">border:</span> <span class="dt">1px</span> <span class="dt">solid</span> <span class="dt">black</span><span class="kw">;</span> 
+                <span class="kw">padding:</span> <span class="dt">20px</span><span class="kw">;</span> 
+                <span class="kw">text-align:</span> <span class="dt">center</span><span class="kw">;</span> 
+            <span class="kw">}</span>
+        <span class="kw">&lt;/style&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;styling&#39;</span><span class="ot"> onclick=</span><span class="st">&#39;alert(&quot;DIV CLICKED&quot;)&#39;</span><span class="kw">&gt;</span>Div element
+            <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&#39;styling&#39;</span><span class="ot"> onclick=</span><span class="st">&#39;alert(&quot;Span clicked&quot;)&#39;</span><span class="kw">&gt;</span>Span element
+                <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;button&#39;</span><span class="ot"> class=</span><span class="st">&#39;styling&#39;</span><span class="ot"> value=</span><span class="st">&#39;Click me!&#39;</span><span class="ot"> onclick=</span><span class="st">&#39;alert(&quot;button clicked&quot;)&#39;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;/span&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
+<div id="this-in-event-bubbling" class="section level4">
+<h4><span class="header-section-number">6.1.3.1</span> ‘this’ in event bubbling</h4>
+<p><code>this</code> refers to the current element to which the event is bubbled.</p>
+<ul>
+<li>Example using <code>this</code> in event bubbling. Not a great example because of the for loop.</li>
+</ul>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;style type=&#39;text/css&#39;&gt;  
+            .styling {
+                display: table-cell;
+                border: 1px solid black; 
+                padding: 20px; 
+                text-align: center; 
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&#39;div1&#39; class=&#39;styling&#39; onclick=&quot;changeBorder()&quot;&gt;div1
+            &lt;div id=&#39;div2&#39; class=&#39;styling&#39; onclick =&quot;changeBorder()&quot;&gt;div2
+                &lt;div id=&#39;div3&#39; class=&#39;styling&#39;&gt;div3&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        let divElements = document.getElementsByTagName(&#39;div&#39;);
+        for (let i =0; i &lt; divElements.length; i++) {
+            divElements[i].onclick = function() {
+                this.style.border = &#39;3px solid pink&#39;;
+                alert(this.getAttribute(&#39;id&#39;) + &#39;color changed&#39;);
+            };
+        }
+        
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+<div id="stop-event-bubbling" class="section level4">
+<h4><span class="header-section-number">6.1.3.2</span> Stop event bubbling</h4>
+<p>In IE8 and earlier versions we use <code>event.cancelBubble = true</code>, with all other browsers we use <code>event.stopPropogation()</code></p>
+
+</div>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="apis-and-microservices.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="command-line.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

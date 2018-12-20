@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="command-line.html">
+<link rel="prev" href="front-end-libraries.html">
+<link rel="next" href="js30.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -265,23 +265,67 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">My Programming Notes</h1>
-<p class="author"><em>Dominic Mullen</em></p>
-<p class="date"><em>2018-12-19</em></p>
+<div id="apis-and-microservices" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> APIs and microservices</h1>
+<p>These are my notes from the APIs and microservices <a href="https://learn.freecodecamp.org/apis-and-microservices/managing-packages-with-npm">certification</a> from FreeCodeCamp!</p>
+<div id="npm" class="section level2">
+<h2><span class="header-section-number">5.1</span> NPM</h2>
+<p>The Node Package Manager (npm) is a command-line tool used by developers to share and control modules (or packages) of JavaScript code written for use with Node.js. When starting a new project, npm generates a package.json file. This file lists the package dependencies for your project. Since npm packages are regularly updated, the package.json file allows you to set specific version numbers for each dependency. This ensures that updates to a package don’t break your project.</p>
+<ul>
+<li>npm saves packages in a folder named nodemodules. These packages can be installed in two ways:
+<ul>
+<li>globally in a root nodemodules folder, accessible by all projects.</li>
+<li>locally within a project’s own node_modules folder, accessible only to that project.</li>
+</ul></li>
+</ul>
+<p>Most developers prefer to install packages local to each project to create a separation between the dependencies of different projects.</p>
+<div id="package.json" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> package.json</h3>
+The file package.json is the center of any Node.js project or npm package. It stores information about your project just like the
+<head>
+<p>-section in a HTML document describes the content of a webpage. The package.json consists of a single JSON-object where information is stored in “key”: value-pairs. There are only two required fields in a minimal package.json - name and version - but it’s a good practice to provide additional information about your project that could be useful to future users or maintainers.</p>
+<pre><code>&quot;author&quot; : &quot;Dominic Mullen&quot;,
+&quot;description&quot; : &quot;learning about npm&quot;,
+&quot;keywords&quot;: [
+  &quot;learning&quot;, &quot;npm&quot;, &quot;freecodecamp&quot;, &quot;backend&quot;
+  ],
+&quot;license&quot;: &quot;MIT&quot;,
+&quot;version&quot;: &quot;1.5&quot;, 
+&quot;dependencies&quot;: {
+  &quot;moment&quot;: &quot;~2.10.2&quot;,
+  &quot;package&quot;: &quot;^1.1.1&quot;
+}</code></pre>
+<div id="semver" class="section level4">
+<h4><span class="header-section-number">5.1.1.1</span> SemVer</h4>
+<p>Semantic Versioning is an industry standard for versioning software. Given a version number MAJOR.MINOR.PATCH, increment the: MAJOR version when you make incompatible API changes, MINOR version when you add functionality in a backwards-compatible manner, and PATCH version when you make backwards-compatible bug fixes.</p>
+<ul>
+<li>Including a <code>~</code> in <code>&quot;moment&quot;: &quot;~2.10.2&quot;</code> allows npm to look for and install any <code>PATCH</code> fixes.</li>
+<li>Including a <code>^</code> in <code>&quot;moment&quot;: &quot;^2.10.2&quot;</code> allows npm to look for and install any <code>MINOR</code> fixes.</li>
+</ul>
+<hr>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p>These are my notes from my time spent becoming a self-taught software developer. My apologies if some sections are difficult to read - they’re mainly for my own reference and to track my progress.</p>
+</div>
+</div>
+<div id="node.js-and-express" class="section level2">
+<h2><span class="header-section-number">5.2</span> Node.js and Express</h2>
+<p>Node.js is a JavaScript tool that allows developers to write backend (server-side) programs in JavaScript. Node.js comes with a handful of built-in modules—small, independent programs—that help facilitate this purpose. Some of the core modules include:</p>
+<ul>
+<li>HTTP: a module that acts as a server</li>
+<li>File System: a module that reads and modifies files</li>
+<li>Path: a module for working with directory and file paths</li>
+<li>Assertion Testing: a module that checks code against prescribed constraints</li>
+</ul>
+<p>Express, while not included with Node.js, is another module often used with it. Express runs between the server created by Node.js and the frontend pages of a web application. Express also handles an application’s routing. Routing directs users to the correct page based on their interaction with the application.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="command-line.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="front-end-libraries.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="js30.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

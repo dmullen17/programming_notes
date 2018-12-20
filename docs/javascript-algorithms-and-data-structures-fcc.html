@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2018-12-18">
+<meta name="date" content="2018-12-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -115,8 +115,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html"><i class="fa fa-check"></i><b>2</b> JavaScript Algorithms and Data Structures FCC</a><ul>
 <li class="chapter" data-level="2.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#es6"><i class="fa fa-check"></i><b>2.1</b> ES6</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#charat"><i class="fa fa-check"></i><b>2.1.1</b> charAt</a></li>
-<li class="chapter" data-level="2.1.2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#charcodeat"><i class="fa fa-check"></i><b>2.1.2</b> charCodeAt</a></li>
+<li class="chapter" data-level="2.1.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#destructuring-objects"><i class="fa fa-check"></i><b>2.1.1</b> Destructuring objects</a></li>
+<li class="chapter" data-level="2.1.2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#getters-and-setters"><i class="fa fa-check"></i><b>2.1.2</b> Getters and Setters</a></li>
+<li class="chapter" data-level="2.1.3" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#charat"><i class="fa fa-check"></i><b>2.1.3</b> charAt</a></li>
+<li class="chapter" data-level="2.1.4" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#charcodeat"><i class="fa fa-check"></i><b>2.1.4</b> charCodeAt</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#regex"><i class="fa fa-check"></i><b>2.2</b> Regex</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="javascript-algorithms-and-data-structures-fcc.html"><a href="javascript-algorithms-and-data-structures-fcc.html#lookaheads"><i class="fa fa-check"></i><b>2.2.1</b> lookaheads</a></li>
@@ -230,6 +232,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.11" data-path="front-end-libraries.html"><a href="front-end-libraries.html#section"><i class="fa fa-check"></i><b>4.4.11</b> &amp;&amp;</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="apis-and-microservices.html"><a href="apis-and-microservices.html"><i class="fa fa-check"></i><b>5</b> APIs and microservices</a><ul>
+<li class="chapter" data-level="5.1" data-path="apis-and-microservices.html"><a href="apis-and-microservices.html#npm"><i class="fa fa-check"></i><b>5.1</b> NPM</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="apis-and-microservices.html"><a href="apis-and-microservices.html#package.json"><i class="fa fa-check"></i><b>5.1.1</b> package.json</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="apis-and-microservices.html"><a href="apis-and-microservices.html#node.js-and-express"><i class="fa fa-check"></i><b>5.2</b> Node.js and Express</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="js30.html"><a href="js30.html"><i class="fa fa-check"></i><b>6</b> JS30</a><ul>
+<li class="chapter" data-level="6.1" data-path="js30.html"><a href="js30.html#drumkit-project"><i class="fa fa-check"></i><b>6.1</b> Drumkit Project</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="js30.html"><a href="js30.html#center-div-within-div"><i class="fa fa-check"></i><b>6.1.1</b> Center div within div</a></li>
+<li class="chapter" data-level="6.1.2" data-path="js30.html"><a href="js30.html#document.queryselectorall"><i class="fa fa-check"></i><b>6.1.2</b> document.querySelectorAll</a></li>
+<li class="chapter" data-level="6.1.3" data-path="js30.html"><a href="js30.html#event-bubbling"><i class="fa fa-check"></i><b>6.1.3</b> Event Bubbling</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -256,16 +271,68 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="es6" class="section level2">
 <h2><span class="header-section-number">2.1</span> ES6</h2>
 <p>Arrow function defintion syntax:</p>
-<pre><code>let printAandB = (a, b) =&gt; {
-  console.log(`${a} = a and ${b} = b`);
-}</code></pre>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> printAandB <span class="op">=</span> (a<span class="op">,</span> b) <span class="op">=&gt;</span> <span class="op">{</span>
+  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`</span><span class="sc">${</span>a<span class="sc">}</span><span class="vs"> = a and </span><span class="sc">${</span>b<span class="sc">}</span><span class="vs"> = b`</span>)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<div id="destructuring-objects" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Destructuring objects</h3>
+<p>We can use destructing to assign variables as well.</p>
+<pre><code>var voxel = {x: 3.6, y: 7.4, z: 6.54 };
+var x = voxel.x; // x = 3.6
+var y = voxel.y; // y = 7.4
+var z = voxel.z; // z = 6.54</code></pre>
+<p>is equivalent to</p>
+<pre><code>const { x, y, z } = voxel; // x = 3.6, y = 7.4, z = 6.54</code></pre>
+<p>in ES6. If instead you want to store the values of voxel.x into a, voxel.y into b, and voxel.z into c, you have that freedom as well.</p>
+<pre><code>const { x : a, y : b, z : c } = voxel // a = 3.6, b = 7.4, c = 6.54</code></pre>
+<ul>
+<li>We can also assign variables from arrays using the following syntax:</li>
+</ul>
+<pre><code>const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, c); // 1, 2, 5</code></pre>
+<ul>
+<li>We can also use destructuring similarly to <code>slice</code></li>
+</ul>
+<pre><code>const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+console.log(a, b); // 1, 2
+console.log(arr); // [3, 4, 5, 7]</code></pre>
+<ul>
+<li><p>We can also destructure objects passed into functions as arguments:</p>
+<pre><code>const profileUpdate = (profileData) =&gt; {
+  const { name, age, nationality, location } = profileData;
+  // do something with these variables
+}</code></pre></li>
+</ul>
+</div>
+<div id="getters-and-setters" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Getters and Setters</h3>
+<p>Getter functions are meant to simply return (get) the value of an object’s private variable to the user without the user directly accessing the private variable. Setter functions are meant to modify (set) the value of an object’s private variable based on the value passed into the setter function. This change could involve calculations, or even overwriting the previous value completely.</p>
+<pre><code>class Book {
+  constructor(author) {
+    this._author = author;
+  }
+  // getter
+  get writer(){
+    return this._author;
+  }
+  // setter
+  set writer(updatedAuthor){
+    this._author = updatedAuthor;
+  }
+}
+const lol = new Book(&#39;anonymous&#39;);
+console.log(lol.writer);  // anonymous
+lol.writer = &#39;wut&#39;;
+console.log(lol.writer);  // wut</code></pre>
+<p>Notice the syntax we are using to invoke the getter and setter - as if they are not even functions.Getters and setters are important, because they hide internal implementation details.</p>
+</div>
 <div id="charat" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> charAt</h3>
+<h3><span class="header-section-number">2.1.3</span> charAt</h3>
 <p>Strings are immuatable - the best way I’ve seen to modify a string is to create a new and use the <code>.charAt</code> and <code>.splice</code> methods</p>
 <pre><code>after = after.charAt(0).toUpperCase()+after.slice(1);</code></pre>
 </div>
 <div id="charcodeat" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> charCodeAt</h3>
+<h3><span class="header-section-number">2.1.4</span> charCodeAt</h3>
 <p>The string method charCodeAt returns the ASCII character encoding at a given index in a string. Below is a useful way of mapping all of the encodings to an array.</p>
 <pre><code>str.split(&#39;&#39;).map(el =&gt; el.charCodeAt(0))</code></pre>
 </div>
@@ -1042,6 +1109,21 @@ console.log(sumPrimes(10));</code></pre>
 <li>sort array</li>
 <li>create a sequence from the end of the array to end^factorial</li>
 </ul>
+<ol start="20" style="list-style-type: decimal">
+<li>Make a function that looks through an array of objects (first argument) and returns an array of all objects that have matching name and value pairs (second argument). Each name and value pair of the source object has to be present in the object from the collection if it is to be included in the returned array.</li>
+</ol>
+<ul>
+<li>create an array of the keys from the second argument</li>
+<li>call filter method on collection (start looping through each object)</li>
+<li>then for each object we call the keys array - use the (every) method to test that each key-value pair is in an object (we could have also used map) - the point is we have two loops with these two methods</li>
+</ul>
+<pre><code>function whatIsInAName(collection, source) {
+  var keys = Object.keys(source);
+  
+  return collection.filter(obj =&gt; keys.every(key =&gt; obj.hasOwnProperty(key) &amp;&amp; obj[key] === source[key]));
+}
+console.log(whatIsInAName([{ first: &quot;Romeo&quot;, last: &quot;Montague&quot; }, { first: &quot;Mercutio&quot;, last: null }, { first: &quot;Tybalt&quot;, last: &quot;Capulet&quot; }], { last: &quot;Capulet&quot; }));
+console.log(whatIsInAName([{ &quot;apple&quot;: 1, &quot;bat&quot;: 2 }, { &quot;bat&quot;: 2 }, { &quot;apple&quot;: 1, &quot;bat&quot;: 2, &quot;cookie&quot;: 2 }], { &quot;apple&quot;: 1, &quot;bat&quot;: 2 }));</code></pre>
 <hr>
 </div>
 <div id="project-1-palindrome-checker" class="section level2">

@@ -3,11 +3,78 @@ These are my notes from the JavaScript Algorithms and Data Structures certificat
 
 ## ES6 
 Arrow function defintion syntax: 
-```
+```{javascript}
 let printAandB = (a, b) => {
   console.log(`${a} = a and ${b} = b`);
 }
 ```
+
+### Destructuring objects 
+We can use destructing to assign variables as well. 
+```
+var voxel = {x: 3.6, y: 7.4, z: 6.54 };
+var x = voxel.x; // x = 3.6
+var y = voxel.y; // y = 7.4
+var z = voxel.z; // z = 6.54
+```
+is equivalent to 
+```
+const { x, y, z } = voxel; // x = 3.6, y = 7.4, z = 6.54
+```
+in ES6. If instead you want to store the values of voxel.x into a, voxel.y into b, and voxel.z into c, you have that freedom as well.
+```
+const { x : a, y : b, z : c } = voxel // a = 3.6, b = 7.4, c = 6.54
+```
+
++ We can also assign variables from arrays using the following syntax: 
+
+```
+const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, c); // 1, 2, 5
+```
+
++ We can also use destructuring similarly to `slice`
+
+```
+const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+console.log(a, b); // 1, 2
+console.log(arr); // [3, 4, 5, 7]
+```
+
++ We can also destructure objects passed into functions as arguments: 
+```
+const profileUpdate = (profileData) => {
+  const { name, age, nationality, location } = profileData;
+  // do something with these variables
+}
+```
+
+### Getters and Setters 
+Getter functions are meant to simply return (get) the value of an object's private variable to the user without the user directly accessing the private variable. Setter functions are meant to modify (set) the value of an object's private variable based on the value passed into the setter function. This change could involve calculations, or even overwriting the previous value completely.
+
+```
+class Book {
+  constructor(author) {
+    this._author = author;
+  }
+  // getter
+  get writer(){
+    return this._author;
+  }
+  // setter
+  set writer(updatedAuthor){
+    this._author = updatedAuthor;
+  }
+}
+const lol = new Book('anonymous');
+console.log(lol.writer);  // anonymous
+lol.writer = 'wut';
+console.log(lol.writer);  // wut
+```
+
+Notice the syntax we are using to invoke the getter and setter - as if they are not even functions.Getters and setters are important, because they hide internal implementation details.
+
+
 
 ### charAt
 Strings are immuatable - the best way I've seen to modify a string is to create a new and use the `.charAt` and `.splice` methods 
@@ -838,6 +905,23 @@ console.log(sumPrimes(10));
 
 - sort array 
 - create a sequence from the end of the array to end^factorial
+
+20. Make a function that looks through an array of objects (first argument) and returns an array of all objects that have matching name and value pairs (second argument). Each name and value pair of the source object has to be present in the object from the collection if it is to be included in the returned array.
+
+- create an array of the keys from the second argument 
+- call filter method on collection (start looping through each object)
+- then for each object we call the keys array - use the (every) method to test that each key-value pair is in an object (we could have also used map) - the point is we have two loops with these two methods
+
+```
+function whatIsInAName(collection, source) {
+  var keys = Object.keys(source);
+  
+  return collection.filter(obj => keys.every(key => obj.hasOwnProperty(key) && obj[key] === source[key]));
+}
+console.log(whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }));
+console.log(whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 }));
+```
+
 
 <hr>
 

@@ -1,0 +1,104 @@
+#JS30 
+These are my notes from Wes Bos's free Javscript 30 [course](https://javascript30.com/)
+
+## Drumkit Project 
+
+### Center div within div 
+We need to add text-align: center to the parent div to center text horizontally.  Then in the child div elements we add top 50% and position relative to center them vertically.  
+
+```
+.parent-div {
+  text-align: center;
+}
+
+.child-div {
+  top: 50%; 
+  position: relative; 
+}
+```
+
+### document.querySelectorAll
+**Add a class to a div on keypress:**
+This method returns a NodeList element so it's necessary to use indexing to find the one we want.  This is usually [0] if we're using data attributes to search. Here we use querySelectorAll method to find the div where we set the data attribute `data-key` equal to the `event.keyCode`
+
+```{html, javascript}
+<!DOCTYPE html>
+<html>
+<div class='key' id='key-1' data-key='65'><h2>A</h2><p class='key-p'>CLAP</p></div>
+<script> 
+window.addEventListener('keypress', function(event){
+    console.log(event.keyCode);
+    document.querySelectorAll(`[data-key='${event.keyCode}']`)[0].classList.add('key-press');
+</script>
+</html>
+```
+
+### Event Bubbling
+When an event is triggered it will "bubble" up through its parent elements until it reaches the window. If it reaches any event handlers those will process if they match the event.  When we have multiple children we typically add an event handler to their parent element so we only need to write the code once. 
+
++ Example of event bubbling 
+
+```{html}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type='text/css'>  
+            .styling {
+                display: table-cell;
+                border: 1px solid black; 
+                padding: 20px; 
+                text-align: center; 
+            }
+        </style>
+    </head>
+    <body>
+        <div class='styling' onclick='alert("DIV CLICKED")'>Div element
+            <span class='styling' onclick='alert("Span clicked")'>Span element
+                <input type='button' class='styling' value='Click me!' onclick='alert("button clicked")'>
+            </span>
+        </div>
+    </body>
+</html>
+```
+
+#### 'this' in event bubbling
+`this` refers to the current element to which the event is bubbled. 
+
++ Example using `this` in event bubbling.  Not a great example because of the for loop.  
+
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type='text/css'>  
+            .styling {
+                display: table-cell;
+                border: 1px solid black; 
+                padding: 20px; 
+                text-align: center; 
+            }
+        </style>
+    </head>
+    <body>
+        <div id='div1' class='styling' onclick="changeBorder()">div1
+            <div id='div2' class='styling' onclick ="changeBorder()">div2
+                <div id='div3' class='styling'>div3</div>
+            </div>
+        </div>
+    </body>
+    <script>
+        let divElements = document.getElementsByTagName('div');
+        for (let i =0; i < divElements.length; i++) {
+            divElements[i].onclick = function() {
+                this.style.border = '3px solid pink';
+                alert(this.getAttribute('id') + 'color changed');
+            };
+        }
+        
+    </script>
+</html>
+```
+
+#### Stop event bubbling
+In IE8 and earlier versions we use `event.cancelBubble = true`, with all other browsers we use `event.stopPropogation()`
+
