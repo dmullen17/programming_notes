@@ -1,7 +1,7 @@
 #JS30 
 These are my notes from Wes Bos's free Javscript 30 [course](https://javascript30.com/)
 
-## Drumkit Project 
+## Drumkit 
 
 ### Center div within div 
 We need to add text-align: center to the parent div to center text horizontally.  Then in the child div elements we add top 50% and position relative to center them vertically.  
@@ -102,3 +102,64 @@ When an event is triggered it will "bubble" up through its parent elements until
 #### Stop event bubbling
 In IE8 and earlier versions we use `event.cancelBubble = true`, with all other browsers we use `event.stopPropogation()`
 
+### Transition end event 
+Similar to a click event - when an element transitions it fires off a transition end event that says "I'm finished transitioning".  In this case elements are scaling up by 1.1 and making the border larger.  Each CSS property that transitions records its own event (there will likely be lots of transition events in adding / removing a class).
+
++ In this example: this is always equal to what got called against it - in this case "addEventListener" was called against key --> so this = key
+
+```
+const keys = document.querySelectorAll('.key');
+// loop over the NodeList to add event listeners
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+function removeTransition(e) {
+    console.log(e); 
+    // this shows a ton of events - one for each property
+    if (e.propertyName !== 'transform') return; // skip the event 
+    console.log(this); // see what this is 
+    // this is always equal to what got called against it - in this case "addEventListener" was called against key --> so this = key.
+};
+```
+
+<hr>
+
+## JS Clock
+
+### Center div using translate
+The translate() CSS function repositions an element in the horizontal and/or vertical directions. In this example we transform it by subtracting 50% of it's width from the X-direction.  Thus - left: 50% and transform(-50%) center it horizontally.  The same is true vertically.  
+
+```{html}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .centered-div {
+                background-color: black;
+                position: absolute;
+                height: 500px;
+                width: 350px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class='centered-div'></div>
+    </body>
+</html>
+```
+
+### Center div using flexbox
+
+```
+body {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.clock {
+    margin: auto;
+}
+```
