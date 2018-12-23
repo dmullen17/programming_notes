@@ -163,3 +163,47 @@ body {
     margin: auto;
 }
 ```
+
+<hr>
+
+## CSS Variables 
+
+### slider input 
+The following code generates a slider input button. We can also set `min` and `max` attributse on the slider. 
+```
+<input type='range' min='10' max='200' value='10'>
+```
+
+## Array Cardio 1 
+
+### sort
+The `sort` method sorts an array based on the values the callback function calculates.  If we use (a, b) => return a - b, and the first two elements of an array are 40 and 100, then it will return -60, a negative value, so it will sort 40 lower than 100.
+
+
+### reduce
+The first two input values to reduce are to total and currentValue. I was thinking of it too often as index elements 0 and 1, then 0+1, and 2, etc.  The first iteration of this is actually the unitialized variable "total" and index element 0.  We here set the initial value of total to zero.  
+```
+const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    let numCars6 = data.reduce((total, currentValue) => total + (currentValue === 'car' ? 1 : 0), initialValue = 0);
+```
+We can also use an object as a way to keep track of multiple fields when using reduce instead of an integer. Here we set the intial value to an empty object, initialize an obj[item] to 0 if it DNE to dynmically populate the object, then increment the count.
+```
+const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+let counts = data.reduce(function(obj, item) {
+  if (!obj[item]) {
+    obj[item] = 0;
+  }
+  obj[item] ++;
+  return obj;
+}, {})
+```
+
+### console.table
+This function outputs objects in a stylized table - makes it really easy to read.  
+
+### map 
+Good way to conceptualize map is like a factory machine. It will put a stamp on each item -> or take in X items, do something to them, and return the same amount of items.   
+
+### Turn a NodeList into an Array
+We can't use some methods on nodeLists - like map. It's better to turn then into arrays.  We can either wrap a NodeList in `Array.from()`, or enclose it in brackets and use the spread operator. 
+
