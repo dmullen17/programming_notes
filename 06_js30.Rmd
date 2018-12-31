@@ -174,6 +174,18 @@ The following code generates a slider input button. We can also set `min` and `m
 <input type='range' min='10' max='200' value='10'>
 ```
 
+### Access data attributes 
+We can access data attributes using an event listener.  Upon an event we can console log: `this.dataset`.  This will return a data object of all properties that are prefixed with the `data-` attribute.  
+```
+<input type='range' min='0' max='100' value='50' data-sizing='px'>
+<script>
+const input = document.querySelector('input'); 
+input.addEventListener('change', function(event) {
+  console.log(this.dataset);
+})
+</script>
+```
+
 ## Array Cardio 1 
 
 ### sort
@@ -207,3 +219,38 @@ Good way to conceptualize map is like a factory machine. It will put a stamp on 
 ### Turn a NodeList into an Array
 We can't use some methods on nodeLists - like map. It's better to turn then into arrays.  We can either wrap a NodeList in `Array.from()`, or enclose it in brackets and use the spread operator. 
 
+<br>
+
+## Flex Panels
+
+### Combinators 
+
+A CSS selector can contain more than one simple selector. Between the simple selectors, we can include a combinator.
+
+There are four different combinators in CSS3:
+
+descendant selector (space)
+child selector (>)
+adjacent sibling selector (+)
+general sibling selector (~)
+
+This selects all direct child elements of `.panel` and applies margin: 0 to them
+```
+.panel > * {
+    margin: 0;
+}
+```
+
+### box-shadow
+box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+
+### transition 
+With the transition property you specify a property, time, and cubic bezier function to specify how a transition animation will play out.  When one of these properties is changed either by a class addition or JS these timing effects will apply.  
+```
+.panel {
+transition:
+  font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+  flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+  background 0.2s;
+}
+        ```

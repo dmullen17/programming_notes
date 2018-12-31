@@ -72,6 +72,9 @@ n	| Move to next search result
 N	| Move to previous search result
 q	| Quit less
 
+## Man
+man + a command opens the documenation for a command 
+
 
 ## Grep (globally search a regular expression and print)
 grep is used for simple patterns and basic regular expressions (BREs); egrep can
