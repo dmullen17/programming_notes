@@ -1,0 +1,14 @@
+#What the Flexbox
+These are my notes from Wes Bos's free What the flexbox [course](https://courses.wesbos.com/account/access/5c2a75d8536bc562b0ef40c4)
+
+### CSS Tricks 
+[https://css-tricks.com/snippets/css/a-guide-to-flexbox/](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+
++ flex items are the immediate children of an element with `display: flex` called on it 
++ `display: inline-flex;` only wraps around the content compared to `display: flex` which will take up and entire vh or vw depending on if it's row or column displayed.  
++ usually want to put a height or width on the `container` element.  For instance `height: 100 vh;`
++ on `flex-direction: row` the main axis is left to right and the cross axis is top to bottom.  Vice-versa is true for columns.  With the reverse the main axes are the same except they run starting from the opposite direction.  The main axis is where the content starts to where it ends in a line.
++ if we assign a total width or height that exceeds the container flexbox will try to fit in, but if it can't it will give equal width/height to the flex items until the container is filled up - it won't exceed boundaries. 
++ margin isn't part of the box.  So if we give two items widths of 50% and margin of 10px they won't fit in the row.  
+    + to get around this we can use `width: calc(50% - 20px)` if the two elements also have a 10px margin
+    + padding and border are part of the box model so we can include these without breaking percentage height and widths

@@ -106,3 +106,8 @@ ties.
 + you can separate commands in one line using `;`
 + you can chain commands using `&&` that run only if the previous call was successful
 + `grep -ri folder_name` search recursivley through folder 
+
+## Useful commands I've used
+
+### Move downloaded files to another folder 
+This command uses `ls -rtl` to list the contents of a folder in reverse download order.  I then pipe the results using `grep` to find the pattern that I want.  I then select the last 4 using `tail -4` since they are in chronological order from top-bottom.  

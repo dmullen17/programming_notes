@@ -243,6 +243,7 @@ This selects all direct child elements of `.panel` and applies margin: 0 to them
 ```
 
 ### box-shadow
+[https://css-tricks.com/almanac/properties/b/box-shadow/](https://css-tricks.com/almanac/properties/b/box-shadow/)
 box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
 
 ### transition 
@@ -263,3 +264,25 @@ List of psuedo classes: https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-
 ```
 flex: 1; /* evenly distribute items among space */
 ```
+if we give one of the 12 elements here a `flex:5` then it will takes up 5 times as much space as the other 11 items that have `flex:1`
+
+### Run on pageload
+If we have a callback function that's invoked in the event listener then it will run on pageload.  We just want to give a callback function something to reference - which is why we don't immediately invoke it with braces.  Example of immediately invoking an event listener callback function 
+```
+panels.forEach(panel => panel.addEventListener('click', toggleOpen()));
+```
+
+<br>
+
+## Ajax Type Ahead 
+
+### Style input placeholder text 
+For this we use a psuedoclass to style the text.  
+```
+#search-main::placeholder {
+    color: red;
+}
+```
+
++ `box-sizing: border-box` If we set the width of an element to 300px it will often appear bigger because it's border and padding are added to that.  If we set `box-sizing` to `border-box` then the box will always be 300px wide, regardless of what you change border or padding to.  
++ `*, *:before, *:after {box-sizing: inherit;}` this causes elements to inherit the `box-sizing` property from their parents.  This makes it easier when incorporating a component that doesn't use `border-box` to make the rest of its children inherit the `box-sizing` property that we will set at the top level of the component.  At least that what I understood from this [arcticle](https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/)
