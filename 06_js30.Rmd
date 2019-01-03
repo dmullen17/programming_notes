@@ -286,3 +286,66 @@ For this we use a psuedoclass to style the text.
 
 + `box-sizing: border-box` If we set the width of an element to 300px it will often appear bigger because it's border and padding are added to that.  If we set `box-sizing` to `border-box` then the box will always be 300px wide, regardless of what you change border or padding to.  
 + `*, *:before, *:after {box-sizing: inherit;}` this causes elements to inherit the `box-sizing` property from their parents.  This makes it easier when incorporating a component that doesn't use `border-box` to make the rest of its children inherit the `box-sizing` property that we will set at the top level of the component.  At least that what I understood from this [arcticle](https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/)
+
+### fetch 
+fetch function gets a URL endpoint then returns a promise object. We call `.then` to return the blob of data object.  From here we need to convert it to the format that we want.  If we look at the object's prototype in this case we see that there is a `.json()` method we can use.  That returns another promise which we need to call `.then` on to get our data.
+
+```
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    
+const cities = []; 
+    
+const prom = fetch(endpoint);
+console.log(prom);
+// from that it will return a blob of data 
+fetch(endpoint).then(blob => console.log(blob));
+
+fetch(endpoint)
+    .then(blob => blob.json())
+    .then(data => console.log(data));
+
+// Now we can add the data to our cities const using the spread operator and .push.  We use the spread operator b/c it will be a nested array otherwise.
+fetch(endpoint)
+    .then(blob => blob.json())
+    .then(data => cities.push(...data));
+```
+
+### keyup 
+
+```
+function displayMatches() {
+    console.log(this.value); 
+}
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches);
+// for a change event you have to click outside the box, we can add a keyup event to refresh on each key you type
+searchInput.addEventListener('keyup', displayMatches);
+```
+
+### displayMatches 
+We call this function using an event listener on the `.search` input form. Thus the value of `this.value` is equal to whatever we typed, lets say "Bos" for the rest of this example.  We call findMatches on the cities data object to filter it to down.  We then create the html to display the results using map and join to coalesce it into one string.  In our `map` callback function we define a new RegExp object equivalent to what we typed, then in each "place object" we replace to the regular expression characters with a span with a class of highlight.  Finally we return our formatted using template literals to call the variables we created.  
+
+```
+function displayMatches() {
+    console.log(this.value); // shows the typed value if we call it on the .search form 
+    const matches = findMatches(this.value, cities); 
+    console.log(matches);
+    
+    const html = matches.map(place => {
+        const regex = new RegExp(this.value, 'gi');
+        const cityName = place.city.replace(regex, `<span class='hl'>${this.value}</span>`);
+        const stateName = place.state.replace(regex, `<span class='hl'>${this.value}</span>`);
+        
+        return `
+            <li>
+                <span class='name'>${cityName}, ${stateName}</span>
+                <span class='population'>${numberWithCommas(place.population)}</span>
+            </li>
+               `
+    }).join(''); //returns an array and we want a string 
+    suggestions.innerHTML = html; // set the inner html of the suggestions object to the new html string
+}
+```
