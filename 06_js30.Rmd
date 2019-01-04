@@ -354,3 +354,126 @@ function displayMatches() {
 
 ## HTML5 Canvas 
 Really good tutorial <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes' target='_blank'>here</a>
+
+## 14 Dev Tricks 
+
+### Find hidden JS
+You know when an element is changing but can't figure out how.  Inspect and select the element you're curious about, right-click it and select Break On --> attribute modifications.  It will open a debugger and show us the line of code that is modifying this element's attributes.  
+
+In this example we would do this on the paragraph element
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dev Tricks</title>
+</head>
+<body>
+    <p onClick='makeGreen()'>Paragraph text</p> <!-- This is the same as adding an event listener -->
+</body>
+<script>
+    console.log('hello');
+    
+    function makeGreen() {
+        const p = document.querySelector('p');
+        p.style.color = '#BADA55'; 
+        p.style.fontSize = '50px';
+    }
+</script>
+</html>
+```
+
+### Interpolate 
+We can interpolate values into `console.log` using `%` notation.  This is basically the same as backticks but it's useful to know the syntax. 
+```
+const str = 'string';
+console.log('hello I am a %s value.', str);
+console.log(`hello I am a ${str} value.`);
+```
+
+### Style console.log
+We can style console.log messages using the following syntax: 
+```
+    console.log('%c hello I am some text.', 'font-size: 50px; background-color: red; text-shadow: 10px 10px 0 blue;')
+```
+
+### Error messages / Testing 
+Some useful code for test-driven development 
+
+```
+// warnings
+console.warn('oh no!!!');
+
+// errors 
+console.error('shit!'); 
+
+// info
+console.info('crocodiles eat 3 people per year');
+
+// Testing 
+// evaluates if T/F and prints the message if false 
+console.assert(1===1, 'That is wrong!');
+console.assert(1===2, 'That is wrong!')
+// More useful example of this 
+const p = document.querySelector('p');
+console.assert(p.classList.contains('ouch'), 'Does not contain class "ouch"');
+
+// Clearing 
+console.clear()
+```
+
+### Viewing DOM elements 
+We can use `console.dir()` to show all the methods, classes, etc. that live on a DOM element 
+```
+const p = document.querySelector('.p');
+console.dir(p);
+```
+
+### Grouping 
+If we have lots of debugging information we can group information together using a set of variables or names.  This creates separate drop down menus with the information we want - that can be displayed collapsed or uncollapsed by default.  
+
+```
+// Grouping together 
+const dogs = [{name: 'Clifford', age: 2}, {name: 'Rusty', age: 4}];
+dogs.forEach(dog => {
+console.groupCollapsed(`${dog.name}`);
+console.log(`This is ${dog.name}`);
+console.log(`${dog.name} is ${dog.age} years old`);
+console.log('more error messages!');
+console.groupEnd(`${dog.name}`);
+})
+```
+
+### Count 
+`console.count` counts how many times an object appears 
+
+```
+// count 
+// count how many times something appears 
+console.count('Dom');
+console.count('Dom');
+console.count('Dom');
+console.count('hi');
+console.count('Dom');
+```
+
+### Timing 
+We can wrap a code block in `console.time('name')` and `console.timeEnd('name')` to see how long that code took to execute. 
+
+```
+console.time('fetching data');
+fetch('https://rickandmortyapi.com/api/character/')
+.then(data => data.json())
+.then(data => {
+console.log(data);
+console.timeEnd('fetching data');
+});
+```
+
+### Table 
+`console.table` outputs a data array in pretty-printed table format 
+```
+// table
+const dogs = [{name: 'Clifford', age: 2}, {name: 'Rusty', age: 4}];
+console.table(dogs);
+```
