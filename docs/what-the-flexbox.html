@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="js30.html">
 
-<link rel="next" href="command-line.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -301,23 +301,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">My Programming Notes</h1>
-<p class="author"><em>Dominic Mullen</em></p>
-<p class="date"><em>2019-01-03</em></p>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p>These are my notes from my time spent becoming a self-taught software developer. My apologies if some sections are difficult to read - they’re mainly for my own reference and to track my progress.</p>
+<div id="what-the-flexbox" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> What the Flexbox</h1>
+<p>These are my notes from Wes Bos’s free What the flexbox <a href="https://courses.wesbos.com/account/access/5c2a75d8536bc562b0ef40c4">course</a></p>
+<div id="css-tricks" class="section level3">
+<h3><span class="header-section-number">6.0.1</span> CSS Tricks</h3>
+<p><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" class="uri">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></p>
+<ul>
+<li>flex items are the immediate children of an element with <code>display: flex</code> called on it</li>
+<li><code>display: inline-flex;</code> only wraps around the content compared to <code>display: flex</code> which will take up and entire vh or vw depending on if it’s row or column displayed.<br />
+</li>
+<li>usually want to put a height or width on the <code>container</code> element. For instance <code>height: 100 vh;</code></li>
+<li>on <code>flex-direction: row</code> the main axis is left to right and the cross axis is top to bottom. Vice-versa is true for columns. With the reverse the main axes are the same except they run starting from the opposite direction. The main axis is where the content starts to where it ends in a line.</li>
+<li>if we assign a total width or height that exceeds the container flexbox will try to fit in, but if it can’t it will give equal width/height to the flex items until the container is filled up - it won’t exceed boundaries.</li>
+<li>margin isn’t part of the box. So if we give two items widths of 50% and margin of 10px they won’t fit in the row.
+<ul>
+<li>to get around this we can use <code>width: calc(50% - 20px)</code> if the two elements also have a 10px margin</li>
+<li>padding and border are part of the box model so we can include these without breaking percentage height and widths</li>
+</ul></li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="js30.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="command-line.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

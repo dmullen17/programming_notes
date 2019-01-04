@@ -349,3 +349,8 @@ function displayMatches() {
     suggestions.innerHTML = html; // set the inner html of the suggestions object to the new html string
 }
 ```
+
+<hr>
+
+## HTML5 Canvas 
+Really good tutorial <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes' target='_blank'>here</a>
