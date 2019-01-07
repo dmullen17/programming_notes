@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="javascript-algorithms-and-data-structures-fcc.html">
+<link rel="prev" href="what-the-flexbox.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -317,256 +317,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="command-line" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Command Line</h1>
-<p>These are my notes from the excellent tutorial: <a href='https://www.learnenough.com/command-line-tutorial#fig-tech_support_cheat_sheet'>Learn Enough Command Line to Be Dangerous</a>!</p>
-<div id="shortcuts" class="section level2">
-<h2><span class="header-section-number">1.1</span> Shortcuts</h2>
-<table>
-<thead>
-<tr class="header">
-<th>ShortCuts</th>
-<th>Definitions</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>new tab</td>
-<td>cmd+t</td>
-</tr>
-<tr class="even">
-<td>close tab</td>
-<td>cmd+w</td>
-</tr>
-<tr class="odd">
-<td>^A</td>
-<td>go the beginning of the command</td>
-</tr>
-<tr class="even">
-<td>^E</td>
-<td>go to the end of the line</td>
-</tr>
-<tr class="odd">
-<td>^U</td>
-<td>clear line</td>
-</tr>
-<tr class="even">
-<td>hold ⌥ + click</td>
-<td>move to specified spot in line</td>
-</tr>
-<tr class="odd">
-<td>^L</td>
-<td>clear previous text</td>
-</tr>
-<tr class="even">
-<td>^R</td>
-<td>search interactively and edit previous commands</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="commands" class="section level2">
-<h2><span class="header-section-number">1.2</span> Commands</h2>
-<table>
-<colgroup>
-<col width="10%" />
-<col width="89%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Command</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>echo</td>
-<td>print strings to screen</td>
-</tr>
-<tr class="even">
-<td>mkdir</td>
-<td>create directory</td>
-</tr>
-<tr class="odd">
-<td>cd</td>
-<td>change directory</td>
-</tr>
-<tr class="even">
-<td>pwd</td>
-<td>print working directory</td>
-</tr>
-<tr class="odd">
-<td>crtl+c</td>
-<td>best for “getting out of trouble” (cancel as a mnemonic)</td>
-</tr>
-<tr class="even">
-<td>q</td>
-<td>quits out of text editor windows / man windows</td>
-</tr>
-<tr class="odd">
-<td>clear</td>
-<td>removes all previous text</td>
-</tr>
-<tr class="even">
-<td>sleep x</td>
-<td>puts the terminal to sleep for “x” seconds, processes commands typed during sleep mode afterwards</td>
-</tr>
-<tr class="odd">
-<td><code>&gt;</code> (redirect operator)</td>
-<td>use cat + fileName to write contents of a file to a new file</td>
-</tr>
-<tr class="even">
-<td><code>&gt;&gt;</code> (append operator)</td>
-<td>writes output to the end of a file</td>
-</tr>
-<tr class="odd">
-<td>curl</td>
-<td>download a file from a URL <code>curl -OL cdn.learnenough.com/sonnets.txt</code></td>
-</tr>
-<tr class="even">
-<td>!! (bang)</td>
-<td>re-run previous command</td>
-</tr>
-<tr class="odd">
-<td>!curl</td>
-<td>(re-run previous curl command)</td>
-</tr>
-<tr class="even">
-<td>history</td>
-<td>show previous command history</td>
-</tr>
-</tbody>
-</table>
-<p><br> <br></p>
-<table>
-<thead>
-<tr class="header">
-<th>File related Command</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>open</td>
-<td>opens the argument using the default application</td>
-</tr>
-<tr class="even">
-<td>cat</td>
-<td>dumps contents onto the screen, can accept multiple args</td>
-</tr>
-<tr class="odd">
-<td>diff</td>
-<td>shows differences between two files</td>
-</tr>
-<tr class="even">
-<td>ls</td>
-<td>list all files and directories (supports some regex expressions)</td>
-</tr>
-<tr class="odd">
-<td>ls -l</td>
-<td>lists files in long format with date modified and size</td>
-</tr>
-<tr class="even">
-<td>ls -rtl</td>
-<td>lists files in reverse order of modification</td>
-</tr>
-<tr class="odd">
-<td>ls -a</td>
-<td>show hidden files</td>
-</tr>
-<tr class="even">
-<td>ls -h</td>
-<td>adds human readable byte count</td>
-</tr>
-<tr class="odd">
-<td>mv (move)</td>
-<td>rename a file or directory</td>
-</tr>
-<tr class="even">
-<td>cp</td>
-<td>copy a file</td>
-</tr>
-<tr class="odd">
-<td>rm</td>
-<td>remove a file</td>
-</tr>
-<tr class="even">
-<td>head/tail</td>
-<td>show first/last 10 lines of a file</td>
-</tr>
-<tr class="odd">
-<td>wc</td>
-<td>shows lines, words, and bytes in a file</td>
-</tr>
-<tr class="even">
-<td>rm -rf</td>
-<td>delete a directory and all contents recursively</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="piping" class="section level2">
-<h2><span class="header-section-number">1.3</span> Piping</h2>
-<p>Piping exists in command line!</p>
-<ul>
-<li><code>head sonnets.txt | wc</code> - get head of sonnets.txt then pipe result to wc</li>
-<li><code>history | less</code> - pipe history to less for interactive searching
-<ul>
-<li>example: <code>open -a '/Applications/Microsoft Excel.app' 'Downloads/Utqiagvik_daily_species_counts.csv'</code></li>
-</ul></li>
-</ul>
-</div>
-<div id="less" class="section level2">
-<h2><span class="header-section-number">1.4</span> Less</h2>
-<p>Lets you interactly navigate a file or output.<br />
-Command | Description<br />
-——- | ———– up &amp; down arrow keys | Move up or down one line<br />
-spacebar | Move forward one page<br />
-⌃F | Move forward one page<br />
-⌃B | Move back one page<br />
-G | Move to end of file<br />
-1G | Move to beginning of file<br />
-/<string> | Search file for string /rose n | Move to next search result N | Move to previous search result q | Quit less</p>
-</div>
-<div id="man" class="section level2">
-<h2><span class="header-section-number">1.5</span> Man</h2>
-<p>man + a command opens the documenation for a command</p>
-</div>
-<div id="grep-globally-search-a-regular-expression-and-print" class="section level2">
-<h2><span class="header-section-number">1.6</span> Grep (globally search a regular expression and print)</h2>
-<p>grep is used for simple patterns and basic regular expressions (BREs); egrep can handle extended regular expressions (EREs). See re_format(7) for more informa- tion on regular expressions. fgrep is quicker than both grep and egrep, but can only handle fixed patterns (i.e. it does not interpret regular expressions). Patterns may consist of one or more lines, allowing any of the pattern lines to match a portion of the input.</p>
-<p>zgrep, zegrep, and zfgrep act like grep, egrep, and fgrep, respectively, but accept input files compressed with the compress(1) or gzip(1) compression utili- ties.</p>
-<p><em>Note:</em> It doesn’t work that well (for instance I tried using anchors <code>^</code> and <code>$</code> with no success). Better to use a text editor or another language.</p>
-</div>
-<div id="miscellaneous" class="section level2">
-<h2><span class="header-section-number">1.7</span> Miscellaneous</h2>
-<ul>
-<li>Unix refers to a family of operating systems that includes Linux, Android, iOS (iPhone/iPad), and macOS
-<ul>
-<li>the main exception to the unix family is windows</li>
-</ul></li>
-<li>touch foo is commonly used to create an empty file</li>
-<li>Use <code>tail -f foo</code> to view a file that’s actively changing
-<ul>
-<li>Ex. <code>ping learneough.com &gt; learneough.log</code> in one tab and <code>tail -f learneough.log</code> in another tab</li>
-</ul></li>
-<li><code>/</code> is the root directory</li>
-<li><code>cd</code> by itself defaults to the home directory</li>
-<li><code>cd ..</code> goes up one directory</li>
-<li><code>open .</code> opens the current directory in default viewer (finder)</li>
-<li><code>cd -</code> goes to the previous directory, whatever it was</li>
-<li>you can separate commands in one line using <code>;</code></li>
-<li>you can chain commands using <code>&amp;&amp;</code> that run only if the previous call was successful</li>
-<li><code>grep -ri folder_name</code> search recursivley through folder</li>
-</ul>
-</div>
-<div id="useful-commands-ive-used" class="section level2">
-<h2><span class="header-section-number">1.8</span> Useful commands I’ve used</h2>
-<div id="move-downloaded-files-to-another-folder" class="section level3">
-<h3><span class="header-section-number">1.8.1</span> Move downloaded files to another folder</h3>
-<p>This command uses <code>ls -rtl</code> to list the contents of a folder in reverse download order. I then pipe the results using <code>grep</code> to find the pattern that I want. I then select the last 4 using <code>tail -4</code> since they are in chronological order from top-bottom.</p>
+<div id="miscellaneous-js" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Miscellaneous JS</h1>
+<div id="web-scraping" class="section level2">
+<h2><span class="header-section-number">7.1</span> Web Scraping</h2>
+<ol style="list-style-type: decimal">
+<li><p>First create a new folder and run <code>npm init -y</code> to set up a <code>package.json</code> file.</p></li>
+<li><p>Next we install two packages with <code>npm install axios cheerio</code>. Axios is promise based HTTP client for the browser and node.js. Cheerio is like jQuery for node.js - it makes it easier to select, edit, and view DOM elements.</p></li>
+<li></li>
+</ol>
 
-</div>
 </div>
 </div>
             </section>
@@ -574,8 +334,8 @@ G | Move to end of file<br />
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="javascript-algorithms-and-data-structures-fcc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-the-flexbox.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

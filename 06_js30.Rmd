@@ -355,6 +355,65 @@ function displayMatches() {
 ## HTML5 Canvas 
 Really good tutorial <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes' target='_blank'>here</a>
 
+With canvas we have a `canvas` html element.  On this we draw on the "context". We select this by calling and selecting either 2d or 3d context. 
+```
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+```
+
+We can set the height and width of the canvas using JS 
+```
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+```
+
+Next we can set the color using `strokeStyle` - this can also be set to a gradient or a pattern. 'lineJoin = round' creates a rounded edge rather than a 90 degree one when two lines meet.  `lineCap = 'round'` adds a rounded semi-circle to the end of a line.  
+
+```
+ctx.strokeStyle = '#  BADA55';
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+```
+
+We can draw a line by using `beginPath()` to initialize it, calling `moveTo` to move the context somewhere, then call `LineTo` to draw a line from the "moveTo" coordinate arguments to the "lineTo" coordinate arguments.  `stroke` actually draws it.  
+
+```
+ctx.beginPath();
+ctx.moveTo(lastX, lastY);
+ctx.lineTo(e.offsetX, e.offsetY);
+ctx.stroke();
+```
+
+### HSL
+<a href='http://mothereffinghsl.com/' target='_blank'>Mother effing HSL</a>
+  
+This is an <a href='http://www.useragentman.com/blog/2010/08/28/coding-colors-easily-using-css3-hsl-notation/' target='_blank'>awesome hsl tutorial</a>
+
+  
++ Hue: Color from 0 to 360. 
+    + Red: 0, Yellow: 60, Green: 120, Cyan: 180, Blue: 240, Magenta: 300, Red: 360
++ Saturation: How "colorful" something is from 0% to 100%
+    + 0% is essentially grey, 50% is pretty muted, and 100% is vibrant / neon.
++ Lightness: how light something is from 0 to 100% 
+    + 0% is black, 100% is white, 50% is relatively normal.
++ some browsers also support hsla where the fourth argument "alpha" is essentially transparency
+
+### Event Listeners 
+Here we use a flag with 4 event listeners.  We listen for a mousedown event, when this occur we set our flag to true, which will trigger the mousemove event.  Our final two event listeners listen for the two negation events, mouseup and mouseout.
+
+```
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);// need this
+```
+
+<hr>
+
+
 ## 14 Dev Tricks 
 
 ### Find hidden JS

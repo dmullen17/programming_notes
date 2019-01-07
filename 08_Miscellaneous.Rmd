@@ -1,0 +1,9 @@
+# Miscellaneous JS 
+
+## Web Scraping 
+
+1. First create a new folder and run `npm init -y` to set up a `package.json` file. 
+
+2. Next we install two packages with `npm install axios cheerio`.  Axios is promise based HTTP client for the browser and node.js.  Cheerio is like jQuery for node.js - it makes it easier to select, edit, and view DOM elements.  
+
+3. 

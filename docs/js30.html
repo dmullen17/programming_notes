@@ -25,7 +25,7 @@
 <meta name="author" content="Dominic Mullen">
 
 
-<meta name="date" content="2019-01-03">
+<meta name="date" content="2019-01-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -276,10 +276,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.6.3" data-path="js30.html"><a href="js30.html#keyup"><i class="fa fa-check"></i><b>5.6.3</b> keyup</a></li>
 <li class="chapter" data-level="5.6.4" data-path="js30.html"><a href="js30.html#displaymatches"><i class="fa fa-check"></i><b>5.6.4</b> displayMatches</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="js30.html"><a href="js30.html#html5-canvas"><i class="fa fa-check"></i><b>5.7</b> HTML5 Canvas</a></li>
+<li class="chapter" data-level="5.7" data-path="js30.html"><a href="js30.html#html5-canvas"><i class="fa fa-check"></i><b>5.7</b> HTML5 Canvas</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="js30.html"><a href="js30.html#hsl"><i class="fa fa-check"></i><b>5.7.1</b> HSL</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="js30.html"><a href="js30.html#dev-tricks"><i class="fa fa-check"></i><b>5.8</b> 14 Dev Tricks</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="js30.html"><a href="js30.html#find-hidden-js"><i class="fa fa-check"></i><b>5.8.1</b> Find hidden JS</a></li>
+<li class="chapter" data-level="5.8.2" data-path="js30.html"><a href="js30.html#interpolate"><i class="fa fa-check"></i><b>5.8.2</b> Interpolate</a></li>
+<li class="chapter" data-level="5.8.3" data-path="js30.html"><a href="js30.html#style-console.log"><i class="fa fa-check"></i><b>5.8.3</b> Style console.log</a></li>
+<li class="chapter" data-level="5.8.4" data-path="js30.html"><a href="js30.html#error-messages-testing"><i class="fa fa-check"></i><b>5.8.4</b> Error messages / Testing</a></li>
+<li class="chapter" data-level="5.8.5" data-path="js30.html"><a href="js30.html#viewing-dom-elements"><i class="fa fa-check"></i><b>5.8.5</b> Viewing DOM elements</a></li>
+<li class="chapter" data-level="5.8.6" data-path="js30.html"><a href="js30.html#grouping"><i class="fa fa-check"></i><b>5.8.6</b> Grouping</a></li>
+<li class="chapter" data-level="5.8.7" data-path="js30.html"><a href="js30.html#count"><i class="fa fa-check"></i><b>5.8.7</b> Count</a></li>
+<li class="chapter" data-level="5.8.8" data-path="js30.html"><a href="js30.html#timing"><i class="fa fa-check"></i><b>5.8.8</b> Timing</a></li>
+<li class="chapter" data-level="5.8.9" data-path="js30.html"><a href="js30.html#table"><i class="fa fa-check"></i><b>5.8.9</b> Table</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="what-the-flexbox.html"><a href="what-the-flexbox.html"><i class="fa fa-check"></i><b>6</b> What the Flexbox</a><ul>
 <li class="chapter" data-level="6.0.1" data-path="what-the-flexbox.html"><a href="what-the-flexbox.html#css-tricks"><i class="fa fa-check"></i><b>6.0.1</b> CSS Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="miscellaneous-js.html"><a href="miscellaneous-js.html"><i class="fa fa-check"></i><b>7</b> Miscellaneous JS</a><ul>
+<li class="chapter" data-level="7.1" data-path="miscellaneous-js.html"><a href="miscellaneous-js.html#web-scraping"><i class="fa fa-check"></i><b>7.1</b> Web Scraping</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -631,7 +647,136 @@ searchInput.addEventListener(&#39;keyup&#39;, displayMatches);</code></pre>
 <div id="html5-canvas" class="section level2">
 <h2><span class="header-section-number">5.7</span> HTML5 Canvas</h2>
 <p>Really good tutorial <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes' target='_blank'>here</a></p>
+<p>With canvas we have a <code>canvas</code> html element. On this we draw on the “context”. We select this by calling and selecting either 2d or 3d context.</p>
+<pre><code>const canvas = document.querySelector(&#39;canvas&#39;);
+const ctx = canvas.getContext(&#39;2d&#39;);</code></pre>
+<p>We can set the height and width of the canvas using JS</p>
+<pre><code>canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;</code></pre>
+<p>Next we can set the color using <code>strokeStyle</code> - this can also be set to a gradient or a pattern. ‘lineJoin = round’ creates a rounded edge rather than a 90 degree one when two lines meet. <code>lineCap = 'round'</code> adds a rounded semi-circle to the end of a line.</p>
+<pre><code>ctx.strokeStyle = &#39;#  BADA55&#39;;
+ctx.lineJoin = &#39;round&#39;;
+ctx.lineCap = &#39;round&#39;;</code></pre>
+<p>We can draw a line by using <code>beginPath()</code> to initialize it, calling <code>moveTo</code> to move the context somewhere, then call <code>LineTo</code> to draw a line from the “moveTo” coordinate arguments to the “lineTo” coordinate arguments. <code>stroke</code> actually draws it.</p>
+<pre><code>ctx.beginPath();
+ctx.moveTo(lastX, lastY);
+ctx.lineTo(e.offsetX, e.offsetY);
+ctx.stroke();</code></pre>
+<div id="hsl" class="section level3">
+<h3><span class="header-section-number">5.7.1</span> HSL</h3>
+<p><a href='http://mothereffinghsl.com/' target='_blank'>Mother effing HSL</a> HSL function takes three arguments: hue which is color from 0 to 360, Saturation is from grey to intense from 0 to 100%, lightness is % light from 0 to 100%, and This is an <a href='http://www.useragentman.com/blog/2010/08/28/coding-colors-easily-using-css3-hsl-notation/' target='_blank'>awesome hsl tutorial</a></p>
+<hr>
+</div>
+</div>
+<div id="dev-tricks" class="section level2">
+<h2><span class="header-section-number">5.8</span> 14 Dev Tricks</h2>
+<div id="find-hidden-js" class="section level3">
+<h3><span class="header-section-number">5.8.1</span> Find hidden JS</h3>
+<p>You know when an element is changing but can’t figure out how. Inspect and select the element you’re curious about, right-click it and select Break On –&gt; attribute modifications. It will open a debugger and show us the line of code that is modifying this element’s attributes.</p>
+<p>In this example we would do this on the paragraph element</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Dev Tricks&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p onClick=&#39;makeGreen()&#39;&gt;Paragraph text&lt;/p&gt; &lt;!-- This is the same as adding an event listener --&gt;
+&lt;/body&gt;
+&lt;script&gt;
+    console.log(&#39;hello&#39;);
+    
+    function makeGreen() {
+        const p = document.querySelector(&#39;p&#39;);
+        p.style.color = &#39;#BADA55&#39;; 
+        p.style.fontSize = &#39;50px&#39;;
+    }
+&lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+<div id="interpolate" class="section level3">
+<h3><span class="header-section-number">5.8.2</span> Interpolate</h3>
+<p>We can interpolate values into <code>console.log</code> using <code>%</code> notation. This is basically the same as backticks but it’s useful to know the syntax.</p>
+<pre><code>const str = &#39;string&#39;;
+console.log(&#39;hello I am a %s value.&#39;, str);
+console.log(`hello I am a ${str} value.`);</code></pre>
+</div>
+<div id="style-console.log" class="section level3">
+<h3><span class="header-section-number">5.8.3</span> Style console.log</h3>
+<p>We can style console.log messages using the following syntax:</p>
+<pre><code>    console.log(&#39;%c hello I am some text.&#39;, &#39;font-size: 50px; background-color: red; text-shadow: 10px 10px 0 blue;&#39;)</code></pre>
+</div>
+<div id="error-messages-testing" class="section level3">
+<h3><span class="header-section-number">5.8.4</span> Error messages / Testing</h3>
+<p>Some useful code for test-driven development</p>
+<pre><code>// warnings
+console.warn(&#39;oh no!!!&#39;);
 
+// errors 
+console.error(&#39;shit!&#39;); 
+
+// info
+console.info(&#39;crocodiles eat 3 people per year&#39;);
+
+// Testing 
+// evaluates if T/F and prints the message if false 
+console.assert(1===1, &#39;That is wrong!&#39;);
+console.assert(1===2, &#39;That is wrong!&#39;)
+// More useful example of this 
+const p = document.querySelector(&#39;p&#39;);
+console.assert(p.classList.contains(&#39;ouch&#39;), &#39;Does not contain class &quot;ouch&quot;&#39;);
+
+// Clearing 
+console.clear()</code></pre>
+</div>
+<div id="viewing-dom-elements" class="section level3">
+<h3><span class="header-section-number">5.8.5</span> Viewing DOM elements</h3>
+<p>We can use <code>console.dir()</code> to show all the methods, classes, etc. that live on a DOM element</p>
+<pre><code>const p = document.querySelector(&#39;.p&#39;);
+console.dir(p);</code></pre>
+</div>
+<div id="grouping" class="section level3">
+<h3><span class="header-section-number">5.8.6</span> Grouping</h3>
+<p>If we have lots of debugging information we can group information together using a set of variables or names. This creates separate drop down menus with the information we want - that can be displayed collapsed or uncollapsed by default.</p>
+<pre><code>// Grouping together 
+const dogs = [{name: &#39;Clifford&#39;, age: 2}, {name: &#39;Rusty&#39;, age: 4}];
+dogs.forEach(dog =&gt; {
+console.groupCollapsed(`${dog.name}`);
+console.log(`This is ${dog.name}`);
+console.log(`${dog.name} is ${dog.age} years old`);
+console.log(&#39;more error messages!&#39;);
+console.groupEnd(`${dog.name}`);
+})</code></pre>
+</div>
+<div id="count" class="section level3">
+<h3><span class="header-section-number">5.8.7</span> Count</h3>
+<p><code>console.count</code> counts how many times an object appears</p>
+<pre><code>// count 
+// count how many times something appears 
+console.count(&#39;Dom&#39;);
+console.count(&#39;Dom&#39;);
+console.count(&#39;Dom&#39;);
+console.count(&#39;hi&#39;);
+console.count(&#39;Dom&#39;);</code></pre>
+</div>
+<div id="timing" class="section level3">
+<h3><span class="header-section-number">5.8.8</span> Timing</h3>
+<p>We can wrap a code block in <code>console.time('name')</code> and <code>console.timeEnd('name')</code> to see how long that code took to execute.</p>
+<pre><code>console.time(&#39;fetching data&#39;);
+fetch(&#39;https://rickandmortyapi.com/api/character/&#39;)
+.then(data =&gt; data.json())
+.then(data =&gt; {
+console.log(data);
+console.timeEnd(&#39;fetching data&#39;);
+});</code></pre>
+</div>
+<div id="table" class="section level3">
+<h3><span class="header-section-number">5.8.9</span> Table</h3>
+<p><code>console.table</code> outputs a data array in pretty-printed table format</p>
+<pre><code>// table
+const dogs = [{name: &#39;Clifford&#39;, age: 2}, {name: &#39;Rusty&#39;, age: 4}];
+console.table(dogs);</code></pre>
+
+</div>
 </div>
 </div>
             </section>
