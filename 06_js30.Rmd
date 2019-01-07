@@ -164,6 +164,109 @@ body {
 }
 ```
 
+### box shadow
+
++ `0 0 0 4px rgba(0,0,0,0.1)` - applies an outer shadow to our clock face 
++ the next one has `inset` which applies it on the inside of the clock diameter
++ 
+
+```
+box-shadow:
+0 0 0 4px rgba(0,0,0,0.1),
+inset 0 0 0 3px #EFEFEF,
+inset 0 0 10px black,
+0 0 10px rgba(0,0,0,0.2);
+```
+
+### position: relative 
+We need a div with relative position to place our hand divs.  These three will be absolutely positioned (i.e. stacked on top of each other).  This is necessary so they all rotate from the origin
+
+### Setup Description 
+The background is standard.  We turn `body` into a flex container with min-height: 100vw and `align-items` and `justify-content` set to center to get the clock in the middle of the flex container.  The clock div we style.  Inside the clock div we create another with 100% height and width with positition set to relative - this is so we can use absolute positioning on the clock hands divs.  For clock hands we set their height, width, and background to create the slim rectangle, next we set top to 50% to move it to the center of the div.  Finally we set the position to absolute to stack them on top of each other.  
+
+```
+html {
+    background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+    background-size: cover;
+    font-family: 'helvetica nue';
+    font-size: 10px;
+}
+
+body {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.clock {
+    height: 30em;
+    width: 30em;
+    border: 20px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, .1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+}
+
+.clock-face {
+    height: 100%; 
+    width: 100%; 
+    position: relative;
+    transform: translateY(-3px); /*accounts for half the height of the clock hands */
+}
+
+.hand {
+    background: black;
+    height: 6px;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+}
+```
+
+### transform-origin
+Updates where the origin is in an element.  The default is 50%.  Changing it to 100% makes the origin the right most side of the X-axis.
+```
+transform-origin: 100%;
+```
+
+### transition timing 
+Another way to set transition timing 
+```
+transition: all .05s;
+transition-timing-function: all cubic-bezier(.1, 2.7, .65, 1);
+```
+
+### JS Logic 
+The logic here is fairly simple.  We run a function `setDate` every one second.  Each second we create a new Date object that has methods for extracting the current second, minute, and hour.  We update the CSS of each of the three hand div elements based on the current sec, min, hour, converted into degrees.  We update the `transform: rotate(xdeg);` property of each of them.  We add a cubic-bezier timing that creates a tic effect to these `transition` events.  
+
+```
+function setDate() {
+    // console.log('hi');
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const secondsDegrees = (seconds/60)*360 + 90;
+    //console.log(secondsDegrees);
+    if (secondsDegrees == 90) secondHand.style.transition = '0s';
+    // console.log(seconds);
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+    
+    const minutes = now.getMinutes();
+    const minutesDegrees = (minutes/60)*360 + 90;
+    if (minutesDegrees == 90) secondHand.style.transition = '0s';
+    minHand.style.transform = `rotate(${minutesDegrees}deg)`;
+    
+    const hours = now.getHours();
+    // console.log(hours); - base 24
+    const hoursDegrees = (hours/12)*360 + 90;
+    if (hoursDegrees == 90) secondHand.style.transition = '0s';
+    hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+}
+```
+
 <hr>
 
 ## CSS Variables 
