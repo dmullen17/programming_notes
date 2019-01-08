@@ -640,6 +640,48 @@ const dogs = [{name: 'Clifford', age: 2}, {name: 'Rusty', age: 4}];
 console.table(dogs);
 ```
 
+<hr>
+
+## Hold Shift to check Boxes 
+
+### Style a checkbox 
+In this example we used the `:checked` psuedoclass and a `+ p` to apply it to the nearest paragraph element. `text-decoration: line-through;` adds a through-line to the paragraph element
+```
+input:checked + p {
+background: #F9F9F9;
+text-decoration: line-through;
+}
+```
+
+### Style a list 
+The following code styles a list nicely, it adds lines beneath each listen item except for the last one. In this example we have a checkbox input followed by a p.  Here we add a border-left on the p element to creates a nice grid effect. 
+
+```
+.item {
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+p {
+  border-left: 1px solid #D1E2FF;
+}
+```
+
+### Comparisons on DOM elements 
+The big takeaway from this project is that we can perform copmarisons on DOM elements.  
+
+### Summary 
+We create a listen with X amount of inputs with `type='checkbox'`.  Next we select all of them and add an event listener to each one.  We listen for a click event.  On every click event our callback function updates the variable `lastChecked` which stores a copy of the DOM element that we last checked.  In the callback function we then add an if block that asserts that the event `shiftKey` property and `this.checked` are both true.  If this is the case we then loop over each input element.  This is the clever part: we add a flag called `inBetween` that we want to set to `true` when we are between the two checked boxes.  We initialize it to `false` and set it to its opposite value `!inBetween` if the current element we're looping over is equal to either `this` (the input that triggered the event) or `lastChecked` (the input we checked before this one).  To do this we can just directly compare the current iteration input, in this case `checkBox` to both directly using `if (checkBox === this || checkBox === lastChecked)`.  Once we have the flag logic then we just update each element we're iterating over if the flag is true.  
+
+### Code Snippets 
+
++ `margin: 50px auto;` Adds 50px top and bottom and evenly spaces pixels on the left and right - useful for centering an item.
+
+
+
 ## HTML Video Player 
 
 ### Styling a button 
