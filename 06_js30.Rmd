@@ -639,3 +639,59 @@ console.timeEnd('fetching data');
 const dogs = [{name: 'Clifford', age: 2}, {name: 'Rusty', age: 4}];
 console.table(dogs);
 ```
+
+## HTML Video Player 
+
+### Styling a button 
+We can style a button many different ways.  This example primarily uses `background: none` to remove the white background, `border: 0` to remove the 1 px border, and `color: white` to change the play button to white rather than black.
+
+```
+.player__button {
+  background: none;
+  border: 0;
+  line-height: 1;
+  color: white;
+  text-align: center;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  max-width: 50px;
+}
+```
+
+### cursor: 
+The cursor property sets what the mouse cursor looks like when it hovers over an element.  Here I set it to `cursor: crosshair` just to hammer home what it does - since setting it to `cursor: pointer` is what I have by default anyway.  
+
+### focus psuedoclass
+The `:focus` psuedoclass is applied when an element is selected either by clicking on it or when a user tabs over to it.  With this we can set `outline: none` to remove the blue glow when an element is selected.  This is a key accessibility feature so if you remove it something else needs to happen on :focus.  
+
+```
+.player__button:focus {
+    /*border: 5px solid red;*/
+    border: 1px solid #ffc600;
+    outline: none;
+}
+```
+
+### linear-gradient
+We can do some creative things with linear gradient.  This iteration specifies an angle of 135 degrees for the gradient to go through (which is more or less top left corner to bottom right), then it defines 3 stopping points at percentages. 
+
++ 90deg is left to right 
++ 180deg is top to bottom
++ 270 deg is right to left 
++ 360 deg is bottom to top
+
+https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf
+
+```
+linear-gradient(135deg, #7c1599 0%,#921099 48%,#7e4ae8 100%)
+```
+
+### Use a psuedoclass to modify another class 
+We can use psuedoclasses to modify other elements using the following syntax. Here when we hover over the element with class "player" we modify the underlying CSS for elements with the "player__controls" class. 
+
+```
+.player:hover .player__controls{
+    transform: translateY(0) translateY(-10px);
+}
+```
