@@ -289,6 +289,17 @@ input.addEventListener('change', function(event) {
 </script>
 ```
 
+### Arrow function callback
+With arrow functions as callback functions we do not get access to the `this` variable.  Instead it is set to the global window. This event listener logs the window instead of the value of the range <input> element that we added the event listener to.
+
+
+```
+gradientStart.addEventListener('change', () => {
+    console.log(this); // why is it logging the window?
+    root.style.setProperty('--gradient-start', this.value);
+});
+```
+
 ## Array Cardio 1 
 
 ### sort
