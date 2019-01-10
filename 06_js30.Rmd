@@ -293,6 +293,7 @@ input.addEventListener('change', function(event) {
 With arrow functions as callback functions we do not get access to the `this` variable.  Instead it is set to the global window. This event listener logs the window instead of the value of the range <input> element that we added the event listener to.
 
 
+
 ```
 gradientStart.addEventListener('change', () => {
     console.log(this); // why is it logging the window?
@@ -748,3 +749,58 @@ We can use psuedoclasses to modify other elements using the following syntax. He
     transform: translateY(0) translateY(-10px);
 }
 ```
+
+## Slide in on scroll 
+
+### float:left 
+To get text to wrap around an element (in this case an `img`) we can set its `float` property.  This will cause elements like text to flow past it.
+
+### figure and figcaption
+In HTML5 we can use the `figure` tag to wrap an `img` or other element. Inside there we can also use the `figcaption` element to add a caption. 
+```
+<figure>
+  <img src="pic_trulli.jpg" alt="Trulli" style="width:100%">
+  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
+</figure>
+```
+
+### debounce 
+If we want to limit the rate at which a function is called.  For instance a callback function on a scroll event - we use a technique called debouncing.  This essentially limits how many times we can call a function in a certain time period.  We pass in a function - and specify how long in milliseconds we wait until it can be called again.
+
+```
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+```
+
+### scrollY
+The window object has a property called `scrollY` that shows where you are in the page based on it's Y-dimension.  
+```
+window.scrollY
+```
+
+### Y property 
+I think this property is initially positive for a DOM element, then when you scroll down it moves toward 0 - its 0 point is where the top of the DOM element is at the top of the scroll window.  Then it becomes negative.  
+
+### offSetTop
+Property of DOM elements that tells you how many px from the top of the page the beginning of an element is 
+
+### Summary
+Waiting on this until I do the project again. 
+
+### 
