@@ -803,4 +803,142 @@ Property of DOM elements that tells you how many px from the top of the page the
 ### Summary
 Waiting on this until I do the project again. 
 
-### 
+<hr>
+
+## Key Sequence 
+
+### splice 
+If we pass a negative argument into the `splice` methods first argument it will start from the back.  Remember that the first one is not included so we add another -1 when using this method.  If we pass a negative number or zero into splices second argument ("deleteCount") nothing will happen.  So on an array with 6 entries - calling splice with a negative second argument just reutrns an empty vector. This is useful if we want to dynamically check and only splice when it's positive. Interesting if we tell it to start splicing from an element further back than the initial entry (for example -7 would correspond to the index before 0, -10 to the -3 index etc.). It will still start splicing at 0 as if there wasn't an error. 
+
+```
+let arr = [1, 2, 3, 4, 5, 6]
+arr.splice(-7, 0);
+arr.splice(-7, -5);
+arr.splice(-10, 1);
+arr.splice(-1000, 1)'
+```
+
+## Reference vs. Copy 
+
+## Local Storage and Event Delegation
+For integers, characters, and booleans we can use the `=` sign to create a copy of something.  However if we use the `=` operator for arrays or objects it creates a pointer.  If we want to create copies of objects or arrays we need to use other methods of doing so, otherwise any changes will change the original as the second is just a pointer to the first one.  There are some examples of what is valid and invalide below:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2); // 100 100
+    age = 200; 
+    console.log(age, age2); // 200 100
+    // The value gets stored in the new variable - not a pointer to the first variable, so updating the first one won't change the second.
+      
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // and we want to make a copy of it.
+ /*   const team = players; 
+    console.log(players, team); // they're the same 
+      
+    // You might think we can just do something like this:
+    team[3] = 'Lux';
+    console.log(players); */
+    // We updated team -> team is just a reference to the original players array 
+    // When you use '=' syntax it creates a REFERENCE rather than a copy
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+
+    // one way
+    // Use slice()
+    const team2 = players.slice();
+    team2[3] = 'lux';
+    console.log(team2. players);
+    
+
+    // or create a new array and concat the old one in
+    const team3 = [].concat(players); 
+      
+    // or use the new ES6 Spread
+    const team4 = [...players];
+      
+    // or use Array.from()
+    const team5 = Array.from(players);
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+
+    // and think we make a copy:
+    const captain = person;
+    captain.age = 99;
+    console.log(person.age);
+
+    // how do we take a copy instead?
+    const captain2 = Object.assign({}, person, {age: 99})
+    // take a blank object, second arg is the object we want a copy of, then we can optionally overwrite or add properties with the third argument.
+
+    // We will hopefully soon see the object ...spread
+ /*   const cap3 = {...person};
+    console.log(cap3);*/
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const wes = {
+        name: 'Wes',
+        age: 100, 
+        social: {
+            twitter: '@wesbos',
+            facebook: 'wesbos.developer'
+        }
+    }
+    console.clear();
+    console.log(wes);
+    
+/*    const wes2 = Object.assign({}, wes, {age:25});
+    console.log(wes2);
+      
+    // Here are the references 
+    wes2.social.twitter = '@coolguy'; 
+    console.log(wes.social.twitter);*/
+    
+    // It only makes copies for the first level then uses references for the subsequent ones
+      
+    // JSON hack 
+    const dev3 = JSON.parse(JSON.stringify(wes));
+    dev3.social.twitter = '@coolguy';
+    console.log(wes.social.twitter);
+
+  </script>
+
+</body>
+</html>
+```
+
+### Change svg color
+To change the color of an svg element we use the `fill` style property. Here is an example with some other valid formatting applied to it. 
+
+```
+svg {
+    height: 250px;
+    width: 250px;
+    background: rgba(0, 0, 0, .2);
+    border-radius: 50%;
+    border: 20px solid rgba(0, 0, 0, 0);
+    fill: white;
+}}
+```
