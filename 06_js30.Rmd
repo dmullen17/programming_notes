@@ -819,8 +819,6 @@ arr.splice(-1000, 1)'
 ```
 
 ## Reference vs. Copy 
-
-## Local Storage and Event Delegation
 For integers, characters, and booleans we can use the `=` sign to create a copy of something.  However if we use the `=` operator for arrays or objects it creates a pointer.  If we want to create copies of objects or arrays we need to use other methods of doing so, otherwise any changes will change the original as the second is just a pointer to the first one.  There are some examples of what is valid and invalide below:
 
 ```
@@ -929,6 +927,25 @@ For integers, characters, and booleans we can use the `=` sign to create a copy 
 </html>
 ```
 
+<hr>
+
+## Local Storage and Event Delegation
+
+### Event Delegation 
+As an event bubbles up it can trigger on multiple elements. Especially if we have an event listener on a parent DOM element.  In these situations we can use event delegation - we listen for the event we want and add logic in the callback function that only triggers the function body on the DOM elements we want.  Example: 
+
+```
+function toggleDone(e) {
+    // console.log(e.target);
+    // Event delegation
+    if (!e.target.matches('input')) return; // skip unless it's an input
+    let index = e.target.dataset.index;
+    console.log(index);
+    items[index].done = !items[index.done];
+    localStorage.setItem('items', JSON.stringify(items));
+}
+```
+
 ### Change svg color
 To change the color of an svg element we use the `fill` style property. Here is an example with some other valid formatting applied to it. 
 
@@ -942,3 +959,57 @@ svg {
     fill: white;
 }}
 ```
+
+### input style 
+For some input styles it's necessary to override the default browser settings.  For instance you can't update padding without removing browser defaults.  Here's an example 
+
+```
+input[type='submit'] {
+    padding: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+```
+
+### event.target
+
+### Local Storage 
+We can access local storage using `window.localStorage`.  There are 5 methods to choose from using localStorage 
+
++ setItem(): Add key and value to LocalStorage
++ getItem(): Retrieve a value by the key from LocalStorage
++ removeItem(): Remove an item by key from LocalStorage
++ clear(): Clear all LocalStorage
++ key(): Passed a number to retrieve nth key of a LocalStorage
+
+To store arrays or objects you would have to convert them to strings. To do this we use the JSON.stringify() method before passing to setItem() .
+
+```
+const person = {
+    name: "Obaseki Nosa",
+    location: "Lagos",
+}
+window.localStorage.setItem('user', JSON.stringify(person));
+```
+
+#### Limitations 
+Do not store sensitive user information in localStorage. 
+It is not a substitute for a server based database as information is only stored on the browser. LocalStorage is limited to 5MB across all major browsers.
+LocalStorage is quite insecure as it has no form of data protection and can be accessed by any code on your web page.
+LocalStorage is synchronous. Meaning each operation called would only execute one after the other.
+
+### e.preventDefault();
+When working with a `submit` event it will refresh the page by default on most major browsers.  In the callback function if we call `    e.preventDefault();` it will prevent the default behavior and stop the page from re-loading.  This is useful for when we are writing the callback function and want to work with the local objects before they are removed by the refresh.  
+
+### Preserve Log
+If we check the Settings -> `preserve log` option in devtools it will preserve the log on a pageload and show you the source of a new page load.  This is useful when working with `submit` events that trigger this by default.
+
+### Call querySelector on this
+If we have multiple input forms it's a good idea to use the `this` object and `querySelector` to select the one being targetd by an event listener.
+```
+const text = this.querySelector('[name="item"]');
+```
+
+### form.reset()
+Form DOM elements have a method called `reset` that reverts it back to its placeholder value.  We usually call it by using `this.reset()` when using a callback function with an event listener.
