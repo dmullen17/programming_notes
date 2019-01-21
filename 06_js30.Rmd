@@ -375,6 +375,24 @@ transition:
 ### psuedo-classes
 List of psuedo classes: https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes
 
+### multiple psuedoclass rules 
+We can create multiple psuedoclass CSS rules for one CSS class.  In the following example we have one class: `open-active` with two different psuedoclass rules applied to it. When we apply the `open-active` class to the div element with class `panel` the psuedoclass rules are applied to its first and last children. 
+
+```
+.panel p:first-child {
+    transform: translateY(-100%);
+}
+.panel.open-active p:first-child {
+    transform: translateY(0);
+}
+.panel p:last-child {
+    transform: translateY(100%);
+}
+.panel.open-active p:last-child {
+    transform: translateY(0);
+}
+```
+
 ### flex: 1
 ```
 flex: 1; /* evenly distribute items among space */
@@ -1013,3 +1031,170 @@ const text = this.querySelector('[name="item"]');
 
 ### form.reset()
 Form DOM elements have a method called `reset` that reverts it back to its placeholder value.  We usually call it by using `this.reset()` when using a callback function with an event listener.
+
+
+<hr>
+
+
+## Text Shadow on mouse move
+
+### contenteditable
+The contenteditable global attribute is an enumerated attribute indicating if the element should be editable by the user. If so, the browser modifies its widget to allow editing.
+```
+<h1 contenteditable>😱 WOAHHHH!!</h1>
+```
+
+### ClientX, ScreenX, and PageX
+pageX and pageY:
+Relative to the top left of the fully rendered content area in the browser. This reference point is below the URL bar and back button in the upper left. This point could be anywhere in the browser window and can actually change location if there are embedded scrollable pages embedded within pages and the user moves a scrollbar.
+
+screenX and screenY:
+Relative to the top left of the physical screen/monitor, this reference point only moves if you increase or decrease the number of monitors or the monitor resolution.
+
+clientX and clientY:
+Relative to the upper left edge of the content area (the viewport) of the browser window. This point does not move even if the user moves a scrollbar from within the browser.
+
+### destructuring 
+Example of destructuring two `const` variables 
+```
+const hero = document.querySelector('.hero');
+const {offsetWidth: width, offsetHeight: height} = hero;
+```
+
+### mousemove with children 
+If we add a mousemove event listener on a parent element, then it's possible that `e.target` can change if we hover any of the children of the parent.  In this example we have the `.hero` div with h1 text inside of it.  If we hover over the h1 element we see that event.target changed, even though `this` is still equal to `.hero` because that's where we added the event listener.
+
+```
+const hero = document.querySelector('.hero');
+const text = hero.querySelector('h1');
+
+function shadow(e) {
+    // console.log(e);
+    const {offsetWidth: width, offsetHeight: height} = hero;
+    let {offsetX: x, offsetY: y} = e;
+    //console.log(x, y);
+    
+    // console.log(this, e.target); // we can see that this is usually the hero div, but if we hover over h1 that becomes the target
+    if (this !== e.target) {
+        x = x + e.target.offsetLeft;
+        y = y + e.target.offsetTop;
+    }
+}
+
+hero.addEventListener('mousemove', shadow);
+```
+
+### offsetLeft, offsetTop
+DOM elements have the 4 properties offSetLeft, Top, right, and bottom. These come in handy.  
+
+
+<hr> 
+
+## Sort with articles 
+
+### list-style: inside square
+Using `list-style: inside square` on a list element changes the round bullets to square ones and puts the bullet element inside the `<li>` item.  This is really useful if you want to underline the entire `<li>` element.  If you don't do this then the bullet lives in the padding and you can't underline it.  Calling `list-style: inside` is sufficient to create this effect. 
+
+```
+ul {
+    list-style: inside square;
+    padding: 0;
+    width: 40vw;
+    background: rgba(255, 255, 255, .7);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, .1); 
+}
+```
+
+### Sort with articles 
+The logic here uses arr.sort() which places an element below one if the result of a < b is negative.  We need the ternary there to make that logic work for characters.  Next, in the actual a < b comparison we want to exclude the articles.  For this we create a function called `removeArticles` and wrap a and b in it.  In this function we create an array of all the articles we want to exclude, wrapped in parentheses (regex group syntax), next we join then on '|' and create a new `RegExp` object so that we can pass that into the `string.replace` method.  Finally we call replace with the RegExp object, trim() any extra whitespace, and use `replace(/\s\s+/g, ' ')` to remove any instance of extra whitespace. 
+
+```
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+function removeArticles(input) {
+    const articles = ['(the)', '(a )', '(in )', '(as )', '(an )', '(and )', '(, )'];
+    const regex = new RegExp(articles.join('|'), 'gi');
+    return input.replace(regex, ' ').
+                                    trim().
+                                    replace(/\s\s+/g, ' ');
+}
+
+bands.sort((firstBand, secondBand) => {
+    return removeArticles(firstBand) < removeArticles(secondBand) ? -1 : 1; 
+})
+```
+
+## Reduce 
+
+Sum up a bunch of elements with time attributes that look like this:
+
+```
+<li data-time="5:43">
+      Video 1
+    </li>
+    <li data-time="2:33">
+```
+
+### querySelectorAll 
+We can use querySelectorAll to return all DOM elements that have an existing attribute. In this example we return all DOM elements that have a `data-time` attribute. 
+```
+  const timeNodes = document.querySelectorAll('[data-time]')
+```
+
+### Callback function only 
+When using a callback function we have the option of using the following syntax. This will call `parseFloat` on "6" and "10" separately.
+
+```
+"6.10".split(':').map(parseFloat)
+```
+
+<hr> 
+
+##Webcam
+
+### webcam syntax 
+The following syntax returns a video from the webcam.  A dialogue box asking permission appears.  The `getUserMedia` function returns a promise that then returns a local media stream.  We handle this media stream by setting it to the `video.src` property of the `video` element and calling `video.play()`
+
+```
+function getVideo() {
+    // returns a promise
+    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+        .then(localMediaStream => {
+        //console.log(localMediaStream);
+        // deprecated on chrome 
+        // video.src = window.URL.createObjectURL(localMediaStream);
+        video.srcObject = localMediaStream;
+        video.play();
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+```
+
+### takePhoto, document.createElement
+`canvas.toDataURL('image/jpeg')` changes the canvas to base 64 text data.  If we console log it we see it's just text. Next we create a link element `a` with `document.createElement`.  We set it's `href` attribute to the base 64 data object, `setAttribute('download', 'handsome')` sets the name when we download it, and `link.textContent = 'Download Image';` sets the name of the anchor element. Finally we call `.insertBefore` to put the anchor element above the strip div. 
+
+
+```
+function takePhoto() {
+    snap.currentTime = 0;
+    snap.play();
+    
+    // take the data out of the canvas
+    const data = canvas.toDataURL('image/jpeg');
+    console.log(data); //base 64 data 
+    const link = document.createElement('a');
+    link.href = data;
+    link.setAttribute('download', 'handsome');
+    link.textContent = 'Download Image';
+    strip.insertBefore(link, strip.firstChild);
+}
+```
+
+### getImageData 
+`getImageData` returns the pixels from a canvas context. It returns them in the form: 0: 201 = red pixels, 1: 243 = green pixel, etc.  It's usually millions of lines long. 
+
+```
+let pixels = ctx.getImageData(0, 0, width, height); // returns pixels in a large array of red, green, blue, alpha - repeating
+```
