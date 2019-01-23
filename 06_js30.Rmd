@@ -1223,8 +1223,8 @@ The following code creates a "select" dropdown menu
 
 ### radial-gradient
 
-E
-xample of creating a repeating semi-circle background pattern
+
+Example of creating a repeating semi-circle background pattern
 
 ```
 background-image:
@@ -1234,4 +1234,35 @@ background-image:
     radial-gradient(circle at 100% 50%, #42D2BB 5%, #3BC1AC 6%, #3BC1AC 15%, #42D2BB 16%, #42D2BB 20%, #3BC1AC 21%, #3BC1AC 30%, #42D2BB 31%, #42D2BB 35%, #3BC1AC 36%, #3BC1AC 45%, #42D2BB 46%, #42D2BB 49%, transparent 50%, transparent),
     radial-gradient(circle at 0    50%, #42D2BB 5%, #3BC1AC 6%, #3BC1AC 15%, #42D2BB 16%, #42D2BB 20%, #3BC1AC 21%, #3BC1AC 30%, #42D2BB 31%, #42D2BB 35%, #3BC1AC 36%, #3BC1AC 45%, #42D2BB 46%, #42D2BB 49%, transparent 50%, transparent);
     background-size:100px 50px;
+```
+
+### Web Speech API
+The Web Speech API makes web apps able to handle voice data. There are two components to this API:
+
+Speech recognition is accessed via the SpeechRecognition interface, which provides the ability to recognize voice context from an audio input (normally via the device's default speech recognition service) and respond appropriately. Generally you'll use the interface's constructor to create a new SpeechRecognition object, which has a number of event handlers available for detecting when speech is input through the device's microphone. The SpeechGrammar interface represents a container for a particular set of grammar that your app should recognise. Grammar is defined using JSpeech Grammar Format (JSGF.)
+Speech synthesis is accessed via the SpeechSynthesis interface, a text-to-speech component that allows programs to read out their text content (normally via the device's default speech synthesiser.) Different voice types are represented by SpeechSynthesisVoice objects, and different parts of text that you want to be spoken are represented by SpeechSynthesisUtterance objects. You can get these spoken by passing them to the SpeechSynthesis.speak() method
+
+### window.speechSynthesis 
+We use this to define a new synthesis object with `const synth = window.speechSynthesis`. This object has 4 basic properties:, onvoiceschanged: null, paused: false, pending: false, speaking: false.
+
+### speechSynthesis.getVoices()
+Returns an array of all available voices. They have the following format / properties. 
+
+```
+SpeechSynthesisVoice
+default: true
+lang: "en-US"
+localService: true
+name: "Alex"
+voiceURI: "Alex"
+```
+
+### Load function on page load 
+The only method I could to work was `setTimeOut`.  I'm not sure if this is because my function depends on the `const synth` variable already being created or not. 
+
+```
+// this was the only way I could get it to work. The following two methods didn't work
+// <body onload='populateVoiceSelect()'>
+// document.addEventListener('DOMContentLoaded', populateVoiceSelect);
+setTimeout(populateVoiceSelect, 20);
 ```
