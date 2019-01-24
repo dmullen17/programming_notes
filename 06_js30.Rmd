@@ -768,6 +768,53 @@ We can use psuedoclasses to modify other elements using the following syntax. He
 }
 ```
 
+### querySelector on attributes
+We can call `querySelector` to search for DOM elements with non-null attributes fields.  For instance here select all attributes with populated `data-skip` attributes.
+```
+const skipButtons = player.querySelectorAll('[data-skip]');
+```
+
+### play pause event
+The video element has `pause` and `play` events that fire when the video transitions from each state.  Here is a function and two event listeners to illustrate it. 
+
+```
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+```
+
+### timeupdate event
+The html5 video element has a `timeupdate` event that fires when the video updates it's time. There are some differences between browsers: Firefox fires the timeupdate event once per frame. Safari 5 and Chrome 6 fire every 250ms. Opera 10.50 fires every 200ms.
+
+### mousedown flag 
+On our scrubbing progress bar we want to be able to click and to hold the mousedown and drag to a point on it.  To do this we need a flag variable, we initialize it to false, and set it to true when we catch a mousedown event on the progress bar element, while it is true the 'mousemove' event listener will activate because it uses the mousedown flag variable in its callback function.  When we mouseup another event listener sets the flag to false. 
+
+```
+progress.addEventListener('click', scrub);
+let mousedown = false;
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
+progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+```
+
+### fullscreen
+There is a method called `requestFullScreen` in some variation depending on browser.  The details are below:
+
+```
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+```
+
+
+
 ## Slide in on scroll 
 
 ### float:left 
