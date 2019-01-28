@@ -1313,3 +1313,21 @@ The only method I could to work was `setTimeOut`.  I'm not sure if this is becau
 // document.addEventListener('DOMContentLoaded', populateVoiceSelect);
 setTimeout(populateVoiceSelect, 20);
 ```
+
+## Sticky Nav
+
+### position: fixed
+When we transition an element from position on a page to `fixed` the content can "jump" up - this is because the element is no longer up space on the page so stuff below it moves up accordingly. This is called a "reflow".  We need to offset this using padding.
+
+## Event propogation, capture, and bubbling.  
+
+When we click add an event listener for a click the event will bubble up through the DOM and trigger the callback function for each subsequent element.
+
+### Capture 
+A capture is when an event occurs - it will start at the top then go to the body, a subsequent, etc. until it reaches the stopping point.  It "captures" the event at each of these places but it hasn't fired yet. Then it will fire the event back up through the chain it just went down. In the `addEventListener` function the third arugment is set to `capture: false` by default.  If we set it to `{capture: true}` (remember it's an object) then it will run the callback function on the way down (html -> body -> etc.) rather than up.
+
+### e.stopPropogation()
+Using this function in a callback function will stop the event from bubbling up.
+
+### once 
+In the third argument of an event listener we can set ``{capture: true, once: true}` - which will unbind itself.  This is equivalent to `element.removeEventListener('click', callBack)`.   
