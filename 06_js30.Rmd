@@ -483,6 +483,47 @@ function displayMatches() {
 }
 ```
 
+### center li
+The following CSS will center `<li>` elements by removing their bullets points and the default value of `padding-right: 40px`.
+
+```
+ul {
+    list-style-type: none;
+    padding: 0; /* Centers the <li> with its box*/
+}
+```
+
+### transform: perspective
+When we use transform to rotate an element we want to add some perspective.  For instance if we rotate on it's X-axis by 3deg we can't really see this if we're too close or too far away.  A perspective of 100-200 px lets use see the rotation nicely.  
+
+```
+li:nth-child(even) {
+    transform: perspective(100px) rotateX(45deg) translateY(3px);
+    background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
+}
+```
+
+### linear-gradient to top
+Linear-gradient has options for specifying which way you want the gradient to go.  Here we use `to-top` and `to-bottom` to create a nice repeating pattern on odd and even child elements.
+
+```
+.suggestions li:nth-child(even) {
+  transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
+  background: linear-gradient(to bottom,  #ffffff 0%,#EFEFEF 100%);
+}
+
+.suggestions li:nth-child(odd) {
+  transform: perspective(100px) rotateX(-3deg) translateY(3px);
+  background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
+}
+```
+
+### justify-content: space-between;
+This setting pushes items apart.  If there are two items they will be aligned against the left and right walls of their container.
+
+### Summary 
+The first thing we do is fetch a list of cities and states using the fetch API. fetch(endpoint) returns a promise, which we use `.then` on the parse the blob of data is returns. We then call `.then` onces more to push the resulting array to our cities array. Next we create an input box with an unordered list.  We listen for a keyup event in the input element.  Our callback function first uses a RegExp object with `this.value` (the input that the user typed), and filters the list of cities down using the `match` method.  We then use the `map` method to return an `<li>` element for each combination of city, state, and population.  We wrap the city and state in a span, and the population in another span with different classes - for custom formatting.  Finally we use the `replace` method on city, and state to replace the regexp pattern with a span of class 'highlight' that wraps `this.value` in order to highlight the user's search in the results.  This is then set to one string using `join` and set to the `innerHTML` of the `ul`.
+
 <hr>
 
 ## HTML5 Canvas 
