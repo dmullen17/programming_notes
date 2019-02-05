@@ -494,7 +494,7 @@ ul {
 ```
 
 ### transform: perspective
-When we use transform to rotate an element we want to add some perspective.  For instance if we rotate on it's X-axis by 3deg we can't really see this if we're too close or too far away.  A perspective of 100-200 px lets use see the rotation nicely.  
+When we use transform to rotate an element we want to add some perspective.  For instance if we rotate on its X-axis by 3deg we can't really see this if we're too close or too far away.  A perspective of 100-200 px lets use see the rotation nicely.  
 
 ```
 li:nth-child(even) {
@@ -1456,5 +1456,89 @@ Lets the browser know how an element is expected to change so it can optimize th
 ### font-size: 0
 There is some whitespace between inline-block elements by default.  One way to remove this white space is to set `font-size: 0`.  There are other options listed here: https://css-tricks.com/fighting-the-space-between-inline-block-elements
 
+### e.pageX - slider.offsetLeft
+With this we can figure out where in an element we are.  `e.pageX` will normally return this on a mouse event, however if there is a margin it doesn't account for that.  So in this case `slider` is the element with the event listener, so we subtract its margin `slider.offsetLeft` (if any exists).
+```
+e.pageX - slider.offsetLeft
+```
+
+### console.log({x, startX})
+If we wrap the input of a console.log call in an object. It will output it in the following pretty-printed format: ```{x: 524, startX: 239}```
+
 ### Summary
 In this project we put x-number of divs side by side in a flex container.  We use the `display: inline-flex` and `overflow-x` properties to move them off the page.  The `perspective` and `transform` properties give them depth, and if you scroll these update based on where it is in the page. The JS logic uses `mouseup` and `mouseexit` as events that set our scrolling flag to `false`, `mousedown` sets it to true.  Next we define an initial variable `lastScreenX` and set it to 0.  If it's set to 0 our callback function will set it to the `event.clientX` and return.  If it's not set to 0 then it will set `this.scrollLeft += (event.clientX - lastScreenX)*-1` - which is the offset of how much we scrolled between two mousemove events.  We need to multiply by -1 because moving your mouse right should cause content to scroll left.
+
+### Wes's App logic 
+Wes used essentially the same logic as I did.  The event listeners were the same. Instead of continuously updating `slider.scrollLeft` by using +=, we logs its value and and the `startX` value on each `mousedown` event to reset the origins.  This is probably better than logic than I used by resetting it to 0 each time.  
+
+
+<hr> 
+
+
+## Video Speed Scrubber 
+
+### overflow: hidden
+The scrubber uses a `div` within another `div` to create the filled effect.  The parent div has a border-radius, but we don't want to apply that to the child because we want the bottom of the child to be a straight line.  The solution is to use `overflow: hidden` on the parent. Which will hide the outer edges of the child rectangle that exceed the parent's boundary. 
+
+### .toPrecision(1)
+We can call this method on a float to round it a certain number of significant digits. 
+
+```
+const x = 3.14159;
+x.toPrecision(1);
+```
+
+### mouseout vs. mouseleave 
+The `mouseout` event can be frustrating because it fires when the cursor leaves the selected element AND its child elements.  The `mouseleave` event is a good alternative to this because it only fires when the mouse leaves the selected element.
+
+<hr>
+
+## Countdown Clock 
+
+### setTimeout
+When you use a setTimeout, the code that follows it is not held up and waiting for the delay in time before it fires. It just fires regardless if the the setTimeout delay is done. So using a traditional for loop to fire off sequential setTimeout functions is no good. The loop will fire off all it’s iterations before the delay has finished firing once, preventing it from ever firing more than that one time.
+
+### timer function 
+Wes uses the same logic as I did, but he defines the global `countdown` variable so the function can be referenced outside the scope. He also creates a `then` variable which is the time the timer should stop in the future.  Each second we get the current time with the `Date.now()` method, and re-calculate how many seconds are remaining. 
+
+```
+let countdown; // could pop this in an IIFE to remove from global
+const timerDisplay = document.querySelector('.display__time-left');
+
+function timer(seconds) {
+    const now = Date.now(); //gives us the current time stamp
+    const then = now + seconds * 1000;
+    //console.log({now, then});
+    displayTimeLeft(seconds);
+    
+    countdown = setInterval(() => {
+        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        // check if we should stop 
+        if (secondsLeft <= -0) { // Math.round must set it to -0
+            //console.log('hi');
+            clearInterval(countdown);
+        }
+        // display it
+        displayTimeLeft(secondsLeft);
+    }, 1000);
+ }
+ ```
+ 
+### document.title 
+This is the DOM element that controls the `<title>` tag in the tab of a webpage.  We can dynamically update it to set it equal to the time remaining. 
+
+### Date.now()
+returns the number of milliseconds since Januaray 1st, 1970;
+
+### document.name 
+If a DOM element has a name attribute you can select it with `document.name`. If that element has children with name attributes you can then select those `document.name.name`.  
+
+```
+<form name="customForm" id="custom">
+    <input type="text" name="minutes" placeholder="Enter Minutes">
+</form>
+```
+We can select this DOM element with the following JS
+```
+document.customForm.minutes
+```
