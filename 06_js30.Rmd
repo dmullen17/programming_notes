@@ -1395,7 +1395,7 @@ y: 10
 ```
 
 ### why does display: block show it?
-The span only shows up when you have `display: block` enabled in its CSS.  Need to investigate this further.  
+The span only shows up when you have `display: block` enabled in its CSS.  Need to investigate this further.  -- This is probably not the case. 
 
 ### z-index
 z-index only works on positioned elements (position:absolute, position:relative, or position:fixed). You also cannot apply z-indexes to backgrounds.  So if I want to use the z-index technique in this tutorial I set it to 0 (so it's in front of backgrounds), and then z-indexes on other elements to higher numbers (1, 2, etc.).  
@@ -1414,7 +1414,10 @@ let x = 'hello world';
 triggers.forEach(trigger => trigger.addEventListener('mouseenter', callback(x)));
 ```
 
-### Summary
+### Sz-index: -1 
+If you set z-index: -1 then certain events like 'mouseenter' and 'click' will not trigger on the element.
+
+### ummary
 In this project we create a basic webpage. When we hover over anchor tags there is a <span> element that redirects behind these. It has a transition animation so we know it's only one <span> that moves around. We initialize the span element to the top of the page with height and width 0.  Next we add an event listener to each anchor tag with a callback function. The callback function uses `this.getBoundingClientRect()` to get the height, width, and x,y coordinates of the anchor tag.  We reset the span's height, width, and transform properties to these.  We also need to make a scroll adjustment - if we scroll then x,y coordinates will be off by the scroll - so we add these in to the `transform` property.  Finally the span's z-index is set to 0. This is so it will appear in front of backgrounds, but behind other elements with higher z-indices.  It's also important to note that in order to use a z-index property an element must also have a `position` property.
 
 <hr>
