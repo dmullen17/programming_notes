@@ -1,9 +1,54 @@
-# Miscellaneous JS 
+# Miscellaneous 
 
-## Web Scraping 
+## Basic Principles of Responsive Web Design 
+My notes from [9 Basic Principles of Responsive Web Design](http://blog.froont.com/9-basic-principles-of-responsive-web-design/)
 
-1. First create a new folder and run `npm init -y` to set up a `package.json` file. 
++ Responsive and adaptive are not the same thing
++ flow: as screen size becomes smaller, content takes up more vertical space and anything below it is pushed down - this is called `flow`.
++ use relative units - % instead of px
++ breakpoints - allow the layout to change at predefined points
++ use min and max values. A value of `width: 100%` on your phone could make sense but not on your tv.  In that case we could also set a `max-width: 1000px` for that use case. 
++ containers / nesting - wrap elements in containers so that the container can change shape / move, not each element which can get hard to control quickly.
++ webfonts look great but increase loading time, system fonts are much faster. 
++ Image scaling - if an image is going to scale watch out for pixelation - it might be better to use a vector (svg / icon font) to allow it to scale.
 
-2. Next we install two packages with `npm install axios cheerio`.  Axios is promise based HTTP client for the browser and node.js.  Cheerio is like jQuery for node.js - it makes it easier to select, edit, and view DOM elements.  
+## Emojis in HTML
+Emojis look like images but they're actually bucketed into the text category.  They're just characters, you can select, copy-paste, adjust their size, and they have a primitive numerical representation. 
+  
++ To use them we can either use them directly or specify their unicode representation.
++[Emojipedia](https://emojipedia.org/) is the best to go for copy-pasting emojis.
++In the `<head>` tag be sure to specify the charset as UTF-8 `<meta charset='UTF-8'>`.
++ HTML Codepoint: alternate way to represent an emoji 
+    + `&#xCodepoint` 
+    + for pizza the codepoint is: `&#x1F355`
+    + tells the browswer it's a unicode character
+    + F355 is its ID
++ CSS Codepoint: the format is `"\01F355"` for pizza.
++ Javascript: we use the `String.fromCodePoint()` method to specify a unciode representation. 
+    + we can also specify it directly as a string. 
++ Character Viewer - we can use the character viewer to see a full list of unicode characters available to us. To open it on mac the command is `crtl + command + space`
++ All characters are actually represented like this.  A is represented as `U+0041`.
+    
+Example: 
 
-3. 
+```
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Mouse move text shadow</title>
+    <link rel='stylesheet'>
+</head>
+<body>
+    <div class='container'>
+        <h1 id='emoji'>:P</h1>
+    </div>
+<script>
+    let emoji = document.querySelector('#emoji');
+    emoji.innerText = String.fromCodePoint(0x1F355);
+    emoji.innerText += '😛';
+</script>
+</body>
+</html>
+```
+
