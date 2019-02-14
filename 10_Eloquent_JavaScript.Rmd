@@ -1,0 +1,29 @@
+# Eloquent Javascript 
+
+## Introduction 
+Operators that use two values are called binary operators, while those that take one are called unary operators. The minus operator can be used both as a binary operator and as a unary operator. This is why the "ternary operator" is referred to by name is it's the only one in the language.
+  
+There is only one value in JavaScript that is not equal to itself, and that is NaN
+```
+console.log(NaN == NaN)
+```
+
+## Program Structure
+A fragment of code that produces a value is called an expression. Every value that is written literally (such as 22 or "psychoanalysis") is an expression. A statement is one or more expressions with a semicolon following them. 
+
++ `binding`: how a program defines its internal state (basically a variable declaration)
+    + a binding can't contain special characters except for $ and _ 
++ `environment`: The collection of bindings and their values that exist at a given time
++ console.log isn't actually a binding but invoking the `log` property of the console object 
+
+## Functions
+A function definition is a regular binding where the value of the binding is a function. 
+
+### Scope 
+Each binding has a scope, which is the part of the program in which the binding is visible. For bindings defined outside of any function or block, the scope is the whole program—you can refer to such bindings wherever you want. These are called global. 
+
++ Each function call has its own environment with instances of local bindingds 
++ bindings with let and const are local to the block they're declared in, but var bindings are visible in throughout the entire function or global scope - depending on where they're declared. 
++ Each scope can “look out” into the scope around it (i.e. functions can access the global environment scope)
+    + the exception is when a binding in a function scope shares a name with one in the global scope, it will access the one it its scope rather than "look out"
++ lexical scoping: Each local scope can also see all the local scopes that contain it, and all scopes can see the global scope.

@@ -1545,3 +1545,29 @@ We can select this DOM element with the following JS
 ```
 document.customForm.minutes
 ```
+
+## Stripe Follow Along
+Based on the CSS it looks when our mouse enters a `div` of class `dropdown` it will change the `display` property from `none` to `block`. Finally a div of class `dropdownbackground` follows the cursor around and cahnges to `opacity: 1` when it's active.
+
++ cms: content management system 
+
+### display: none;
+This property hides elements from the page, although they are there.
+
+## Arrow function vs. normal inheriting this 
+Arrow functions inherit the value of `this` from their parents while normal functions do not.  In this example `this` corresponds to an `<li>` element. In the first `setTimeout`, this refers to the window and it doesn't set the classList properly.  In the second one we use an arrow function and this corresponds to the `<li>` element. 
+
+```
+function handleEnter() {
+    this.classList.add('trigger-enter');
+    setTimeout(function() {
+        this.classList.add('trigger-enter-active')
+    }, 150);
+}
+
+function handleEnter() {
+    this.classList.add('trigger-enter');
+    setTimeout(() => this.classList.add('trigger-enter-active'), 150);
+}
+```
+

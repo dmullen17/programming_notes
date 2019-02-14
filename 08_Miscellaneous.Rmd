@@ -27,7 +27,7 @@ Emojis look like images but they're actually bucketed into the text category.  T
 + Javascript: we use the `String.fromCodePoint()` method to specify a unciode representation. 
     + we can also specify it directly as a string. 
 + Character Viewer - we can use the character viewer to see a full list of unicode characters available to us. To open it on mac the command is `crtl + command + space`
-+ All characters are actually represented like this.  A is represented as `U+0041`.
++ All characters are actually represented like this.  A is represented as `U+0041`. 
     
 Example: 
 
