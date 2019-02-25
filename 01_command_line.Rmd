@@ -111,3 +111,9 @@ ties.
 
 ### Move downloaded files to another folder 
 This command uses `ls -rtl` to list the contents of a folder in reverse download order.  I then pipe the results using `grep` to find the pattern that I want.  I then select the last 4 using `tail -4` since they are in chronological order from top-bottom.  
+
+### recursively find a file 
+This command recursively searches through all subdirectories of the second argument for the file witht name "foo".
+```
+find . -name "foo*"
+```

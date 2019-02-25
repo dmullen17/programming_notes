@@ -19,6 +19,14 @@ A fragment of code that produces a value is called an expression. Every value th
 ## Functions
 A function definition is a regular binding where the value of the binding is a function. 
 
+Function declaration: The following format is function declaration. This is not part of the top-bottom flow of a program and allows you to use functions anywhere, as long as they are declared at some point. 
+
+```
+function square(x) {
+  return x * x;
+}
+```
+
 ### Scope 
 Each binding has a scope, which is the part of the program in which the binding is visible. For bindings defined outside of any function or block, the scope is the whole program—you can refer to such bindings wherever you want. These are called global. 
 
@@ -27,3 +35,4 @@ Each binding has a scope, which is the part of the program in which the binding 
 + Each scope can “look out” into the scope around it (i.e. functions can access the global environment scope)
     + the exception is when a binding in a function scope shares a name with one in the global scope, it will access the one it its scope rather than "look out"
 + lexical scoping: Each local scope can also see all the local scopes that contain it, and all scopes can see the global scope.
+

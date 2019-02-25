@@ -52,3 +52,14 @@ Example:
 </html>
 ```
 
+### Parentheses in regex 
+When using parentheses in regex they can denote a pattern we want to extract, then keep looking for more matches.  For instance in this function we pass in an `element.style.background` property in rgb format and extract the red, blue, and green components.  From there the function adds an offset to them. Something important to note is that the `.match` string method returns all characters that it matched up to and including the parentheses as `match[0]`.
+
+```
+function rgbColorOffset(rgbString, offset) {
+    const matches = rgbString.match(/^rgb\((\d+),\s(\d+),\s(\d+)/);
+    const colors = [matches[1], matches[2], matches[3]];
+    return `rgb(${colors.map(color => (parseInt(color) - 255) * -1).join(',')})`;
+}
+```
+
