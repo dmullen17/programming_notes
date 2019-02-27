@@ -63,3 +63,10 @@ function rgbColorOffset(rgbString, offset) {
 }
 ```
 
+### innerText vs textContent 
+`innerText` was non-standard, while `textContent` was standardized earlier.
+`innerText` returns the visible text contained in a node, while `textContent` returns the full text. For example, on the following HTML <span>Hello <span style="display: none;">World</span></span>, innerText will return 'Hello', while textContent will return 'Hello World'. For a more complete list of differences, see the table at http://perfectionkills.com/the-poor-misunderstood-innerText/.
+As a result, innerText is much more performance-heavy: it requires layout information to return the result. https://kellegous.com/j/2013/02/27/innertext-vs-textcontent/
+
++ `innerText` is not present in firefox
++ Opera, merely computes textContent when you try to access innerText
