@@ -70,3 +70,11 @@ As a result, innerText is much more performance-heavy: it requires layout inform
 
 + `innerText` is not present in firefox
 + Opera, merely computes textContent when you try to access innerText
+
+
+### Advice for JR devs
+
++ write small, bite-sized divs.  Each commit should handle one thing
++ overengineered code.  Long functions, random helpers, too many if statements (write a design doc to organize)
++ APM - actions per minute, spend more of your time developing vs. reddit
++ don't have pride / ego - be open to suggestions / criticism 

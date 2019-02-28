@@ -1,0 +1,83 @@
+## Backbone
+
+In a finished Backbone app, you don't have to write the glue code that looks into the DOM to find an element with a specific id, and update the HTML manually — when the model changes, the views simply update themselves.
+  
+Model
+  
++ Orchestrates data and business logic.
++ Loads and saves data from the server.
++ Emits events when data changes.
+
+View
+  
++ Listens for changes and renders UI.
++ Handles user input and interactivity.
++ Sends captured input to the model.
+
+A Model manages an internal table of data attributes, and triggers "change" events when any of its data is modified. Models handle syncing data with a persistence layer — usually a REST API with a backing database. Design your models as the atomic reusable objects containing all of the helpful functions for manipulating their particular bit of data. Models should be able to be passed around throughout your app, and used anywhere that bit of data is needed.
+
+A View is an atomic chunk of user interface. It often renders the data from a specific model, or number of models — but views can also be data-less chunks of UI that stand alone. Models should be generally unaware of views. Instead, views listen to the model "change" events, and react or re-render themselves appropriately.
+
+### Backbone logic 
+From the client side the `Router` makes an HTTP request.  For instance (https://test.arcticdata.io/view/urn:uuid:375de5f7-d5cc-483e-b23b-a5199df73111) is an HTTP request.  From there it accesses `Views` and locates what it needs to render based on the request. When a view `event` is fired it will update the `Model`s based on the event which in turn updates the data source.  Then when the Models are updated they in turn update how the `Views` are rendered. 
+
+### Creating a View
+The following syntax creates a backbone View using the `.extend` method. Then we create a new instance of the `AppView` view and call it newView.  The `initialize` property is run automatically on creation of a new object. 
+
+```
+  var AppView = Backbone.View.extend({
+          initialize: function() {
+              this.renderView();
+              console.log('intialize runs by itself');
+          },
+          renderView: function() {
+              console.log('Hello World');
+          }
+      });
+      const newView = new AppView();
+      //newView.renderView();
+```
+
+
+Views create an empty div as a DOM element by default. We need to select a DOM element to pass to a view.
+
+### this.$el
+`this.$el` creates a `div` element. If we don't specifiy which div we want to replace in the `el` property then it just logs an empty div 
+
+```
+      var FirstView = Backbone.View.extend({
+          initialize: function() {
+              this.render();
+          },
+          render: function() {
+              this.$el.html('hello from the other side');
+              console.log(this.$el);
+          }
+      });
+      var fView = new FirstView({
+          //el: '#content'
+      });
+```
+
+### tagName, className, and Id
+When creating a view we can specify the `tagName` (type of DOM element), the `className` (CSS class), and an id. It seems like this only works if we do not specify `el` when creating a new View.  This is why `//el: '#content';` is commented out.
+
+```
+    // Setting a tagName, className, and id
+      const SecondView = Backbone.View.extend({
+          tagName: 'a', // this will create an anchor element
+          className: 'some-class',
+          id: 'some-id',
+          initialize: function() {
+              this.render();
+          },
+          render: function() {
+              this.$el.html('second view message');
+              console.log(this.$el);
+          }
+      });
+      const SView = new SecondView({
+          //el: '#content';
+      });
+```
+
