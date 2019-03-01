@@ -1,5 +1,6 @@
-## Backbone
+# Backbone
 
+## Introduction
 In a finished Backbone app, you don't have to write the glue code that looks into the DOM to find an element with a specific id, and update the HTML manually — when the model changes, the views simply update themselves.
   
 Model
@@ -21,7 +22,7 @@ A View is an atomic chunk of user interface. It often renders the data from a sp
 ### Backbone logic 
 From the client side the `Router` makes an HTTP request.  For instance (https://test.arcticdata.io/view/urn:uuid:375de5f7-d5cc-483e-b23b-a5199df73111) is an HTTP request.  From there it accesses `Views` and locates what it needs to render based on the request. When a view `event` is fired it will update the `Model`s based on the event which in turn updates the data source.  Then when the Models are updated they in turn update how the `Views` are rendered. 
 
-### Creating a View
+## Views
 The following syntax creates a backbone View using the `.extend` method. Then we create a new instance of the `AppView` view and call it newView.  The `initialize` property is run automatically on creation of a new object. 
 
 ```
@@ -80,4 +81,78 @@ When creating a view we can specify the `tagName` (type of DOM element), the `cl
           //el: '#content';
       });
 ```
+
+### el vs $el
+By default backbone sets `this.el` to an empty div (a DOM element) and `this.$el` is a jQuery object that points to it. If we set a `tagName` then it will update the it to the provided element.
+
+
+## Models
+The following example shows using the Model constructor.  We create two instances of the shop model and use the `get` and `set` methods on its attributes.  You can also access them manually by `shopName.attributes.attributeName`.
+
+```
+      // Models
+      // Create the Shop constructor? 
+      const Shop = Backbone.Model.extend({
+          defaults: {
+              brand: '',
+              type: '',
+              price: 0,
+              stock: 0
+          }
+      });
+      
+      // Create two Shop Model instances 
+      const firstShop = new Shop({
+          brand: 'Wilson',
+          type: 'Basketball',
+          price: 60,
+          stock: 10
+      });
+      const secondShop = new Shop({
+          brand: 'TF-1000',
+          type: 'basketball'
+      });
+      secondShop.attributes.price = 59.99;
+      secondShop.attributes.stock = 12;
+      
+      // Use get and set methods 
+      secondShop.get('brand');
+      secondShop.set('price', 100);
+      console.log(secondShop.get('price'));
+```
+
+
+## Collections 
+Collections are ordered sets of models. You can bind some events to be notified when any model in the collection has been modified. Events such as change, add, remove.
+
+```
+      // Create a Collection of Shops 
+      const ShopCollection = Backbone.Collection.extend({
+          model: Shop
+      });
+      const shopCollection = new ShopCollection;
+      shopCollection.add(firstShop);
+      shopCollection.add(secondShop);
+      console.log(shopCollection);
+      console.log(shopCollection.models);
+      
+      // Underscore each method to iterate over models
+      shopCollection.each((shop) => {
+          console.log(shop.get('brand'));
+          console.log(shop.get('price'));
+      });
+```
+
+## Views 2
+The views handle user input and interactivity, renders data from the model and also sends captureed input back to the model. The views listen to the model "change" events, and react or re-render themselves appropriately.
+
+
+## Notes from Backbone-fundamentals 
+
++ Backbone is a MV* framework.  It has models and views but the distinct controller functionality is baked into the Views / other components. 
++ SPA - web applications that load into the browser and then react to data changes on the client side without requiring complete page refreshes from the server
++ spaghetti code - unstructured and difficult-to-maintain source code
+
+
+
 
