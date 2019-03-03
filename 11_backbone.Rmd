@@ -151,7 +151,34 @@ The views handle user input and interactivity, renders data from the model and a
 
 + Backbone is a MV* framework.  It has models and views but the distinct controller functionality is baked into the Views / other components. 
 + SPA - web applications that load into the browser and then react to data changes on the client side without requiring complete page refreshes from the server
+    + the goals of SPAs is to improve latency (the time before a page something loads after reciving a request).  After the initial page loads they're able to run faster as subsequent navigations and requests for data don't require new page loads. 
 + spaghetti code - unstructured and difficult-to-maintain source code
+
+### When to choose MV*
+If you’re writing an application where much of the heavy lifting for view rendering and data manipulation will be occurring in the browser, you may find a JavaScript MV* framework useful. Examples of applications that fall into this category are GMail, NewsBlur and the LinkedIn mobile app.
+
+These types of applications typically download a single payload containing all the scripts, stylesheets, and markup users need for common tasks and then perform a lot of additional behavior in the background. For instance, it’s trivial to switch between reading an email or document to writing one without sending a new page request to the server.
+
+If, however, you’re building an application that still relies on the server for most of the heavy-lifting of page/view rendering and you’re just using a little JavaScript or jQuery to make things more interactive, an MV* framework may be overkill. There certainly are complex Web applications where the partial rendering of views can be coupled with a single-page application effectively, but for everything else, you may find yourself better sticking to a simpler setup.
+
+I think this relates to metacatUI b/c you're constantly moving around - switching from package to package and search to search - ask Chris about this 
+
+
+### MVC with the web 
+The web heavily relies on the HTTP protocol, which is stateless. This means that there is not a constantly open connection between the browser and server; each request instantiates a new communication channel between the two. Once the request initiator (e.g. a browser) gets a response the connection is closed. This fact creates a completely different context when compared to one of the operating systems on which many of the original MVC ideas were developed. The MVC implementation has to conform to the web context.
+
+### Front Controller Example 
+The way I understand this is that the controller handles everything. It branches off actions based off the request (usually HTTP).
+
+**The Server receives an HTTP request and routes it through a single entry point. At that entry point, the Front Controller analyzes the request and, based on it, invokes an Action of the appropriate Controller. This process is called routing. The Action Model is asked to return and/or save submitted data. The Model communicates with the data source (e.g., database or API). Once the Model completes its work it returns data to the Controller which then loads the appropriate View. The View executes presentation logic (loops through articles and prints titles, content, etc.) using the supplied data. In the end, an HTTP response is returned to the browser.**
+
+For example, let’s say we have our blog on www.example.com and we want to edit an article (with  id=43) and request http://www.example.com/article/edit/43:
+
+On the server side, the Front Controller would analyze the URL and invoke the Article Controller (corresponding to the /article/ part of the URI) and its Edit Action (corresponding to the /edit/ part of the URI). Within the Action there would be a call to, let’s say, the Articles Model and its Articles::getEntry(43) method (43 corresponding to the /43 at the end of the URI). This would return the blog article data from the database for editing. The Article Controller would then load the (article/edit) View which would include logic for injecting the article’s data into a form suitable for editing its content, title, and other (meta) data. Finally, the resulting HTML response would be returned to the browser.
+
+As you can imagine, a similar flow is necessary with POST requests after we press a save button in a form. The POST action URI would look like /article/save/43. The request would go through the same Controller, but this time the Save Action would be invoked (due to the  /save/ URI chunk), the Articles Model would save the edited article to the database with  Articles::saveEntry(43), and the browser would be redirected to the /article/edit/43 URI for further editing.
+
+Finally, if the user requested http://www.example.com/ the Front Controller would invoke the default Controller and Action; e.g., the Index Controller and its Index action. Within Index Action there would be a call to the Articles model and its Articles::getLastEntries(10) method which would return the last 10 blog posts. The Controller would load the blog/index View which would have basic logic for listing the blog posts.
 
 
 
