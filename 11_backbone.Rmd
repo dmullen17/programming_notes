@@ -89,6 +89,11 @@ By default backbone sets `this.el` to an empty div (a DOM element) and `this.$el
 ## Models
 The following example shows using the Model constructor.  We create two instances of the shop model and use the `get` and `set` methods on its attributes.  You can also access them manually by `shopName.attributes.attributeName`.
 
++ `persistence` - models in real-world applications require persistence that allows us to edit and updat them such that their recent states will be saved somewhere. Example: localStorage or synchronized with a database
++ a model can have multiple views observing it for changes. 
++ It's useful for listen for changes on `Collection`s rather than `Model`s so that we don't have to re-write individual logic per model. This is similar to adding an event listener on a parent div.
+
+
 ```
       // Models
       // Create the Shop constructor? 
@@ -146,13 +151,14 @@ Collections are ordered sets of models. You can bind some events to be notified 
 ## Views 2
 The views handle user input and interactivity, renders data from the model and also sends captureed input back to the model. The views listen to the model "change" events, and react or re-render themselves appropriately.
 
-
 ## Notes from Backbone-fundamentals 
 
 + Backbone is a MV* framework.  It has models and views but the distinct controller functionality is baked into the Views / other components. 
 + SPA - web applications that load into the browser and then react to data changes on the client side without requiring complete page refreshes from the server
     + the goals of SPAs is to improve latency (the time before a page something loads after reciving a request).  After the initial page loads they're able to run faster as subsequent navigations and requests for data don't require new page loads. 
 + spaghetti code - unstructured and difficult-to-maintain source code
++ XHR (XMLHttpRequest), typically communicating with a server-side REST API or endpoint
+    + Ajax (Asynchronous JavaScript and XML) makes communication with the server asynchronous so that data is transferred and processed in the background, allowing the user to interact with other parts of a page without interruption. This improves usability and responsiveness.
 
 ### When to choose MV*
 If you’re writing an application where much of the heavy lifting for view rendering and data manipulation will be occurring in the browser, you may find a JavaScript MV* framework useful. Examples of applications that fall into this category are GMail, NewsBlur and the LinkedIn mobile app.
@@ -179,6 +185,149 @@ On the server side, the Front Controller would analyze the URL and invoke the Ar
 As you can imagine, a similar flow is necessary with POST requests after we press a save button in a form. The POST action URI would look like /article/save/43. The request would go through the same Controller, but this time the Save Action would be invoked (due to the  /save/ URI chunk), the Articles Model would save the edited article to the database with  Articles::saveEntry(43), and the browser would be redirected to the /article/edit/43 URI for further editing.
 
 Finally, if the user requested http://www.example.com/ the Front Controller would invoke the default Controller and Action; e.g., the Index Controller and its Index action. Within Index Action there would be a call to the Articles model and its Articles::getLastEntries(10) method which would return the last 10 blog posts. The Controller would load the blog/index View which would have basic logic for listing the blog posts.
+
+
+### ToDo View Example 
+
+```
+var TodoView = Backbone.View.extend({
+
+  tagName:  'li',
+
+  // Cache the template function for a single item.
+  todoTpl: _.template( $('#item-template').html() ),
+
+  events: {
+    'dblclick label': 'edit',
+    'keypress .edit': 'updateOnEnter',
+    'blur .edit':   'close'
+  },
+
+  // Called when the view is first created
+  initialize: function() {
+    this.$el = $('#todo');
+    // Later we'll look at:
+    // this.listenTo(someCollection, 'all', this.render);
+    // but you can actually run this example right now by
+    // calling todoView.render();
+  },
+
+  // Re-render the titles of the todo item.
+  render: function() {
+    this.$el.html( this.todoTpl( this.model.attributes ) );
+    // $el here is a reference to the jQuery element
+    // associated with the view, todoTpl is a reference
+    // to an Underscore template and model.attributes
+    // contains the attributes of the model.
+    // Altogether, the statement is replacing the HTML of
+    // a DOM element with the result of instantiating a
+    // template with the model's attributes.
+    this.input = this.$('.edit');
+    return this;
+  },
+
+  edit: function() {
+    // executed when todo label is double clicked
+  },
+
+  close: function() {
+    // executed when todo loses focus
+  },
+
+  updateOnEnter: function( e ) {
+    // executed on each keypress when in todo edit mode,
+    // but we'll wait for enter to get in action
+  }
+});
+
+// create a view for a todo
+var todoView = new TodoView({model: myTodo});
+```
+
+Notes for this view: 
+
++ the `events` attribute fulfills the role of the Controller configuration.  It defines the action (callback function) that occurs for each event specified. 
++ Users interact with views - which usually means reading and editing Model data 
++ We define a render() utility within our View which is responsible for rendering the contents of the Model using a JavaScript templating engine (provided by Underscore.js) and updating the contents of our View, referenced by this.$el
++ We then add our `render()` callback as a Model subscriber, so the View can be triggered to update when the Model changes
+
+
+## Templating 
+It has long been considered bad practice (and computationally expensive) to manually create large blocks of HTML markup in-memory through string concatenation. Templating libraries are often used to define templates for Views as HTML markup. Variables are delimited using a variable syntax (e.g `<%= title %>` for Underscore and `{{title}}` for Handlebars).
+
+## Model Examples 
+
+### initialize and defaults
+We can set `default` attributes and an initialize function when defining a model.
+```
+var myTodo = Backbone.Model.extend({
+    initialize: function() {
+      console.log('myTodo model initialized');
+    },
+    // default attribuet values 
+    defaults: {
+        title: '',
+        completed: false,
+        name: 'Dom'
+    }
+});
+```
+
+### .toJSON()
+If you need to read or clone all of a model’s data attributes, use its toJSON() method. This method returns a copy of the attributes as an object (not a JSON string despite its name). (When JSON.stringify() is passed an object with a toJSON() method, it stringifies the return value of toJSON() instead of the original object. The examples in the previous section took advantage of this feature when they called JSON.stringify() to log model instances.)
+
+```
+    var myTodoList = new myTodo(); 
+    console.log(myTodoList.toJSON());
+    console.log(JSON.stringify(myTodoList));
+    // these output of the second call is the stringified version of the first call 
+```
+
+### Model.set()
+Model.set() sets a hash containing one or more attributes on the model. When any of these attributes alter the state of the model, a “change” event is triggered on it. Change events for each attribute are also triggered and can be bound to (e.g. change:name, change:age).  We can also pass `{silent: true}` to `.set()` in order to remove the event. 
+
+```
+    // Set one attribute at a time 
+    myTodoList.set('title', 'shopping list');
+    // Set both attributes at once
+    myTodoList.set({
+        title: 'shopping list updated',
+        completed: true
+    });
+```
+
+### Events and Direct Access 
+We can create attribute-specific event handlers by referencing `event:hash` in callback function declarations.  These are triggered when the attributes are changed or whatever other event occurs on them.  However if you update them directly through the exposed `.attributes` property, then these events won't be triggered. 
+
+```
+    // Add a name change handler - notice that we add this to the instance not the Model itself
+    me.on('change:name', function() {
+        console.log(`Name changed to ${this.attributes.name}`); 
+    });
+    me.set({name: 'Kobe'});
+    // If we set it manually through .attributes it won't call this function 
+    me.attributes.name = 'Snoopy';
+    me.set({name: 'Lebron'}, {silent: true});
+    console.log(me.get('name')); 
+```
+
+A good place to add listeners in is in the `initialize` function. Note that changing more than one attribute at once only calls the function once. 
+
+```
+    // Add a listener in the initialize functions 
+    var Person = Backbone.Model.extend({
+        defaults: {
+            name: '',
+            species: 'Human'
+        },
+        initialize: function() {
+            console.log(`New human ${this.attributes.name}!`);
+            this.on('change', () => {console.log('attributes changed!');});
+        }
+    });
+    var me = new Person({name: 'Dom'});
+    me.set({name: 'Steph'});
+```
 
 
 
