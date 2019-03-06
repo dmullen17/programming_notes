@@ -329,6 +329,84 @@ A good place to add listeners in is in the `initialize` function. Note that chan
     me.set({name: 'Steph'});
 ```
 
+### validation 
+Backbone supports model validation through model.validate(), which allows checking the attribute values for a model prior to setting them. By default, validation occurs when the model is persisted using the save() method or when set() is called if {validate:true} is passed as an argument.  
+We can also add attribute-specific listeners and define methods directly in the Model object - "setTitle" in this example. 
+
+```
+    // Add an attribute specific listener
+    var Movie = Backbone.Model.extend({
+        defaults: {
+            title: '',
+            length: 0
+        },
+        initialize: function() {
+            console.log('Movie initialized');
+            this.on('change:title', () => {console.log('Movie title updated!');});
+        },
+        validate: function(attributes) {
+            if (attributes.title == '') {
+                return('Remember to set a title for your movie');
+            }
+        },
+        // we can also call .set methods in defined methods 
+        setTitle: function(newTitle) {
+            this.set('title', newTitle);
+        }
+    });
+    var batman = new Movie({title: 'Batman Begins', 'length': '150'});
+    batman.setTitle('The Dark Knight');
+    batman.set('length', 165); // function was not called
+    // Test validation 
+    var newMovie = new Movie();
+    newMovie.validate(newMovie.attributes);
+```
 
 
+## Views
+Views in Backbone don’t contain the HTML markup for your application; they contain the logic behind the presentation of the model’s data to the user. This is usually achieved using JavaScript templating (e.g., Underscore Microtemplates, Mustache, jQuery-tmpl, etc.). A view’s render() method can be bound to a model’s change() event, enabling the view to instantly reflect model changes without requiring a full page refresh.
 
+
+### el
+el is basically a reference to a DOM element and all views must have one. Views can use el to compose their element’s content and then insert it into the DOM all at once, which makes for faster rendering because the browser performs the minimum required number of reflows and repaints. **There are two ways to associate a DOM element with a view: a new element can be created for the view and subsequently added to the DOM (el) or a reference can be made to an element which already exists in the page (referance an element by id for instance).**
+
+#### Create a new element for your view 
+If you want to create a new element for your view, set any combination of the following properties on the view: tagName, id, and className. A new element will be created for you by the library and a reference to it will be available at the el property. If nothing is specified  tagName defaults to div.  
+This is why the `tagName` property doesn't work if I use a jQuery selector to select an element by `Id` - it won't overwrite an already existing element - we should instead create a new one.
+
+```
+    // Create a new element for the view 
+    // Assigning className and Ids are optional 
+    var TodoView = Backbone.View.extend({
+        tagName: 'ul',
+        className: 'container homepage myClass', // we can assign multiple classes
+        id: 'toDos'
+    });
+    var TodosView = new TodoView();
+    console.log(TodosView.el);
+```
+
+#### Set el to pre-existing DOM element
+We can specify where to render a view by manually setting `el: #id` in the constructor.  If we this we can see that setting `el` to an element overrides the 'tagName', 'className', and 'id' attributes, and ignores these in favor of those present on the selected DOM element.
+
+```
+    // Set el to a pre-existing div (<div id='container'>Container</div>)
+    var TodoView = Backbone.View.extend({
+        tagName: 'ul',
+        className: 'container homepage myClass', // we can assign multiple classes
+        id: 'toDos',
+        el: '#container'
+    });
+    var TodosView = new TodoView();
+    console.log(TodosView.el); // we can see that setting el to an element overrides the 'tagName', 'className', and 'id' attributes.
+```
+
+### setElement
+### .trigger()
+If you need to apply an existing Backbone view to a different DOM element `setElement` can be used for this purpose. Overriding `this.el` needs to both change the DOM reference and re-bind events to the new element (and unbind from the old).
+setElement will create a cached $el reference for you, moving the delegated events for a view from the old element to the new one.
+
+`.trigger()` - mimics the event that you pass into it.
+
+
+### render 
