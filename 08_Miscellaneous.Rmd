@@ -78,3 +78,53 @@ As a result, innerText is much more performance-heavy: it requires layout inform
 + overengineered code.  Long functions, random helpers, too many if statements (write a design doc to organize)
 + APM - actions per minute, spend more of your time developing vs. reddit
 + don't have pride / ego - be open to suggestions / criticism 
+
+
+## Chai.js
+
+Automated tests: 
+
++ Unit tests: A single piece of code (usually an object or a function) is tested, isolated from other pieces
++ Integration tests: Multiple pieces are tested together, for example testing database access code against a test database
++ Acceptance tests (also called Functional tests): Automatic testing of the entire application, for example using a tool like Selenium to automatically run a browser.
+
+Test Driven Development
+TDD or Test-Driven Development is a process for when you write and run your tests. Following it makes it possible to have a very high test-coverage. Test-coverage refers to the percentage of your code that is tested automatically, so a higher number is better. TDD also reduces the likelihood of having bugs in your tests, which can otherwise be difficult to track down.
+
++ Start by writing a test
++ Run the test and any other tests. At this point, your newly added test should fail. If it doesn’t fail here, it might not be testing the right thing and thus has a bug in it.
++ Write the minimum amount of code required to make the test pass
++ Run the tests to check the new test passes
++ Optionally refactor your code
++ Repeat from 1
+
+BDD - Behavior Driven Development 
+BDD states that you test behavior - not implemantation.
+
+This examples tests `implementation` because we're assuming that `counter.count` starts at 0.  However this could change based on our needs.
+```
+suite('Counter', function() {
+  test('tick increases count to 1', function() {
+    var counter = new Counter();
+ 
+    counter.tick();
+ 
+    assert.equal(counter.count, 1);
+  });
+});
+```
+
+This example tests `behavior` because we do not assume that `counter.count` starts anywhere.  Instead we test that `counter.count` has been incremented by one after calling `counter.tick()` - thus it could have been initialized to any starting value and the test would pass. 
+
+```
+describe('Counter', function() {
+  it('should increase count by 1 after calling tick', function() {
+    var counter = new Counter();
+    var expectedCount = counter.count + 1;
+ 
+    counter.tick();
+ 
+    assert.equal(counter.count, expectedCount);
+  });
+});
+```

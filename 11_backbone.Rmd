@@ -614,4 +614,4 @@ File exists in src/js/collections.ObjectFormats.js
 From the model attribute we see that this is a Collection of the Objectformat model in `src/models/formats/Objectformat.js`. Basic overview of the app logic can be found here: https://github.com/NCEAS/metacatui/blob/master/docs/design/editor/images/editor-design.png
 
 ### Entry point 
-index.html is the entry point - We can see the `loading-app` icon there 
+index.html is the entry point - We can see the `loading-app` icon there.  Afterwards it pulls in `src=metacatui/loader.js?v=2.5.1`.  
