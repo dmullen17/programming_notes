@@ -615,3 +615,5 @@ From the model attribute we see that this is a Collection of the Objectformat mo
 
 ### Entry point 
 index.html is the entry point - We can see the `loading-app` icon there.  Afterwards it pulls in `src=metacatui/loader.js?v=2.5.1`.  
+
+## Collections
