@@ -121,3 +121,10 @@ find . -name "foo*"
 ### zip a folder without including folder paths 
 The option `-j` refers to junk file paths.  This will zip up the contents of a folder but remove the directory strucutre.  I used this in R when I had to automate creating zip archives.  The initial zip archives I created included the following folder structure: `/home/visitor/McPherson/ADC_Bathymetric_Data_Corrected/NAD83/Garmin/E4_Lake_GIS_Files/E4_Area/E4_Area_20060620.shx` when all I need was for them to be zipped up in an `E4_Area` folder. 
 
+### get file MIME Type
+[More information](https://stackoverflow.com/questions/29017725/how-do-you-change-the-mime-type-of-a-file-from-the-terminal). MIME type comes from lots of different places depending on OS and web browswer. In Mac OS, mime type is actually set on downloaded files.  We can access it using the following terminal command:
+
+```
+file --mime-type -b science_metadata.xml
+```
+
