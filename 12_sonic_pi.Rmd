@@ -1,0 +1,44 @@
+## Sonic Pi
+
+
+### Samples
+When you stretch a sound out so it's twice as long it plays an ocatve lower. We can also play sounds backwards by applying `rate: -1` 
+```
+sample :ambi_choir, rate: 0.5 
+```
+A useful way to think of samples is as springs. Playback rate is like squashing and stretching the spring. If you play the sample at rate 2, you’re squashing the spring to half its normal length. The sample therefore takes half the amount of time to play as it’s shorter. If you play the sample at half rate, you’re stretching the spring to double its length. The sample therefore takes twice the amount of time to play as it’s longer. The more you squash (higher rate), the shorter it gets, the more you stretch (lower rate), the longer it gets. 
+Compressing a spring increases its density (the number of coils per cm) - this is similar to the sample sounding higher pitched. Stretching the spring decreases its density and is similar to the sound having a lower pitch. 
+
+#### Waveform 
+It’s called the waveform of a sample. It’s just a graph of numbers. Typically a waveform like this will have 44100 points of data per second (this is due to the Nyquist-Shannon sampling theorem). So, if the sample lasts for 2 seconds, the waveform will be represented by 88200 numbers which we would feed to the speaker at a rate of 44100 points per second. We can represenet it with this formula: `new_sample_duration = (1 / rate) * sample_duration`
+
+Changing the playback rate also affects the pitch of the sample. The frequency or pitch of a waveform is determined by how fast it moves up and down. Our brains somehow turn fast movement of speakers into high notes and slow movement of speakers into low notes. This is why you can sometimes even see a big bass speaker move as it pumps out super low bass - it’s actually moving a lot slower in and out than a speaker producing higher notes. 
+
+If you take a waveform and squash it it will move up and down more times per second. This will make it sound higher pitched. It turns out that doubling the amount of up and down movements (oscillations) doubles the frequency. So, playing your sample at double rate will double the frequency you hear it. Also, halving the rate will halve the frequency. Other rates will affect the frequency accordingly. 
+
+```
+A sample that’s fun to stretch and compress is the Amen Break. At normal rate, we might imagine throwing it into a drum ‘n’ bass track: 
+sample :loop_amen 
+However by changing the rate we can switch up genres. Try half speed for old school hip-hop: 
+sample :loop_amen, rate: 0.5 
+If we speed it up, we enter jungle territory: 
+sample :loop_amen, rate: 1.5 
+Now for our final party trick - let’s see what happens if we use a negative rate: 
+sample :loop_amen, rate: -1
+```
+
+### Enveloped Samples
+
+#### Attack, Release
+This parameter allows us to fade in or out.  A lower value corresponds to a quicker fade in and vice-versa. 
+```
+With no opts, we hear the full sample at full amplitude. If we want to fade this in over 1 second we can use the attack: param:
+sample :loop_amen, attack: 1 
+For a shorter fade in, choose a shorter attack value: 
+sample :loop_amen, attack: 0.3
+```
+
+Release fades out at the end of a sample.  The duration of :loop_amen is 1.75, it plays for 1 second, then fades out.
+```
+sample :loop_amen, release: 0.75 
+```
