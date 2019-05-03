@@ -187,3 +187,17 @@ foo.should.equal('bar');
 foo.should.have.lengthOf(3);
 beverages.should.have.property('tea').with.lengthOf(3);
 ```
+
+## Debugger 
+These notes are from [this](https://medium.com/datadriveninvestor/stopping-using-console-log-and-start-using-your-browsers-debugger-62bc893d93ff) excellent article on debugging.  
+  
+**Breakpoint:** A breakpoint is something that your browser looks for in order to know when to pause execution of your code and allow you the opportunity to debug it. 
+
+**Stepping through code**  Now that a breakpoint is set we have click buttons to either "step into" or "step over" function calls.  Stepping over skips a function call, for instance if it's known to work.  Stepping into a function takes us through step by step and allows us to debug it.  IF the function returns a value it will show you the value to the right of the function. In the "Scope" tab it will also you variable values inside of different scopes.  
+  
+**Line of Code Breakpoint** Stepping through the code is great, but it can take a long time with longer functions.  We can set a line of code breakpoint.  We can set this by clicking the line number in the console we want to set as a breakpoint.  To stop on line 77, just click on "77" in the debugger console.  
+  
+**Watch expressions** Once we've identified some values of interest we can "watch" for them, or even other javascript expressions.  To define values to ‘watch’, click on the watch pane at the very top and click the + symbol once it opens. Here, you can type in variable names or other expressions. 
+
+
+**Editing the Code** To actually edit the code you can save it with command + s, edit it, and then load it locally.  
