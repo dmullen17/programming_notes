@@ -1,0 +1,49 @@
+# Monthly Selling Options Notes 
+
+## Chapter 1 
+Reccomends two strategies: 
+
++ Selling puts and calls using cash secured options and credit spreads
++ Selling covered calls
+
+You can't have a stock option without a stock, but you can have a stock without an option.
+
+A call option is the right to buy a stock or an ETF; a put option is the right to sell a stock or ETF. One call or put is comprised of 100 shares of a stock or an ETF - no exceptions.  The main strategy here is selling options - other strategies like naked calls, bull call spread, ratio spread, etc. are not as effective. Purchasing options carries more risk - time decay works against you and you only make money if the price hits your call or put number.  
+
+
+## Chapter 3 
+Benefits of selling options: 
+
++ you can make money whether the stock market goes up or down 
++ low, controllable risk 
++ high liquidity - buy or sell at any time 
+
+ETF - An exchange-traded fund (ETF) is an investment fund traded on stock exchanges, much like stocks.[1][2] An ETF holds assets such as stocks, commodities, or bonds
+
+Each option is attached to a stock or ETF and each stock or ETF has a symbol.  Example: General Electric has the symbol GE. Orders to buy and sell options are handled through online brokerages.  Options contracts trade on various US securities exchanges (New York Stock Exchange - NYSE, Pacific Stock Exchange - PSE, etc.)
+
+## Chapter 4 
+You should generally sell options that favor the market trend.  You don't have to predict where the market goes - but you do have to predict where it won't go (a much easier prospect). Your profit is limited to the premium you collect when you sell the option.  Option premiums are based on market volatility - higher volatility = higher premium. 
+
+Commissions - deducted from your premium at the time of the trade.  A typical commission is 7.95 + .75 cents per option. 
+
+### Weekly Calls and Puts 
+Incur higher brokerage fees and commissions since you're making more trades.  You also have to put the strike price closer to the actual stock price since you're working with a short time frame.  The advantage is there's less time for the stock price to go against you, you can get a higher ROI given the short time period, and you can turn your money over faster.  
+
+### Longer than a week 
+You can make a higher premium per trade, requires less time to manage your trades and you don't incur as many commission fees. 
+
+
+## Chapter 5 
+
+
+
+## Questions 
+1. Investors should only sell options on securities that they are willing to own at the strike price at which they sold the option.  
+2. Credit spreads eliminate unlimited risk? 
+3. If a commission is 7.95 + .75 cents per option what's the most cost effective way to sell options?  Probably in batches? 
+4. 
+
+
+
+
