@@ -35,14 +35,46 @@ You can make a higher premium per trade, requires less time to manage your trade
 
 
 ## Chapter 5 
+Try to sell a bid at the midpoint of the bid and the ask price.  There are several major factors affecting the premium price of an option, including a change in the price of the underlying stock, the strike price, the amount of time left until expiration of the option, and the volatility of the stock or ETF. The closer the strike price is to the actual value of the stock the higher the premium and vice versa.  
 
+We recommend selecting premiums that are equivalent to a Delta no higher than 12. A Delta of 12 percent is far below the market price of the security. If you were selling a call, a Delta 12 would be far above the market price of the security. This Delta gives you an 88 percent chance that you will have a successful trade.
+
+**Volume**: Daily activity of an option - describes how many contracts changed hands on any given option during the day.  You want to see at least 100,000 because that implies the contract is liquid.
+**Open interest:** The number of outstanding contracts that haven't been closed out or exercised.  Better indicator of liquidity than volume. Open orders are listed for each option strike price. 
+**Implied Volatility** - higher volatility generally favors the trader.  
+
+## Vocabulary 
+
++ Assignment - When you get assigned you're required to purchase the shares at the strike price.  
++ ATM (at the money) - An option with a strike price that's equal to the price of the security. 
++ Bear Call Spread - 
++ Bull Put Spread 
++ Covered call - when an investor owns at least 100 shares of a contract then you can sell a "covered" call against the security and receive a premium. 
++ Early exercise - when an owner buys back an option prior to its expiration date 
++ ITM (In the money option) - When the price is above strike on a call option and vice versa for puts. 
++ Iron Condor - 
++ LEAPS - one to five year options 
++ Limit Order vs. Market Order - buy or sell securities at a certain price vs a market order where you buy them immediately.  They recommend using limit orders. 
++ Naked - Put or call options that are uncovered.  Unlimited loss potential. Only use cash-secured orders. 
++ Open interest - the total open options contracts not repurchased or exercised. 
++ OptionChain - a list of all the strike bid and ask pries for an option 
++ OTM (Out of the money) - an option with a strike price that's away from the actual security price
++ P/E - price to earnings ratio.  Price of security / its earnings per share. 
++ Rollover - moving a position from one expiration period to another - for another premium.  
++ Time decay - theta 
 
 
 ## Questions 
 1. Investors should only sell options on securities that they are willing to own at the strike price at which they sold the option.  
 2. Credit spreads eliminate unlimited risk? 
 3. If a commission is 7.95 + .75 cents per option what's the most cost effective way to sell options?  Probably in batches? 
-4. 
+4. We recommend selecting premiums that are equivalent to a Delta no higher than 12. A Delta of 12 percent is far below the market price of the security. If you were selling a call, a Delta 12 would be far above the market price of the security. This Delta gives you an 88 percent chance that you will have a successful trade. -- need an example of this. 
+5. We recommend longer expiration periods, up to eight weeks. We want you to select stable securities that pass our screening criteria and pay favorable premiums. -- Why is this the case / why does Harrison trade weekly?
+6. Is volume important? They recommend looking for at least 100,000.  Also open interest.  
+7. Bear Call spread? 
+8. Bid and Ask 
+9. Naked call/put example?  
+
 
 
 
