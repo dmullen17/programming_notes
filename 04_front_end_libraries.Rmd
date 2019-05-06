@@ -1123,7 +1123,7 @@ const actionCreator = () => {
 #### Dispatch an action event 
 In order to pass an action into the store we use the `dispatch` method.  Example: `store.dispatch(actionCreator())`.  Next, once an action is dispatched, the Redux store needs to respond to that action.  This is the job of a reducer function. Reducers in Redux are responsible for the state modifications that take place in response to actions. A reducer takes state and action as arguments, and it always returns a new state.  
   
-Another key principle in Redux is that state is read-only. In other words, the reducer function must always return a new copy of state and never modify state directly. Redux does not enforce state immutability, however, you are responsible for enforcing it in the code of your reducer functions. You'll practice this in later challenges.
+Another key principle in Redux is that state is read-only. In other words, the reducer function must always return a new copy of state and never modify state directly. Redux does not enforce state immutability, however, you are responsible for enforcing it in the code of your reducer functions. 
 
 ```
 const defaultState = {
@@ -1193,6 +1193,103 @@ const logoutUser = () => {
 ```
 
 #### Store Listener
+Another method you have access to on the Redux store object is store.subscribe(). This allows you to subscribe listener functions to the store, which are called whenever an action is dispatched against the store. One simple use for this method is to subscribe a function to your store that simply logs a message every time an action is received and the store is updated. A callback function registered with the `subscribe` method is called every time you call `dispatch`.  There's no need to tell the event listener what to listen for - `subscribe` does this for you by default, every time an action is passed to the store using `dispatch`.
+
+```
+const ADD = 'ADD';
+
+const reducer = (state = 0, action) => {
+  switch(action.type) {
+    case ADD:
+      return state + 1;
+    default:
+      return state;
+  }
+};
+
+const store = Redux.createStore(reducer);
+
+// global count variable:
+let count = 0;
+
+const increaseCount = () => {count += 1;}
+store.subscribe(increaseCount);
+
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
+```
+
+#### Combine Multiple Reducers 
+Redux provides reducer composition as a solution for a complex state model. You define multiple reducers to handle different pieces of your application's state, then compose these reducers together into one root reducer. The root reducer is then passed into the Redux createStore() method. In this example `counterReducer` and `authReducer` are the two reducer functions we define earlier. 
+
+```
+const rootReducer = Redux.combineReducers({
+  count: counterReducer,
+  auth: authReducer
+});
+```
+
+#### Send Action Data to the Store 
+When an action contains additional data we need to handle it.  Here the reducer functions returns `action.text` as the new state if the action has a case of ADD_NOTE.  The action creator function takes note text and returns an action of type: ADD_NOTE with an additional text property (data) that holds the text we want.  
+
+```
+const ADD_NOTE = 'ADD_NOTE';
+
+const notesReducer = (state = 'Initial State', action) => {
+  switch(action.type) {
+    // change code below this line
+    case (ADD_NOTE): 
+      return action.text;
+    // change code above this line
+    default:
+      return state;
+  }
+};
+
+const addNoteText = (note) => {
+  // change code below this line
+  return {type: ADD_NOTE, text: note};
+  // change code above this line
+};
+
+const store = Redux.createStore(notesReducer);
+
+console.log(store.getState());
+store.dispatch(addNoteText('Hello!'));
+console.log(store.getState());
+```
+
+#### Redux Counter App 
+This app counts state.  We have two consts that we use in our action creators and that we reference in the switch statement in the reducer function.  The reducer function returns and incremented or decremented state depending on which action type it recieves - if it receives neither then it returns an default state of 0 (or initialized state).  We pass this in to `createStore` to create the Redux store.  
+
+```
+const INCREMENT = 'INCREMENT'; 
+const DECREMENT = 'DECREMENT'; 
+
+const counterReducer = (state, action) => {
+    switch (action.type) {
+        case (INCREMENT):
+            return state + 1;
+        case (DECREMENT):
+            return state - 1;
+        default: 
+            return 0;
+    }
+};
+
+const incAction = () => {
+    return {type: INCREMENT};
+};
+const decAction = () => {
+    return {type: DECREMENT};
+}; 
+const store = Redux.createStore(counterReducer) ; 
+```
+
 
 #### Redux Questions 
 Question: What is redux? 
