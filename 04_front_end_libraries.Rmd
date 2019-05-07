@@ -1290,6 +1290,147 @@ const decAction = () => {
 const store = Redux.createStore(counterReducer) ; 
 ```
 
+#### Enforce Immuntability 
+You are responsible for enforcing state immutability in your code. I found the following [link](https://www.samanthaming.com/tidbits/35-es6-way-to-clone-an-array) really helpful with this. All primitives are immutable string, number, boolean, null, undefined, and symbol.  Objects arrays and functions are however.  For arrays I found it most instructive to use `Array.from`, although the spread operator apparently works as well. It's important to note that the spread operator only makes a shallow copy of the array. That is to say, it only provides immutable array operations for one-dimensional arrays.
+
+ 
+
+```
+const ADD_TO_DO = 'ADD_TO_DO';
+
+// A list of strings representing tasks to do:
+const todos = [
+  'Go to the store',
+  'Clean the house',
+  'Cook dinner',
+  'Learn to code',
+];
+
+const immutableReducer = (state = todos, action) => {
+  switch(action.type) {
+    case ADD_TO_DO:
+      let newState = Array.from(state);
+      newState.push(action.todo);
+      console.log(newState);
+      return newState;
+    default:
+      return state;
+  }
+};
+
+// an example todo argument would be 'Learn React',
+const addToDo = (todo) => {
+  return {
+    type: ADD_TO_DO,
+    todo
+  }
+}
+
+const store = Redux.createStore(immutableReducer);
+```
+
+Spread Operator Example: 
+
+```
+const immutableReducer = (state = ['Do not mutate state!'], action) => {
+  switch(action.type) {
+    case 'ADD_TO_DO':
+      let newState = [...state, action.todo];
+      return newState;
+    default:
+      return state;
+  }
+};
+
+const addToDo = (todo) => {
+  return {
+    type: 'ADD_TO_DO',
+    todo
+  }
+}
+
+const store = Redux.createStore(immutableReducer);
+```
+
+Remove an Item from an array without mutating state.  The array.prototype.concat method combines two arrays.   
+
+```
+const immutableReducer = (state = [0,1,2,3,4,5], action) => {
+  switch(action.type) {
+    case 'REMOVE_ITEM':
+      let array1 = state.slice(0, action.index);
+      let array2 = state.slice(action.index+1, state.length);
+      return array1.concat(array2);
+    default:
+      return state;
+  }
+};
+
+const removeItem = (index) => {
+  return {
+    type: 'REMOVE_ITEM',
+    index
+  }
+}
+
+const store = Redux.createStore(immutableReducer);
+```
+
+#### Middleware for asynchronous requests 
+Sometimes we need to handle asynchronous API calls.  In this case we need to pass a second argument to the `createStore` method `Redux.applyMiddleware(ReduxThunk.default)`.  This handle async dispatch calls.  Then you need create an async function that returns a function that takes dispatch as an argument. Within this function, you can dispatch actions and perform asynchronous requests. Remember that you're passing dispatch as a parameter to this special action creator. This is what you'll use to dispatch your actions, you simply pass the action directly to dispatch and the middleware takes care of the rest.
+
+```
+const REQUESTING_DATA = 'REQUESTING_DATA'
+const RECEIVED_DATA = 'RECEIVED_DATA'
+
+const requestingData = () => { return {type: REQUESTING_DATA} }
+const receivedData = (data) => { return {type: RECEIVED_DATA, users: data.users} }
+
+const handleAsync = () => {
+  return function(dispatch) {
+    // dispatch request action here
+    dispatch(requestingData());
+    setTimeout(function() {
+      let data = {
+        users: ['Jeff', 'William', 'Alice']
+      }
+      // dispatch received data action here
+    dispatch(receivedData(data));
+    }, 2500);
+  }
+};
+
+const defaultState = {
+  fetching: false,
+  users: []
+};
+
+const asyncDataReducer = (state = defaultState, action) => {
+  switch(action.type) {
+    case REQUESTING_DATA:
+      return {
+        fetching: true,
+        users: []
+      }
+    case RECEIVED_DATA:
+      return {
+        fetching: false,
+        users: action.users
+      }
+    default:
+      return state;
+  }
+};
+
+const store = Redux.createStore(
+  asyncDataReducer,
+  Redux.applyMiddleware(ReduxThunk.default)
+);
+```
+
+
+
+
 
 #### Redux Questions 
 Question: What is redux? 
