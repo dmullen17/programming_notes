@@ -989,11 +989,14 @@ class MyApp extends React.Component {
 ```
 
 ### LifeCycle Methods 
-React components have several special methods that provide opportunities to perform actions at specific points in the lifecycle of a component. These are called lifecycle methods, or lifecycle hooks, and allow you to catch components at certain points in time. This can be before they are rendered, before they update, before they receive props, before they unmount, and so on. 
+React components have several special methods that provide opportunities to perform actions at specific points in the lifecycle of a component. These are called lifecycle methods, or lifecycle hooks, and allow you to catch components at certain points in time. This can be before they are rendered, before they update, before they receive props, before they unmount, and so on. When a page first loads, all components are mounted and this is where methods like componentWillMount() and componentDidMount() are called. After this, as state changes, components re-render themselves.
 
 + `componentWillMount()` method is called before the render() method when a component is being mounted to the DOM.
 + `componentDidMount()`. This method is called after a component is mounted to the DOM. Any calls to setState() here will trigger a re-rendering of your component. When you call an API in this method, and set your state with the data that the API returns, it will automatically trigger an update once you receive the data.  You can also add component event listeners here.
 + `componentWillUnmount()` When a react component is unrendered - it's good practice to remove any event listeners in this function body as well. 
++ `componentWillReceiveProps()` Called whenever a component is receiving new props.  You can use this argument and compare with `this.props` and perform actions before the component updates.  It's usually called `nextProps`
++ `componentDidUpdate()` called immediately after a component re-renders.
++ `shouldComponentUpdate()` This method is a useful way to optimize performance. For example, the default behavior is that your component re-renders when it receives new props, even if the props haven't changed. You can use shouldComponentUpdate() to prevent this by comparing the props. The method must return a boolean value that tells React whether or not to update the component. You can compare the current props (this.props) to the next props (nextProps) to determine if you need to update or not, and return true or false accordingly.
 
 In this example of `componentDidMount` it triggers a mock API call with setTimeOut. Initially we see 50 activeUsers, then after 2.5 the function returns and triggers a re-build of the UI. 
 
@@ -1056,6 +1059,103 @@ class MyComponent extends React.Component {
     return (
       <div>
         <h1>{this.state.message}</h1>
+      </div>
+    );
+  }
+};
+```
+
+In this example we call three of the lifecycle methods.  The order of the console.log statements show us the orider in which they're called.   
+
+```
+class Dialog extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillUpdate() {
+    console.log('Component is about to update...');
+  }
+  // change code below this line
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props.message);
+    console.log(nextProps.message);
+  }
+
+  componentDidUpdate() {
+    console.log('Component Updated');
+  }
+  // change code above this line
+  render() {
+    return <h1>{this.props.message}</h1>
+  }
+};
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: 'First Message'
+    };
+    this.changeMessage = this.changeMessage.bind(this);
+  }
+  changeMessage() {
+    this.setState({
+      message: 'Second Message'
+    });
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.changeMessage}>Update</button>
+        <Dialog message={this.state.message}/>
+      </div>
+    );
+  }
+};
+```
+
+In this example we use `shouldComponentUpdate` to re-render the component only if the new props value is even 
+
+```
+class OnlyEvens extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Should I update?');
+     // change code below this line
+    return nextProps.value % 2 === 0 ? true : false;
+     // change code above this line
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('Receiving new props...');
+  }
+  componentDidUpdate() {
+    console.log('Component re-rendered.');
+  }
+  render() {
+    return <h1>{this.props.value}</h1>
+  }
+};
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+    this.addValue = this.addValue.bind(this);
+  }
+  addValue() {
+    this.setState({
+      value: this.state.value + 1
+    });
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.addValue}>Add</button>
+        <OnlyEvens value={this.state.value}/>
       </div>
     );
   }
@@ -1270,6 +1370,148 @@ class CheckUserAge extends React.Component {
   }
 };
 ```
+
+### Change Inline CSS Based on State 
+At this point, you've seen several applications of conditional rendering and the use of inline styles. Here's one more example that combines both of these topics. You can also render CSS conditionally based on the state of a React component. To do this, you check for a condition, and if that condition is met, you modify the styles object that's assigned to the JSX elements in the render method.
+
+This paradigm is important to understand because it is a dramatic shift from the more traditional approach of applying styles by modifying DOM elements directly (which is very common with jQuery, for example). In that approach, you must keep track of when elements change and also handle the actual manipulation directly. It can become difficult to keep track of changes, potentially making your UI unpredictable. When you set a style object based on a condition, you describe how the UI should look as a function of the application's state. There is a clear flow of information that only moves in one direction. This is the preferred method when writing applications with React.
+
+```
+
+class GateKeeper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({ input: event.target.value })
+  }
+  render() {
+    let inputStyle = {
+      border: '1px solid black'
+    };
+    // change code below this line
+    if (this.state.input.length > 15) {
+      inputStyle = {
+        border: '3px solid red'
+      };
+    }
+    // change code above this line
+    return (
+      <div>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type="text"
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleChange} />
+      </div>
+    );
+  }
+};
+```
+
+#### Dynamically render UI and unique sibling keys
+Sometimes we need to dynamically generate JSX if we have an unknown number of inputs.  Here we use array.map to generate JSX based on user input.  Note that instead of using backticks ("`") or template literals, this map function just generates JSX without backticks or quotation marks. When you create an array of elements, each one needs a key attribute set to a unique value. React uses these keys to keep track of which items are added, changed, or removed. This helps make the re-rendering process more efficient when the list is modified in any way. Note that keys only need to be unique between sibling elements, they don't need to be globally unique in your application.
+
+```
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    // change code below this line
+    this.state = {
+      userInput: '',
+      toDoList: []
+    }
+    // change code above this line
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+  render() {
+    const items = this.state.toDoList.map(el => <li>{el}</li>);
+    return (
+      <div>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder="Separate Items With Commas" /><br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>
+          {items}
+        </ul>
+      </div>
+    );
+  }
+};
+```
+
+In this example we generate a unique key for each sibling.  I just set the key equal to the name of the string 
+
+```
+
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  const renderFrameworks = frontEndFrameworks.map(el => <li key={el}>{el}</li>); // change code here
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+        {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
+```
+
+### Render React on the Server with renderToString
+So far, you have been rendering React components on the client. Normally, this is what you will always do. However, there are some use cases where it makes sense to render a React component on the server. Since React is a JavaScript view library and you can run JavaScript on the server with Node, this is possible. In fact, React provides a renderToString() method you can use for this purpose.
+
+There are two key reasons why rendering on the server may be used in a real world app. First, without doing this, your React apps would consist of a relatively empty HTML file and a large bundle of JavaScript when it's initially loaded to the browser. This may not be ideal for search engines that are trying to index the content of your pages so people can find you. If you render the initial HTML markup on the server and send this to the client, the initial page load contains all of the page's markup which can be crawled by search engines. Second, this creates a faster initial page load experience because the rendered HTML is smaller than the JavaScript code of the entire app. React will still be able to recognize your app and manage it after the initial load.
+
+```
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+
+// change code below this line
+ReactDOMServer.renderToString(<App />);
+```
+
 
 
 ## Redux 
@@ -1631,3 +1873,5 @@ Answer: Whenever an action is sent to the store the reducer function must return
 Question: What is a reducer function? 
 Question: What method retrieves the state from the Redux store? 
 Answer: getState()
+
+## React and Redux 
