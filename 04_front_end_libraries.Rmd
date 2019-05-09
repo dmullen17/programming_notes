@@ -554,7 +554,7 @@ const CurrentDate = (props) => {
   return (
     <div>
       { /* change code below this line */ }
-      <p>The current date is: {props.date}</p>
+      <p>The current date is: {props.date}</p> {/*THIS IS LIKE FUNCTION BODY*/}
       { /* change code above this line */ }
     </div>
   );
@@ -569,7 +569,7 @@ class Calendar extends React.Component {
       <div>
         <h3>What date is it?</h3>
         { /* change code below this line */ }
-        <CurrentDate date={Date()}/>
+        <CurrentDate date={Date()}/>  {/*THIS IS LIKE A FUNCTION CALL + ARGUMENT INPUTS*/}
         { /* change code above this line */ }
       </div>
     );
@@ -630,7 +630,7 @@ Items.propTypes = {quantity: PropTypes.number.isRequired};
 ```
 
 #### Props in ES6 class component
-Anytime you refer to a class component within itself, you use the this keyword. To access props within a class component, you preface the code that you use to access it with `this`. For example, if an ES6 class component has a prop called data, you write {this.props.data} in JSX.
+Anytime you refer to a class component within itself, you use the `this` keyword. To access props within a class component, you preface the code that you use to access it with `this`. For example, if an ES6 class component has a prop called data, you write {this.props.data} in JSX.  In a stateless function component you can just call `props.whatever`.  
 
 + Example: 
 
@@ -704,11 +704,12 @@ Once you define a component's initial state, you can display any part of it in t
   
 If you want to access a state value within the return of the render method, you have to enclose the value in curly braces.
   
-State is one of the most powerful features of components in React. It allows you to track important data in your app and render a UI in response to changes in this data. If your data changes, your UI will change. React uses what is called a virtual DOM, to keep track of changes behind the scenes. When state data updates, it triggers a re-render of the components using that data - including child components that received the data as a prop. React updates the actual DOM, but only where necessary. This means you don't have to worry about changing the DOM. You simply declare what the UI should look like.
+State is one of the most powerful features of components in React. It allows you to track important data in your app and render a UI in response to changes in this data. If your data changes, your UI will change. React uses what is called a virtual DOM, to keep track of changes behind the scenes. **When state data updates, it triggers a re-render of the components using that data - including child components that received the data as a prop.** React updates the actual DOM, but only where necessary. This means you don't have to worry about changing the DOM. You simply declare what the UI should look like.
   
 Note that if you make a component stateful, no other components are aware of its state. Its state is completely encapsulated, or local to that component, unless you pass state data to a child component as props. This notion of encapsulated state is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.
 
 #### Access state with JS variables 
+In component functions we can also access state in intermediate variables.  We can then call these variables in JSX using the curly brace syntax and the intermediate variable names. 
 
 ```
 class MyComponent extends React.Component {
@@ -764,7 +765,7 @@ class MyComponent extends React.Component {
 ```
 
 #### Add Methods 
-A class method typically needs to use the `this` keyword so it can access properties on the class (such as `state` and `props`) inside the scope of the method. One common way is to explicitly bind `this` in the constructor so `this` becomes bound to the class methods when the component is initialized. 
+A class method typically needs to use the `this` keyword so it can access properties on the class (such as `state` and `props`) inside the scope of the method. One common way is to explicitly bind `this` in the constructor so `this` becomes bound to the class methods when the component is initialized. TLDR: When we define methods for a react component we need to bind `this` to them in the constructor so they have access to the right "this". 
 
 ```
 class MyComponent extends React.Component {
@@ -811,8 +812,7 @@ class MyComponent extends React.Component {
   }
   // change code below this line
   toggleVisibility() {
-    let value = this.state.visibility ? false : true;
-    this.setState({visibility: value}); 
+    this.setState({visibility: !this.state.visibility});
   }
   // change code above this line
   render() {
@@ -874,6 +874,193 @@ class Counter extends React.Component {
 ```
 
 #### Controlled Input form 
+Form control elements for text input, such as input and textarea, maintain their own state in the DOM as the user types --> as the user types their internal state gets updated (this makes sense).
+
+#### Controlled Form 
+When react controls the internal state of an html element - it is referred to as a controlled component.  
+NEED TO COME BACK HERE AND FILL THIS OUT.
+
+```
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      submit: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  handleSubmit(event) {
+    // change code below this line
+    event.preventDefault();
+    this.setState({
+      submit: this.state.input
+    })
+    // change code above this line
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          { /* change code below this line */ }
+          <input value={this.state.input} onChange={this.handleChange}></input>
+          { /* change code above this line */ }
+          <button type='submit'>Submit!</button>
+        </form>
+        { /* change code below this line */ }
+        <h1>{this.state.submit}</h1>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+
+#### State in React 
+This pattern illustrates some important paradigms in React. The first is unidirectional data flow. State flows in one direction down the tree of your application's components, from the stateful parent component to child components. The child components only receive the state data they need. The second is that complex stateful apps can be broken down into just a few, or maybe a single, stateful component. The rest of your components simply receive state from the parent as props, and render a UI from that state. It begins to create a separation where state management is handled in one part of code and UI rendering in another. This principle of separating state logic from UI logic is one of React's key principles. When it's used correctly, it makes the design of complex, stateful applications much easier to manage.  This must be how React and redux are combined ==> redux manages the one stateful component of the app. 
+
+In this example `MyApp` is the component that manages state. When it renders Navbar we pass in `MyApp`'s name property as an argument (or html property).
+
+```
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'CamperBot'
+    }
+  }
+  render() {
+    return (
+       <div>
+         <Navbar name={this.state.name}/>
+       </div>
+    );
+  }
+};
+
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+    <div>
+      <h1>Hello, my name is: {this.props.name} </h1>
+    </div>
+    );
+  }
+};
+```
+
+#### Pass Callbacks to Children 
+You can pass callback functions to child elements from their parents. In this example we pass the handleChange method from MyApp to one of its children: GetInput.
+
+```
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+       <div>
+        { /* change code below this line */ }
+        <GetInput input={this.state.inputValue} handleChange={this.handleChange}/>
+        <RenderInput input={this.state.inputValue} />
+        { /* change code above this line */ }
+       </div>
+    );
+  }
+};
+```
+
+### LifeCycle Methods 
+React components have several special methods that provide opportunities to perform actions at specific points in the lifecycle of a component. These are called lifecycle methods, or lifecycle hooks, and allow you to catch components at certain points in time. This can be before they are rendered, before they update, before they receive props, before they unmount, and so on. 
+
++ `componentWillMount()` method is called before the render() method when a component is being mounted to the DOM.
++ `componentDidMount()`. This method is called after a component is mounted to the DOM. Any calls to setState() here will trigger a re-rendering of your component. When you call an API in this method, and set your state with the data that the API returns, it will automatically trigger an update once you receive the data.  You can also add component event listeners here.
++ `componentWillUnmount()` When a react component is unrendered - it's good practice to remove any event listeners in this function body as well. 
+
+In this example of `componentDidMount` it triggers a mock API call with setTimeOut. Initially we see 50 activeUsers, then after 2.5 the function returns and triggers a re-build of the UI. 
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeUsers: 50
+    };
+  }
+  componentDidMount() {
+    setTimeout( () => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Active Users: {this.state.activeUsers}</h1>
+      </div>
+    );
+  }
+};
+```
+
+In this example we add two event listeners. 
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ''
+    };
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  // change code below this line
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+  // change code above this line
+  handleEnter() {
+    this.setState({
+      message: this.state.message + 'You pressed the enter key! '
+    });
+  }
+  handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      this.handleEnter();
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.message}</h1>
+      </div>
+    );
+  }
+};
+```
 
 ### Styles
 We can apply CSS styles to React elements the same way as JS.  Set the `className` attribute equal to an imported class from a stylesheet. We can also use inline-styling, here's an example of the syntax.

@@ -41,7 +41,13 @@ We recommend selecting premiums that are equivalent to a Delta no higher than 12
 
 **Volume**: Daily activity of an option - describes how many contracts changed hands on any given option during the day.  You want to see at least 100,000 because that implies the contract is liquid.
 **Open interest:** The number of outstanding contracts that haven't been closed out or exercised.  Better indicator of liquidity than volume. Open orders are listed for each option strike price. 
-**Implied Volatility** - higher volatility generally favors the trader.  
+**Implied Volatility** - higher volatility generally favors the trader. 
+
+Do not sell puts or calls around an earnings report.  This is when the greatest fluctuations usually occur.  Technology stocks are usually more volatile - they recommend insurance, service, and financial companies.  
+
+ETFs do not have to be concerned with earnings and revenues that you have to consider when trading stocks. In some cases, ETFs may pay lower premiums than stocks. The best time to trade puts is when a stock or ETF is down on a trading day, and the best time to trade calls is when the stock or ETF is up on a trading day. You will receive the most premium income on these days.
+
+
 
 ## Vocabulary 
 
@@ -74,6 +80,7 @@ We recommend selecting premiums that are equivalent to a Delta no higher than 12
 7. Bear Call spread? 
 8. Bid and Ask 
 9. Naked call/put example?  
+10. What is Harrison's robinhood account?  Has he considered using a Roth IRA?
 
 
 
