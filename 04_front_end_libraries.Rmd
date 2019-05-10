@@ -1875,3 +1875,45 @@ Question: What method retrieves the state from the Redux store?
 Answer: getState()
 
 ## React and Redux 
+You need to use the "react-redux" package in order to use both React and Redux together. 
+
+### Provider
+Provider is a wrapper component from React Redux that wraps your React app. This wrapper then allows you to access the Redux store and dispatch functions throughout your component tree. Provider takes two props, the Redux store and the child components of your app. Defining the Provider for an App component might look like this:
+
+```
+<Provider store={store}>
+  <App/>
+</Provider>
+```
+
+Provider component allows you to provide state and dispatch to your React components, but you must specify exactly what state and actions you want. This way, you make sure that each component only has access to the state it needs. You accomplish this by creating two functions: `mapStateToProps()` and `mapDispatchToProps()`
+
+### mapDispatchToProps
+mapDispatchToProps() function is used to provide specific action creators to your React components so they can dispatch actions against the Redux store.
+
+
+## Project 1 
+
++ Single quotes are not considered valid in JSON. Only use double quotes. 
++ When trying to use the fetch API to make an ajax request on a gist - you need to do so on the "raw" object, not the URL to github webpage of the gist. 
++ If GH recognizes your gist as json it also pretty-prints it.  This is a good way to check if your json is valid without using a third party validator.  
+
+When you invoke the JQuery ajax method and call the success method, any variables you create here will be available globally. `quotesData` is now available in the rest of my app.  
+
+```
+const getQuotes = () => {
+  $.ajax({
+    headers: {
+      Accept: "application/json"
+    },
+    url: endpoint,
+    success: function(jsonQuotes) {
+      if (typeof jsonQuotes === 'string') {
+        // saves this as a global variable
+        quotesData = JSON.parse(jsonQuotes);
+        //console.log(quotesData);
+      }
+    }
+  });
+}
+```
