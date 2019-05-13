@@ -1917,3 +1917,76 @@ const getQuotes = () => {
   });
 }
 ```
+
+### Pass parent method down to children 
+To call a parent method from a child we need to pass the method to the child from the parent as props.  React discourages using event bubbling because this creates another data flow in the opposite direction.  In this example I pass down the `newQuote` method to an intermediate child, which then passes it down again to a stateless functional component. 
+
+```
+class QuoteBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoaded: false,
+      quotes: [],
+      quote: 'Ah music, a magic beyond all those we teach here',
+      speaker: 'Albus Dumbledore'
+    };
+    this.logState = this.logState.bind(this);
+    this.newQuote = this.newQuote.bind(this);
+  }
+  componentDidMount() {
+    fetch(endpoint)
+      .then(blob => blob.json())
+      .then((data) => {
+      this.setState({
+        isLoaded: true,
+        quotes: data["quotes"]
+      });
+    });
+  }
+  logState() {
+    console.log(this.state);
+  }
+  newQuote() {
+    const index = Math.floor(Math.random()*this.state.quotes.length);
+    this.setState({
+      quote: this.state.quotes[index].quote,
+      speaker: this.state.quotes[index].speaker
+    });
+    //console.log(this.state);
+  }
+  render() {
+    return (
+      <div id='quote-box'>
+        <Text quote={this.state.quote}/>
+        <Speaker speaker={this.state.speaker} />
+        <RowOfButtons newQuote={this.newQuote}/>
+      </div>
+    );
+  }
+};
+
+// container element for three buttons
+class RowOfButtons extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  // Pass parent method down to child 
+  newQuote = () => {
+    this.props.newQuote();
+  }
+  render () {
+    return (
+    <div>
+      <TweetButton />
+      <NewQuoteButton newQuote={this.newQuote}/>
+    </div>
+    )};
+};
+
+const NewQuoteButton = (props) => {
+  return (
+    <button id='new-quote' onClick={props.newQuote}>New Quote!</button>
+  );
+}
+```
