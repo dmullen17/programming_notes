@@ -1897,6 +1897,7 @@ mapDispatchToProps() function is used to provide specific action creators to you
 + Single quotes are not considered valid in JSON. Only use double quotes. 
 + When trying to use the fetch API to make an ajax request on a gist - you need to do so on the "raw" object, not the URL to github webpage of the gist. 
 + If GH recognizes your gist as json it also pretty-prints it.  This is a good way to check if your json is valid without using a third party validator.  
++ font-awesome icons register as text.  For instance if you want to apply shadow to one you use `text-shadow` rather `box-shadow`
 
 When you invoke the JQuery ajax method and call the success method, any variables you create here will be available globally. `quotesData` is now available in the rest of my app.  
 
