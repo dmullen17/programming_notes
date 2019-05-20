@@ -81,9 +81,13 @@ It seems like whenever we call a `use` method the middleware also loads the css 
 ### JSON API
 While an HTML server serves (you guessed it!) HTML, an API serves data. A REST (REpresentational State Transfer) API allows data exchange in a simple way, without the need for clients to know any detail about the server. The client only needs to know where the resource is (the URL), and the action it wants to perform on it (the verb). The GET verb is used when you are fetching some information, without modifying anything. These days, the preferred data format for moving information around the web is JSON. Simply put, JSON is a convenient way to represent a JavaScript object as a string, so it can be easily transmitted
 
-When a user navigates to the following endpoint: `/json` they are served the following json: `{"message": "Hello json"}"`
+When a user navigates to the following endpoint: `/json` they are served the following json: `{"message": "Hello json"}"`.  Javascript objects should be passed in as objects (not strings). 
 ```
 app.get('/json', function(req, res) {
-  res.json('{"message": "Hello json"}');
+  res.json({"message": "Hello json"});
 });
 ```
+
++ .env file is a hidden file that is used to pass environment variables to your application. 
++ environment variables are accessible from the app as process.env.VAR_NAME. The process.env object is a global Node object, and variables are passed as strings. By convention, the variable names are all uppercase, with words separated by an underscore.
++ there cannot be space around the equals sign when you are assigning values to your variables, e.g. VAR_NAME=value
