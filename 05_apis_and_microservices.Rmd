@@ -91,3 +91,138 @@ app.get('/json', function(req, res) {
 + .env file is a hidden file that is used to pass environment variables to your application. 
 + environment variables are accessible from the app as process.env.VAR_NAME. The process.env object is a global Node object, and variables are passed as strings. By convention, the variable names are all uppercase, with words separated by an underscore.
 + there cannot be space around the equals sign when you are assigning values to your variables, e.g. VAR_NAME=value
+
+
+### Get Route Parameter Input from the Client
+When building an API, we have to allow users to communicate to us what they want to get from our service. For example, if the client is requesting information about a user stored in the database, they need a way to let us know which user they're interested in. One possible way to achieve this result is by using route parameters. Route parameters are named segments of the URL, delimited by slashes (/). Each segment captures the value of the part of the URL which matches its position. The captured values can be found in the req.params object.
+
+The following echo server takes a parameter word at the endpoint: server/repeatme/echo, and sends it back as json object.
+```
+app.get('/:word/echo', (req, res) => {
+  res.json({'echo': req.params.word});
+});
+```
+
+### Get Query Parameter Input from the Client
+The query string is delimited by a question mark (?), and includes field=value couples. Each couple is separated by an ampersand (&). Express can parse the data from the query string, and populate the object req.query. Some characters cannot be in URLs, they have to be encoded in a different format before you can send them. If you use the API from JavaScript, you can use specific methods to encode/decode these characters. This is the same syntax solr queries use - pretty familiar with it. 
+
+```
+route_path: '/library'
+actual_request_URL: '/library?userId=546&bookId=6754' 
+req.query: {userId: '546', bookId: '6754'}
+```
+
+We can also chain multiple verb handlers on a route path. We could add a post method after the `.get` method in the following example. `app.route(path).get(handler).post(handler)`
+
+```
+app.route('/name').get((req, res) => {
+  var firstName = req.query.first;
+  var lastName = req.query.last;
+  res.json({'name': firstName + ' ' + lastName});
+});
+```
+
+### POST 
+Besides GET there is another common http verb, it is POST. POST is the default method used to send client data with HTML forms. In the REST convention POST is used to send data to create new items in the database (a new user, or a new blog post). We don’t have a database in this project, but we are going to learn how to handle POST requests anyway.
+
+In these kind of requests the data doesn’t appear in the URL, it is hidden in the request body. This is a part of the HTML request, also called payload. Since HTML is text based, even if you don’t see the data, it doesn’t mean that they are secret. The raw content of an HTTP POST request is shown below:
+
+```
+POST /path/subpath HTTP/1.0
+From: john@example.com
+User-Agent: someBrowser/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 20
+name=John+Doe&age=25
+``` 
+
+To parse the data coming from POST requests, you have to install a package: the body-parser. This package allows you to use a series of middleware, which can decode data in different formats. See the docs here.
+
+```
+var bodyParser = require('body-parser');
+const bodyParserMiddleware = bodyParser.urlencoded({extended: false});
+app.use(bodyParserMiddleware);
+```
+
+If the body-parser is configured correctly, you should find the parameters in the object req.body
+
+```
+app.use(bodyParserMiddleware);
+app.post('/name', (req, res) => {
+  var firstName = req.body.first;
+  var lastName = req.body.last;
+  res.json({'name': firstName + ' ' + lastName});
+});
+```
+
+
+## MongoDb 
+
+### Create a Person Schema + instance 
+
+```
+var Schema = mongoose.Schema;
+
+var personSchema = new Schema({
+  name: {
+    type: String,
+    default: 'No one',
+    required: true
+        },
+  age: {
+    type: Number,
+    default: 0
+  },
+  favoriteFoods: {
+    type: [String],
+    default: []
+  }
+});
+var Person = mongoose.model('Person', personSchema);
+```
+
+### Create and save a document 
+Don't totally understand how this works yet. Saving the code blocks here for future reference. 
+
+```
+var createAndSavePerson = function(done) {
+  const myPerson = new Person({name: 'Dominic', age: 27, favoriteFoods: ['Mexican', 'Italian']});
+  myPerson.save(function(err, data) {
+    if(err) return done(err);
+    return done(null, data);
+  });
+};
+```
+
+```
+var createPerson = require('./myApp.js').createAndSavePerson;
+router.get('/create-and-save-person', function(req, res, next) {
+  // in case of incorrect function use wait timeout then respond
+  var t = setTimeout(() => { next({message: 'timeout'}) }, timeout);
+  createPerson(function(err, data) {
+    clearTimeout(t);
+    if(err) { return (next(err)); }
+    if(!data) {
+      console.log('Missing `done()` argument');
+      return next({message: 'Missing callback argument'});
+    }
+     Person.findById(data._id, function(err, pers) {
+       if(err) { return (next(err)); }
+       res.json(pers);
+       pers.remove();
+     });
+  });
+});
+```
+
+### Model.Create
+
+```
+var createManyPeople = function(arrayOfPeople, done) {
+    Person.create(arrayOfPeople, function(err, data) {
+      if (err) return done(err);
+      return done(null, data);
+    });
+};
+```
+

@@ -16,7 +16,7 @@ Basic structure for each page:
   </html>
 ```
 
-+ It's best practice to include an alt tag w/ an image: `<img src='' alt='alt text>`
++ It's best practice to include an alt tag w/ an image: `<img src='' alt='alt text'>`
 + Anchor element links to other pages `<a href="https://freecodecamp.org">this links to freecodecamp.org</a>`
 + To create an internal link, you assign a link's href attribute to a hash symbol # plus the value of the id attribute for the element that you want to internally link to
 + `href="#"` to make a placeholder link
